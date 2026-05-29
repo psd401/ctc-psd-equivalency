@@ -17,7 +17,9 @@ cd "$(dirname "$0")"
 
 # Rebuild HTML + sidecar to be safe
 echo "Rebuilding HTML..."
-python build_html.py >/dev/null
+PYTHON="${PYTHON:-$(pwd)/.venv/bin/python}"
+[ -x "$PYTHON" ] || PYTHON="python3"
+"$PYTHON" build_html.py >/dev/null
 
 mkdir -p docs
 
