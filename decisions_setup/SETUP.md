@@ -1,6 +1,8 @@
-# Decisions backend — v2 upgrade
+# Decisions backend — v2 setup / migration
 
-Goal: migrate the Sheet from the original 10-column schema (v1) to a 16-column append-only schema (v2) that supports multi-institution, cross-college decisions, multi-credit-type overrides, and an audit history. Existing v1 decisions (3 rows as of this writing: ABE19, CHP101, SCI105) are migrated automatically.
+> **Status (2026-05-29):** the production Sheet "TCC-PSD Course Equivalency" is already running v2 with 90+ decisions. This file remains as the deploy recipe for setting up a fresh instance or for reference.
+
+Goal: migrate the Sheet from the original 10-column schema (v1) to a 16-column append-only schema (v2) that supports multi-institution, cross-college decisions, multi-credit-type overrides, and an audit history. Existing v1 decisions (3 rows at original migration time: ABE19, CHP101, SCI105) are migrated automatically.
 
 Time: ~10 minutes.
 

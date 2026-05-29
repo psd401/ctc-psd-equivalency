@@ -1,11 +1,13 @@
 # Pipeline overview
 
-## Architecture (post-Phase 3 refactor)
+## Architecture
 
 ```
-catalogs/   ← per-institution intermediate JSON
-archives/   ← per-year, per-institution snapshots for diff_catalogs.py
-parsers/    ← per-platform catalog parsers
+catalogs/         ← per-institution intermediate JSON
+archives/         ← per-year, per-institution snapshots for diff_catalogs.py
+parsers/          ← per-platform catalog parsers
+decisions_setup/  ← Apps Script (Code.gs) + sheet migration recipe
+docs/             ← what GitHub Pages serves
 
 parsers/__init__.py        ← PARSERS registry
 parsers/base.py            ← CourseRecord, normalize_code, parse_credit_string
@@ -14,10 +16,14 @@ parsers/acalog.py          ← Olympic, Pierce, Green River
 parsers/smartcatalog.py    ← Clover Park
 parsers/drupal.py          ← Bates
 
-build_dataset.py           ← Orchestrator
+build_dataset.py           ← Orchestrator (calls merge_catalogs at the end)
+merge_catalogs.py          ← Combine per-institution → ctc-courses-classified.json
 classify_courses.py        ← 5-tier credit-type resolution
 build_html.py              ← Emits both HTML outputs + equivalency-data.json sidecar
 diff_catalogs.py           ← Year-over-year diff report
+audit_credit_type.py       ← Generate OSPI-standards audit workflow for one credit type
+apply_audit_decisions.py   ← POST workflow verdicts to the Sheet as decisions
+deploy.sh                  ← Stage docs/ for GitHub Pages
 ```
 
 ## Daily build (from a clean checkout)
@@ -72,10 +78,37 @@ Once you have a public repo set up:
    git push
    ```
 4. **GitHub Pages builds** in ~30 seconds. URLs:
-   - Public: `https://<owner>.github.io/<repo>/`
-   - Decider: `https://<owner>.github.io/<repo>/decisions-x7q3.html`
+   - Public: https://psd401.github.io/ctc-psd-equivalency/
+   - Decider: https://psd401.github.io/ctc-psd-equivalency/decisions-x7q3.html
 
 GitHub Pages enables gzip automatically, so the multi-MB sidecar JSON compresses to ~700 KB over the wire.
+
+## OSPI-standards audit workflow
+
+For any credit type, an LLM-driven audit checks each course's description against the WA OSPI K-12 Learning Standards for that type and recommends keep / remove / add-other verdicts.
+
+```bash
+# 1. Generate a workflow script for a credit type
+python audit_credit_type.py "Health"
+python audit_credit_type.py "CTE" --max-confidence 0.85
+python audit_credit_type.py "Math" --include-institutions tcc olympic
+
+# 2. Run the workflow externally (returns a JSON result with a `verdicts` array)
+#    Save that result to e.g. audit-health.json
+
+# 3. Apply (dry-run first)
+python apply_audit_decisions.py audit-health.json --dry-run
+python apply_audit_decisions.py audit-health.json
+```
+
+Behavior:
+- For Common Course Numbers (`&`-prefixed), `apply_audit_decisions.py` collapses verdicts to `applies_to=all` when every institution offering the code got the same recommendation; otherwise it writes per-institution decisions.
+- `keep_*` verdicts are skipped by default (no action needed). Pass `--include-keep` to write them as positive confirmations.
+- Cost guidance: roughly $0.05/course. The Health audit (37 courses) was ~$4; the CTE audit (877 courses) was ~$50.
+
+Audits completed: `audit-health-vs-ospi.md`, `audit-cte-vs-ospi.md`.
+
+When two audits disagree on a course, apply the more specific/well-reasoned one and skip the conflict from the other (the Sheet's append-only history shows both verdicts for review).
 
 ## Catalog ingest caveats
 
