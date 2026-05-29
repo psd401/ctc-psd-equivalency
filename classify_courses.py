@@ -199,14 +199,14 @@ SPECIFIC_OVERRIDES: dict[tuple[str, str], tuple] = {
 # Universal (keyed by &-CCN) and per-institution (keyed by (inst, code)).
 SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
     "BUS&201":  ["Social Studies - Elective"],                       # Business Law
-    "ECON&201": ["CTE"],                                             # Microeconomics (CTE pathway)
-    "ECON&202": ["CTE"],                                             # Macroeconomics (CTE pathway)
+    # ECON&201/202 CTE secondaries REMOVED 2026-05-29 — CTE audit found these are
+    # academic-transfer Social Studies, not CTE. SS Elective is the primary.
     "HIST&214": ["Social Studies - US History"],                     # Pacific NW also satisfies US Hist
-    # NUTR&101 Health secondary REMOVED 2026-05-29 — OSPI audit found most
-    # college nutrition courses lean college-science, not K-12 Health.
-    # Per-institution audit decisions add Health back where appropriate
-    # (e.g. Clover Park, Pierce kept Health alongside Science).
-    "CMST&220": ["CTE"],                                             # Public Speaking — workforce-readiness CTE
+    # NUTR&101 Health secondary REMOVED 2026-05-29 — Health audit found most
+    # college nutrition courses lean college-science. Per-institution audit
+    # decisions add Health back where appropriate.
+    # CMST&220 CTE secondary REMOVED 2026-05-29 — CTE audit found Public Speaking
+    # is general-ed ELA equivalent, not CTE pathway.
 }
 SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {}
 

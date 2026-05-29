@@ -135,7 +135,7 @@ COURSE:
 - Institution: ${c.institution}
 - Code: ${c.code}
 - Title: ${c.title}
-- Current classification: ${c.current_types.join(' + ')}
+- Currently classified as: ${TARGET}${c.secondaries.length ? ' + ' + c.secondaries.join(' + ') : ''}
 - Description: ${c.description || '(none)'}
 
 RULES:
@@ -208,17 +208,20 @@ def main():
     if args.dry_run:
         return
 
-    # Compact candidates (trim description to 1500 chars)
-    compact = [
-        {
+    # Compact candidates. Workflow scripts have a 512KB cap, so trim
+    # descriptions and drop fields the prompt doesn't need. current_types is
+    # implicit (it always contains TARGET) — surface secondary types only.
+    DESC_TRIM = 600
+    compact = []
+    for c in candidates:
+        secondaries = [t for t in c["credit_types"] if t != target]
+        compact.append({
             "institution": c["institution"],
             "code": c["code"],
             "title": c["title"],
-            "description": (c.get("description") or "")[:1500],
-            "current_types": c["credit_types"],
-        }
-        for c in candidates
-    ]
+            "description": (c.get("description") or "")[:DESC_TRIM],
+            "secondaries": secondaries,
+        })
 
     slug = target.lower().replace(" ", "-").replace("&", "and").replace("/", "-")
     name_literal = json.dumps(f"audit-{slug}")

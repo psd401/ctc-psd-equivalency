@@ -85,12 +85,12 @@ def main():
         if is_ccn and len({tuple(v["recommended_types"]) for v in vs}) == 1 and len(vs) > 1:
             # All institutions agree on the same recommendation → single all-scope decision
             v = vs[0]
-            if not args.include_keep and v["verdict"] == "keep_health":
+            if not args.include_keep and v["verdict"].startswith("keep"):
                 continue
             decisions.append((build_decision(v, "all"), "all"))
         else:
             for v in vs:
-                if not args.include_keep and v["verdict"] == "keep_health":
+                if not args.include_keep and v["verdict"].startswith("keep"):
                     continue
                 decisions.append((build_decision(v, v["institution"]), v["institution"]))
 
