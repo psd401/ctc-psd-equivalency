@@ -92,8 +92,16 @@ def _parse_detail(html: str) -> dict | None:
     if not m:
         return None
     title_raw = m.group(1).strip()
-    # Acalog titles use "PREFIX& NUMBER - Title". Normalize the space out.
-    title_match = re.match(r"^([A-Z]+(?:&\s*)?\s*\d+[A-Z]{0,2})\s*-\s*(.+)$", title_raw)
+    # Acalog title formats seen across institutions:
+    #   Olympic / GR:  "ENGL& 101 - English Composition I"
+    #   Pierce:        "ACCT 101 Survey of Accounting (5 credits)"
+    # Strip trailing "(N credits)" if present, then accept either "CODE - Title"
+    # or "CODE Title" (no separator).
+    title_raw = re.sub(r"\s*\(\s*\d+(?:\.\d+)?\s*-?\s*\d*(?:\.\d+)?\s*credits?\s*\)\s*$", "", title_raw, flags=re.I)
+    title_raw = title_raw.strip()
+    title_match = re.match(r"^([A-Z]+(?:&\s*)?\s*\d+[A-Z]{0,2})\s*[-–:]\s*(.+)$", title_raw)
+    if not title_match:
+        title_match = re.match(r"^([A-Z]+(?:&\s*)?\s*\d+[A-Z]{0,2})\s+(.+)$", title_raw)
     if not title_match:
         return None
     code = base.normalize_code(title_match.group(1).replace(" ", ""))

@@ -152,7 +152,7 @@ def main():
     print()
     print("Merging all per-institution outputs → ctc-courses-classified.json...")
     import subprocess
-    subprocess.run(["python", str(HERE / "merge_catalogs.py")], check=True)
+    subprocess.run([__import__("sys").executable, str(HERE / "merge_catalogs.py")], check=True)
 
 
 if __name__ == "__main__":
