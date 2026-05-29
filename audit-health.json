@@ -1,0 +1,388 @@
+{
+  "verdicts": [
+    {
+      "institution": "cloverpark",
+      "code": "NUTR&101",
+      "verdict": "keep_health",
+      "recommended_types": [
+        "Science (Non-Lab)",
+        "Health"
+      ],
+      "reasoning": "Course directly addresses the Nutrition core idea of OSPI K-12 Health standards: macronutrients, micronutrients, food's role in growth/development, nutrition-related disease prevention, and developing a personal healthy dietary plan. The applied component (students create dietary plans for themselves and community members) aligns with personal nutritional planning, health-enhancing behaviors, and advocacy strands. While it includes anatomy/physiology of the GI tract (leaning college-level), the central focus on personal nutrition planning and disease prevention satisfies the Health Nutrition strand. Science (Non-Lab) appropriately captures the biological/physiological content.",
+      "confidence": 0.78
+    },
+    {
+      "institution": "greenriver",
+      "code": "NUTR&101",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "College-level nutrition science course focused on human metabolism, biochemistry of nutrients, and digestive physiology \u2014 prerequisite is AP&100/103 or BIOL&160, and it's designed for health occupations/nursing students. Content emphasizes scientific process of digestion, macro/micronutrient functions, and disease processes at a science level, not K-12 personal health literacy (nutritional planning, label literacy, personal eating habits skill-building). Matches the \"Nutrition science as a college-level biochemistry/dietetics course\" exclusion. Retain Science (Non-Lab).",
+      "confidence": 0.78
+    },
+    {
+      "institution": "olympic",
+      "code": "NUTR&101",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "College-level nutrition science course focused on biochemistry/physiology of macronutrients and metabolism \u2014 explicitly labeled \"Natural Science\" with prereqs in biology/chemistry. This aligns with college science (biochemistry/dietetics track), NOT K-12 personal nutrition planning, food groups, label literacy, or caloric intake skill-building required by OSPI Health standards. The description emphasizes physiological requirements and metabolism rather than personal eating behaviors or health-enhancing decision-making.",
+      "confidence": 0.82
+    },
+    {
+      "institution": "pierce",
+      "code": "NUTR&101",
+      "verdict": "keep_health",
+      "recommended_types": [
+        "Science (Lab)",
+        "Health"
+      ],
+      "reasoning": "Course directly addresses the K-12 Health Nutrition strand: food groups/nutrients, label literacy, caloric/energy balance, nutritional planning across the lifecycle, disease prevention from excesses/deficiencies, and analyzing influences (socioeconomic, cultural, media) on personal eating habits. Also covers body image and consumer literacy. This is personal nutrition literacy, not college-level biochemistry/dietetics professional training, so it aligns with OSPI Health standards. Retaining Science (Lab) as currently classified.",
+      "confidence": 0.85
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP101",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Elective"
+      ],
+      "reasoning": "Course focuses on professional care navigation, coordination, and advocacy roles within health/human services systems \u2014 this is workforce/professional-track healthcare training (community health worker / care coordinator pathway), not K-12 personal health literacy. It does not address the OSPI Health strands (personal wellness, sexual health, substance use, mental/emotional health, safety, nutrition) through individual skill-building. Aligns with CTE Health Sciences pathway rather than the Health graduation strand.",
+      "confidence": 0.88
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP260",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Course focuses on healthcare delivery systems, community health practice, and cross-cultural healthcare provision for clinicians/educators/researchers serving global populations. This is professional-track public health/healthcare administration content, not K-12 personal health literacy. Does not address OSPI's 6 Core Ideas (wellness, safety, nutrition, sexual health, SEL, substance use) at a personal/family/community skill-building level.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP300",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective",
+        "Elective"
+      ],
+      "reasoning": "Course is population/community health focused \u2014 examines social, political, economic, environmental, biomedical aspects of community health, health disparities/inequities, and professional concepts like secondary trauma, compassion fatigue, and burnout. This is college-level public health policy analysis, not K-12 personal health literacy. Does not address required HS Health strands (personal wellness, sexual health per Healthy Youth Act, substance use prevention, CPR/AED, personal nutrition, suicide prevention skills).",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP305",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Course focuses on healthcare systems navigation, health insurance, case management, confidentiality protocols, and community/population health advocacy \u2014 these are professional/workforce-prep topics (community health worker training, healthcare delivery systems) explicitly listed as NOT aligned with K-12 Health standards. While it mentions mental health first aid and signs of chronic illness, the dominant frame is systems-level public health advocacy, not personal health literacy or behavior skills. Belongs in CTE Health Sciences pathway or as Social Studies elective covering health policy/community systems.",
+      "confidence": 0.85
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP310",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Elective"
+      ],
+      "reasoning": "Course focuses on data collection/management, information exchange, and strategic communication design for community health audiences \u2014 this is healthcare informatics and professional health communications/program planning, not K-12 personal health literacy. Description contains no OSPI Health strands (wellness, safety, nutrition, sexual health, SEL/mental health, substance use). Aligns with professional/workforce-prep coursework (health informatics, health promotion program planning) explicitly excluded from the OSPI Health graduation strand.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP315",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective",
+        "Elective"
+      ],
+      "reasoning": "Course is healthcare policy/law/ethics at population level \u2014 examining policy tradeoffs between public welfare and individual rights. Does not address K-12 personal health strands (personal wellness, sexual health, substance use, mental/emotional health, safety skills, personal nutrition). Aligns with public health policy analysis and healthcare law, explicitly listed as NOT K-12 Health.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP320",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "Population-level epidemiology/public health methods, not K-12 personal health literacy strands.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP325",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)",
+        "Elective"
+      ],
+      "reasoning": "Course focuses on population health (a public/systems-level discipline), healthcare quality and safety, the \"four pillars of population health,\" and theoretical frameworks for understanding health behaviors at a population/community level. This is professional/college-level public health coursework \u2014 explicitly excluded from K-12 Health standards which target personal health literacy and skill-building (the 6 Core Ideas: Wellness, Safety, Nutrition, Sexual Health, SEL, Substance Use). The course does not address WA's required HS Health content (CPR/AED, sexual health/Healthy Youth Act, suicide prevention, substance use prevention, personal nutrition planning). Patient education and healthcare quality/safety reference clinical/healthcare delivery contexts, not personal health behaviors.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP330",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "College-level professional course on program planning/evaluation for healthcare and health promotion delivery \u2014 focuses on systems-level program development, implementation frameworks, evidence-based models, resource logistics, and data collection methodology. This is health education program planning and evaluation (PHE-major workforce coursework), explicitly listed as NOT aligned with K-12 OSPI Health standards. No personal wellness, sexual health, substance use, mental health, safety, or personal nutrition content. Best fits CTE Health Sciences pathway.",
+      "confidence": 0.93
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP335",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "Course teaches research methodology (quantitative/qualitative designs, hypotheses, variables, validity/reliability, surveys, content analysis, focus groups, interviewing) applied to healthcare \u2014 explicitly a professional/college research methods course. None of the OSPI K-12 Health strands (personal wellness, sexual health, substance use, mental/emotional health, safety, nutrition) are addressed. Best fits Science (Non-Lab) as a research methods/applied science course; alternatively could fit Elective.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP340",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Elective"
+      ],
+      "reasoning": "Course covers professional/organizational emergency management (threat assessment, EOC staffing, interagency coordination, incident command, response planning) \u2014 a homeland security/public safety workforce topic, not K-12 personal health literacy. OSPI's Safety strand under Health addresses personal Injury Prevention, First Aid, Violence Prevention, and CPR/AED (RCW 28A.230.179), not systems-level disaster response operations. Aligns with CTE Public Safety/Homeland Security pathway or general Elective credit.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP360",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Course focuses on comparative healthcare delivery systems, community health practice, and cultural competency for clinicians/educators/researchers serving global populations. This is professional/systems-level public health and healthcare delivery analysis, not K-12 personal health literacy. It addresses none of the OSPI Core Ideas (Wellness, Safety, Nutrition, Sexual Health, SEL/Mental Health, Substance Use) at the personal-skill-building level. Aligns with college-level global/public health policy, which the context explicitly excludes from Health credit. Best fit is Social Studies Elective due to cross-cultural/sociological focus, or could be Elective.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP399",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Elective"
+      ],
+      "reasoning": "Course is part of the Community Health Professions (CHP) program at Tacoma Community College, which is a college-level professional/workforce track in public/community health \u2014 not K-12 personal health literacy. The 399 designation indicates an upper-level independent study within that professional pathway. Community health profession coursework focuses on population-level health promotion, program planning, and workforce-prep rather than the OSPI 6 Core Ideas (personal wellness, sexual health, substance use, etc.). The vague independent-study description does not demonstrate coverage of the required K-12 Health strands (CPR/AED, sexual health per Healthy Youth Act, suicide prevention, substance use, nutrition planning, etc.). Without a defined syllabus tied to OSPI standards, this cannot satisfy HS Health credit. Elective is the safest replacement given the unspecified independent-study content.",
+      "confidence": 0.78
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP400",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "Course covers environmental policy, regulation, occupational health, waste disposal, and toxic exposure at a systems/policy level \u2014 not K-12 personal health literacy strands (wellness, sexual health, substance use, mental/emotional health, nutrition planning, CPR/first aid). Aligns with environmental science content rather than OSPI Health standards.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP410",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Course teaches Public Health and Social-Ecological Models of trauma at a population/systems level \u2014 analyzing community and societal influences that create trauma. This is public health framework analysis, not K-12 personal health literacy (no personal wellness skills, no sexual health, no substance use prevention skills, no nutrition, no safety/first aid, no personal mental health coping skills). Aligns with social studies / sociology analysis of community-level factors rather than OSPI Health standards' skill-based personal/family health focus.",
+      "confidence": 0.78
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP420",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective"
+      ],
+      "reasoning": "This is a college-level family studies/sociology course examining family as a social system, family processes, and social/cultural contexts of family development. While it mentions \"five areas of health\" and \"health and wellness,\" the focus is on sociological/systems analysis of families rather than personal health literacy skills required by OSPI K-12 Health standards. It does not address the required strands (sexual health/HIV per RCW, substance use, CPR/AED, nutrition planning, mental health skill-building). The content aligns with social sciences/sociology of the family, fitting Social Studies - Elective.",
+      "confidence": 0.78
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP430",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Course focuses on epidemiology, healthcare worker roles, cost/benefit analysis of interventions, emergency preparedness, and government/non-government agency responsibilities \u2014 all population-level public health policy and systems content, not personal K-12 health literacy strands (wellness, nutrition, sexual health, substance use, mental/emotional health, safety skills like CPR/AED).",
+      "confidence": 0.92
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP440",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective",
+        "Elective"
+      ],
+      "reasoning": "Course examines culture-health relationships at the community/population level to inform \"community health work\" and reduce \"health disparities\" \u2014 this is professional/workforce-oriented community health worker training and medical sociology/health disparities content, not K-12 personal health literacy. It does not address required HS Health strands (personal wellness, nutrition, sexual health, mental health, substance use, safety/CPR) or any RCW-mandated content. Aligns with the explicit non-Health exclusions: \"Community health worker / health promotion professional training\" and \"Medical sociology / health disparities research methodology.\" Best fit is Social Studies - Elective (cultural/sociological lens) or general Elective.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHP490",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Capstone course for a Bachelor of Applied Science (BAS) Community Health Professional concentration. This is workforce-prep coursework for a community health professional career, explicitly listed as misaligned with K-12 Health standards (\"Community health worker / health promotion professional training\"). It is a senior-level college capstone, not personal health literacy aligned with the 6 OSPI Core Ideas. Best fit is CTE as a professional/workforce-track health sciences capstone.",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM400",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Professional EMS leadership/ethics course \u2014 workforce-prep healthcare administration, not K-12 personal health literacy strands (wellness, sexual health, substance use, mental/emotional health, safety, nutrition).",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM410",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Social Studies - Elective"
+      ],
+      "reasoning": "Emergency Management is a professional/workforce field focused on leadership and management roles for disaster response \u2014 not K-12 personal health literacy. Course covers vocabulary, core components, historical events, and leadership/management roles of the emergency management field, which is systems-level/professional rather than personal wellness, safety skills (first aid/CPR), sexual health, substance use, mental health, or nutrition. Aligns with CTE (public safety/emergency services pathway) or Social Studies elective (policy/government response to disasters), not the OSPI Health strand.",
+      "confidence": 0.92
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM420",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Social Studies - Elective",
+        "Elective"
+      ],
+      "reasoning": "Course is a college-level public health / health promotion overview focused on population-level issues \u2014 major causes of premature mortality/morbidity, environmental contributions to illness, economic, public policy, and ethical issues in health promotion. This is health policy and public health systems content, explicitly listed as NOT aligned with K-12 Health (which focuses on personal health literacy and skill-building). No coverage of required RCW topics (CPR/AED, sexual health, suicide prevention, substance use prevention at personal level). The \"CHPM\" prefix (Community Health Promotion) and 400-level number confirm professional/upper-division public health coursework.",
+      "confidence": 0.85
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM430",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Community Paramedicine is professional/clinical healthcare workforce training for advanced paramedics \u2014 covers health assessments, chronic disease monitoring, medication management, immunizations, lab specimen collection, and minor medical procedures performed on patients. This is clinical practitioner training, not K-12 personal health literacy. It does not address OSPI's 6 Core Ideas (personal wellness, sexual health, substance use, social-emotional health, nutrition for personal eating, personal safety/CPR) as skill-building for one's own health. Belongs in the CTE Health Sciences pathway as professional pre-licensure coursework.",
+      "confidence": 0.96
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM440",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Clinical internship for Community Paramedicine is professional EMS workforce training involving supervised patient care delivery in community healthcare settings. This is healthcare professional practice, not K-12 personal health literacy. Aligns with CTE Health Sciences pathway, not OSPI Health standards which focus on personal wellness, sexual health, substance use, mental health, and safety skill-building.",
+      "confidence": 0.97
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM450",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Professional paramedic critical care training (FP-C/CCP-C exam prep) \u2014 clinical workforce/CTE Health Sciences, not K-12 personal health literacy strands.",
+      "confidence": 0.98
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM460",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Critical Care Transport Internship is a clinical ICU rotation for professional paramedic/healthcare workforce training, not K-12 personal health literacy. Aligns with CTE Health Sciences pathway.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHPM490",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "EMS Capstone is a professional paramedic-track clinical course covering critical care, community paramedic, or EMS leadership specialties. This is workforce/CTE healthcare pre-professional training, not K-12 personal health literacy aligned with OSPI's 6 Core Ideas. Belongs in CTE Health Sciences pathway.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHRC400",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Professional clinical training in treating tobacco dependence (neuropharmacology, pharmacologic management, counseling sessions, motivational interviewing, co-morbid conditions). This is practitioner/workforce-prep coursework, not K-12 personal substance use prevention/health literacy.",
+      "confidence": 0.92
+    },
+    {
+      "institution": "tcc",
+      "code": "CHRC410",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Course is professional healthcare leadership/supervision training, not K-12 personal health literacy. Addresses healthcare administration and management skills \u2014 explicitly excluded from OSPI Health standards. Aligns with CTE healthcare pathway.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "CHRC420",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE",
+        "Elective"
+      ],
+      "reasoning": "Course trains healthcare professionals to deliver education to peers/students/clients - workforce-prep teaching methods for practitioners, not K-12 personal health literacy (wellness, sexual health, substance use, mental health, safety, nutrition).",
+      "confidence": 0.9
+    },
+    {
+      "institution": "tcc",
+      "code": "CHRC430",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Advanced clinical respiratory therapy training for credentialed practitioners (adult/neonatal/pediatric critical care); professional-track healthcare, not K-12 personal health literacy.",
+      "confidence": 0.98
+    },
+    {
+      "institution": "tcc",
+      "code": "CHRC490",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "CTE"
+      ],
+      "reasoning": "Advanced Respiratory Care Capstone is a clinical pre-professional course in advanced practice specialties (critical care, neonatal, pediatrics, management, or education). This is workforce/clinical training, not K-12 personal health literacy. Aligns with CTE Health Sciences pathway, not the OSPI Health graduation strand.",
+      "confidence": 0.95
+    },
+    {
+      "institution": "tcc",
+      "code": "NUTR&101",
+      "verdict": "remove_health",
+      "recommended_types": [
+        "Science (Non-Lab)"
+      ],
+      "reasoning": "Course is college-level nutrition science focused on chemistry of nutrients and biology of the GI tract \u2014 aligns with college biochemistry/dietetics framing explicitly flagged as NOT K-12 Health. Lacks the personal nutritional planning, label literacy, and skill-based health behaviors required by OSPI Nutrition strand. Retain Science (Non-Lab).",
+      "confidence": 0.7
+    }
+  ]
+}

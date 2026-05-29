@@ -1,17 +1,22 @@
-"""Classify each TCC course into a PSD/WA-SBE credit type and compute HS credit value.
+"""Classify each course into a PSD/WA-SBE credit type and compute HS credit value.
 
 Rules:
   * 100+ level course → HS credits = quarter_credits / 5
   * Sub-100 level course → flagged for Fresh Start (Open Doors) discussion; HS value left null
   * Variable-credit courses (e.g. ABE20) → HS min/max
 Credit types follow WA SBE 24-credit framework (subdivided per James's spec).
+
+CLI:
+  python classify_courses.py                  # reclassify the merged dataset in place
+  python classify_courses.py path/to/in.json [path/to/out.json]
 """
 import json
 import re
+import sys
 from pathlib import Path
 
-SRC = Path("tcc-courses.json")
-OUT = Path("tcc-courses-classified.json")
+SRC = Path("ctc-courses-classified.json")  # merged dataset (default)
+OUT = Path("ctc-courses-classified.json")
 
 # ----- Credit type taxonomy -----
 # Per WA SBE + James's clarifications.
@@ -91,9 +96,11 @@ PREFIX_DIRECT_UNIVERSAL = {
     # PE / Health
     "PE":    ("PE / Fitness",        0.95, []),
     "PHED":  ("PE / Fitness",        0.95, []),
-    "CHP":   ("Health",              0.85, ["Community Health Prevention"]),
-    "CHPM":  ("Health",              0.85, ["Community Health Promotion"]),
-    "CHRC":  ("Health",              0.80, ["Community Health Resource Coordination"]),
+    # NOTE: CHP / CHPM / CHRC are TCC-specific Community Health prefixes.
+    # The OSPI-standards audit (2026-05-29) showed they're workforce-track,
+    # not K-12 personal health literacy. Moved to PREFIX_DIRECT_BY_INSTITUTION["tcc"]
+    # with CTE default. Other colleges using these prefixes would need their
+    # own rules added.
 
     # CTE (flag every CTE entry — WA state CTE alignment rules need review)
     "ACCT":  ("CTE", 0.85, ["CTE — WA state CTE crosswalk review"]),
@@ -139,8 +146,17 @@ PREFIX_DIRECT_UNIVERSAL = {
 
 # ----- Per-institution prefix overrides -----
 # Use this when a college's local prefix means something different from the
-# universal-prefix default. Empty until concrete conflicts emerge.
-PREFIX_DIRECT_BY_INSTITUTION: dict[str, dict[str, tuple]] = {}
+# universal-prefix default. Populated as concrete conflicts emerge through
+# decision-making and audit workflows.
+PREFIX_DIRECT_BY_INSTITUTION: dict[str, dict[str, tuple]] = {
+    "tcc": {
+        # OSPI-standards audit (2026-05-29) confirmed these are workforce/
+        # professional-track programs, not K-12 personal health literacy.
+        "CHP":  ("CTE", 0.75, ["Community Health — OSPI audit reclassified from Health; verify per-course"]),
+        "CHPM": ("CTE", 0.80, ["Community Health Promotion / EMS — workforce track"]),
+        "CHRC": ("CTE", 0.85, ["Community Health Resource Coordination — workforce track"]),
+    },
+}
 
 
 # ----- Common Course Number overrides -----
@@ -186,7 +202,10 @@ SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
     "ECON&201": ["CTE"],                                             # Microeconomics (CTE pathway)
     "ECON&202": ["CTE"],                                             # Macroeconomics (CTE pathway)
     "HIST&214": ["Social Studies - US History"],                     # Pacific NW also satisfies US Hist
-    "NUTR&101": ["Health"],                                          # Human Nutrition also counts as Health
+    # NUTR&101 Health secondary REMOVED 2026-05-29 — OSPI audit found most
+    # college nutrition courses lean college-science, not K-12 Health.
+    # Per-institution audit decisions add Health back where appropriate
+    # (e.g. Clover Park, Pierce kept Health alongside Science).
     "CMST&220": ["CTE"],                                             # Public Speaking — workforce-readiness CTE
 }
 SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {}
@@ -297,14 +316,17 @@ def classify(course):
 
 
 def main():
-    courses = json.loads(SRC.read_text())
+    src = Path(sys.argv[1]) if len(sys.argv) > 1 else SRC
+    out = Path(sys.argv[2]) if len(sys.argv) > 2 else (src if src == SRC else src.with_name(src.stem + "-classified.json"))
+    courses = json.loads(src.read_text())
     classified = [classify(c) for c in courses]
-    OUT.write_text(json.dumps(classified, indent=2))
+    out.write_text(json.dumps(classified, indent=2))
+    print(f"Read {len(courses)} from {src}; wrote classified → {out}")
 
     # Summary
     from collections import Counter
     ct = Counter(c["credit_type"] for c in classified)
-    print(f"Classified {len(classified)} courses → {OUT}\n")
+    print()
     print("Credit-type distribution:")
     for t in TYPES:
         n = ct.get(t, 0)
