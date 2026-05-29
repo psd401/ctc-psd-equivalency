@@ -320,7 +320,7 @@ TEMPLATE = r"""<!doctype html>
   <h1>##H1##</h1>
   <div class="sub">
     <span class="audience">##AUDIENCE##</span>
-    Mapping TCC → Washington SBE credit types ·
+    Mapping WA community &amp; technical college courses → Washington SBE credit types ·
     5 quarter credits = 1.0 HS credit (100-level &amp; above)
     <span class="contact">· Questions? Talk to your high school counselor.</span>
   </div>
@@ -405,7 +405,7 @@ TEMPLATE = r"""<!doctype html>
         <th data-sort="code">Code <span class="arrow">↕</span></th>
         <th data-sort="title">Title <span class="arrow">↕</span></th>
         <th data-sort="department">Department <span class="arrow">↕</span></th>
-        <th data-sort="credits_total" style="text-align:right;" class="col-tcc-qtr">TCC qtr <span class="arrow">↕</span></th>
+        <th data-sort="credits_total" style="text-align:right;" class="col-tcc-qtr">CTC qtr <span class="arrow">↕</span></th>
         <th data-sort="hs_credits" style="text-align:right;">HS credits <span class="arrow">↕</span></th>
         <th data-sort="credit_type">Credit Type <span class="arrow">↕</span></th>
         <th data-sort="confidence" style="text-align:right;" class="col-confidence">Conf <span class="arrow">↕</span></th>
@@ -418,7 +418,7 @@ TEMPLATE = r"""<!doctype html>
 
   <footer>
     <span class="contact-footer">Questions? Talk to your high school counselor. ·</span>
-    Source: <a href="https://catalog.tacomacc.edu/" target="_blank" rel="noopener">TCC 2025-2026 Catalog</a> ·
+    Source: per-college 2025-2026 catalogs (see institution badges above) ·
     Credit framework: <a href="https://sbe.wa.gov/our-work/graduation-requirements" target="_blank" rel="noopener">WA SBE Graduation Requirements</a> ·
     Peninsula School District
   </footer>
@@ -1180,14 +1180,14 @@ dept_opts = "\n".join(f'<option value="{d}">{d}</option>' for d in depts)
 
 
 def emit(mode):
-    title = "TCC → PSD Course Equivalency"
-    h1 = "Tacoma Community College → PSD Course Equivalency"
+    title = "Community & Technical College → PSD Course Equivalency"
+    h1 = "Community &amp; Technical College → PSD Course Equivalency"
     if mode == "decisions":
         audience = "Deciders only"
         h1 = h1 + "  ·  Decisions tool"
         data_injection = data_js  # inline JSON
     else:
-        audience = "Counselors · TCC staff · students & families"
+        audience = "Counselors · CTC staff · students & families"
         # Public mode: sidecar JSON, fetched at boot. DATA starts as null and
         # the boot sequence pulls equivalency-data.json from the same origin.
         data_injection = "null"
