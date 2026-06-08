@@ -3844,8 +3844,7 @@
       "code": "CMST&220",
       "verdict": "remove_target",
       "recommended_types": [
-        "ELA",
-        "Elective"
+        "ELA"
       ],
       "reasoning": "CMST&220 is explicitly named in the guidance as a course that sounds like CTE but is not \u2014 it is general-ed speech taught as a Humanities distribution/transfer elective with no career cluster alignment, no industry/national technical standards, no Washington CTE Program Standards crosswalk, no leadership/employability skills framework, no CTSO linkage, no performance assessments tied to industry credentials, and no exploratory/preparatory CIP designation. The course content (speech organization, audience analysis, informative/persuasive speeches, outlines, fact/value/policy claims) is academic communication theory, not Business/Marketing or Arts/AV/Communications production. ELA is retained as marginal support since oral communication aligns with Common Core Speaking & Listening strands, and Elective is added as the safest HS credit fit for a humanities transfer course.",
       "confidence": 0.9

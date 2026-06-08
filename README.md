@@ -50,6 +50,17 @@ python merge_catalogs.py
 python diff_catalogs.py --year-from 2025-2026 --year-to 2026-2027 -o diff.md
 ```
 
+### Viewing locally
+
+`ctc-psd-equivalency.html` (the public viewer) fetches its data from the `equivalency-data.json` sidecar, which the browser blocks under `file://`. Don't double-click it — serve it over HTTP instead:
+
+```bash
+./serve.sh        # serves this folder at http://localhost:8000
+# then open http://localhost:8000/ctc-psd-equivalency.html
+```
+
+`ctc-psd-decisions.html` embeds its data inline and opens fine from `file://`.
+
 See [PIPELINE.md](./PIPELINE.md) for the full architecture and operational guide.
 
 ## OSPI-standards audit workflow

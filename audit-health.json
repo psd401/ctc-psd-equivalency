@@ -47,8 +47,7 @@
       "code": "CHP101",
       "verdict": "remove_health",
       "recommended_types": [
-        "CTE",
-        "Elective"
+        "CTE"
       ],
       "reasoning": "Course focuses on professional care navigation, coordination, and advocacy roles within health/human services systems \u2014 this is workforce/professional-track healthcare training (community health worker / care coordinator pathway), not K-12 personal health literacy. It does not address the OSPI Health strands (personal wellness, sexual health, substance use, mental/emotional health, safety, nutrition) through individual skill-building. Aligns with CTE Health Sciences pathway rather than the Health graduation strand.",
       "confidence": 0.88
@@ -69,8 +68,7 @@
       "code": "CHP300",
       "verdict": "remove_health",
       "recommended_types": [
-        "Social Studies - Elective",
-        "Elective"
+        "Social Studies - Elective"
       ],
       "reasoning": "Course is population/community health focused \u2014 examines social, political, economic, environmental, biomedical aspects of community health, health disparities/inequities, and professional concepts like secondary trauma, compassion fatigue, and burnout. This is college-level public health policy analysis, not K-12 personal health literacy. Does not address required HS Health strands (personal wellness, sexual health per Healthy Youth Act, substance use prevention, CPR/AED, personal nutrition, suicide prevention skills).",
       "confidence": 0.9
@@ -91,8 +89,7 @@
       "code": "CHP310",
       "verdict": "remove_health",
       "recommended_types": [
-        "CTE",
-        "Elective"
+        "CTE"
       ],
       "reasoning": "Course focuses on data collection/management, information exchange, and strategic communication design for community health audiences \u2014 this is healthcare informatics and professional health communications/program planning, not K-12 personal health literacy. Description contains no OSPI Health strands (wellness, safety, nutrition, sexual health, SEL/mental health, substance use). Aligns with professional/workforce-prep coursework (health informatics, health promotion program planning) explicitly excluded from the OSPI Health graduation strand.",
       "confidence": 0.9
@@ -102,8 +99,7 @@
       "code": "CHP315",
       "verdict": "remove_health",
       "recommended_types": [
-        "Social Studies - Elective",
-        "Elective"
+        "Social Studies - Elective"
       ],
       "reasoning": "Course is healthcare policy/law/ethics at population level \u2014 examining policy tradeoffs between public welfare and individual rights. Does not address K-12 personal health strands (personal wellness, sexual health, substance use, mental/emotional health, safety skills, personal nutrition). Aligns with public health policy analysis and healthcare law, explicitly listed as NOT K-12 Health.",
       "confidence": 0.9
@@ -123,8 +119,7 @@
       "code": "CHP325",
       "verdict": "remove_health",
       "recommended_types": [
-        "Science (Non-Lab)",
-        "Elective"
+        "Science (Non-Lab)"
       ],
       "reasoning": "Course focuses on population health (a public/systems-level discipline), healthcare quality and safety, the \"four pillars of population health,\" and theoretical frameworks for understanding health behaviors at a population/community level. This is professional/college-level public health coursework \u2014 explicitly excluded from K-12 Health standards which target personal health literacy and skill-building (the 6 Core Ideas: Wellness, Safety, Nutrition, Sexual Health, SEL, Substance Use). The course does not address WA's required HS Health content (CPR/AED, sexual health/Healthy Youth Act, suicide prevention, substance use prevention, personal nutrition planning). Patient education and healthcare quality/safety reference clinical/healthcare delivery contexts, not personal health behaviors.",
       "confidence": 0.9
@@ -154,8 +149,7 @@
       "code": "CHP340",
       "verdict": "remove_health",
       "recommended_types": [
-        "CTE",
-        "Elective"
+        "CTE"
       ],
       "reasoning": "Course covers professional/organizational emergency management (threat assessment, EOC staffing, interagency coordination, incident command, response planning) \u2014 a homeland security/public safety workforce topic, not K-12 personal health literacy. OSPI's Safety strand under Health addresses personal Injury Prevention, First Aid, Violence Prevention, and CPR/AED (RCW 28A.230.179), not systems-level disaster response operations. Aligns with CTE Public Safety/Homeland Security pathway or general Elective credit.",
       "confidence": 0.95
@@ -225,8 +219,7 @@
       "code": "CHP440",
       "verdict": "remove_health",
       "recommended_types": [
-        "Social Studies - Elective",
-        "Elective"
+        "Social Studies - Elective"
       ],
       "reasoning": "Course examines culture-health relationships at the community/population level to inform \"community health work\" and reduce \"health disparities\" \u2014 this is professional/workforce-oriented community health worker training and medical sociology/health disparities content, not K-12 personal health literacy. It does not address required HS Health strands (personal wellness, nutrition, sexual health, mental health, substance use, safety/CPR) or any RCW-mandated content. Aligns with the explicit non-Health exclusions: \"Community health worker / health promotion professional training\" and \"Medical sociology / health disparities research methodology.\" Best fit is Social Studies - Elective (cultural/sociological lens) or general Elective.",
       "confidence": 0.9
@@ -267,8 +260,7 @@
       "code": "CHPM420",
       "verdict": "remove_health",
       "recommended_types": [
-        "Social Studies - Elective",
-        "Elective"
+        "Social Studies - Elective"
       ],
       "reasoning": "Course is a college-level public health / health promotion overview focused on population-level issues \u2014 major causes of premature mortality/morbidity, environmental contributions to illness, economic, public policy, and ethical issues in health promotion. This is health policy and public health systems content, explicitly listed as NOT aligned with K-12 Health (which focuses on personal health literacy and skill-building). No coverage of required RCW topics (CPR/AED, sexual health, suicide prevention, substance use prevention at personal level). The \"CHPM\" prefix (Community Health Promotion) and 400-level number confirm professional/upper-division public health coursework.",
       "confidence": 0.85
@@ -348,8 +340,7 @@
       "code": "CHRC420",
       "verdict": "remove_health",
       "recommended_types": [
-        "CTE",
-        "Elective"
+        "CTE"
       ],
       "reasoning": "Course trains healthcare professionals to deliver education to peers/students/clients - workforce-prep teaching methods for practitioners, not K-12 personal health literacy (wellness, sexual health, substance use, mental health, safety, nutrition).",
       "confidence": 0.9

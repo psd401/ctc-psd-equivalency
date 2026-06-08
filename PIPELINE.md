@@ -46,6 +46,8 @@ Outputs:
 - `ctc-psd-decisions.html` — decider tool (single-file, ~1 MB inline)
 - `ctc-psd-equivalency.html` + `equivalency-data.json` — public tool (~30 KB shell + ~1 MB sidecar)
 
+> **Local viewing:** the public tool `fetch()`es its sidecar, which the browser blocks under `file://`. Run `./serve.sh` and open `http://localhost:8000/ctc-psd-equivalency.html` instead of double-clicking. The decider tool embeds data inline and opens fine from `file://`.
+
 ## Adding a new institution
 
 1. **Identify the catalog platform.** Server header is usually the giveaway:

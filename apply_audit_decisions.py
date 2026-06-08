@@ -29,6 +29,14 @@ DEFAULT_SOURCE = "OSPI K-12 Health Learning Standards audit (2026-05-29)"
 DEFAULT_YEAR = "2025-2026"
 
 
+def drop_redundant_elective(types: list[str]) -> list[str]:
+    """"Elective" is the catch-all category — it only applies when no other
+    credit type does. Strip it whenever another type is present."""
+    if len(types) > 1 and "Elective" in types:
+        return [t for t in types if t != "Elective"]
+    return list(types)
+
+
 def post(decision: dict) -> dict:
     body = json.dumps(decision).encode("utf-8")
     req = urllib.request.Request(
@@ -47,7 +55,7 @@ def build_decision(v: dict, applies_to: str) -> dict:
         "institution": v["institution"],
         "applies_to": applies_to,
         "status": "decided",
-        "override_credit_types": "|".join(v["recommended_types"]),
+        "override_credit_types": "|".join(drop_redundant_elective(v["recommended_types"])),
         "override_hs_credits": "",
         "rationale": f"[Workflow audit · {v.get('verdict','')}] {v.get('reasoning','')}",
         "decided_by": DEFAULT_ROLE,

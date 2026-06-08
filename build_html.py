@@ -22,12 +22,15 @@ OUT_PUB = HERE / "ctc-psd-equivalency.html"
 # attempting fetches.
 APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWhXfKmN7ryC8wiPXypvHmChGvQ9LdCKPDu6EolyNODNARsdfF41wpG_9GF2cdWWIJ/exec"
 
-# Roles allowed in the decided_by dropdown.
+# Roles allowed in the decided_by dropdown. "AI Classifier" records decisions
+# that originate from the automated classifier / AI-assisted audit rather than a
+# named human role.
 DECIDER_ROLES = [
     "Chief Academic Officer",
     "Director of Secondary Teaching & Learning",
     "Director of CTE",
     "Director of Research & Assessment",
+    "AI Classifier",
 ]
 
 # Institutions in scope. Order shown in filters / editor checkboxes.
@@ -456,6 +459,18 @@ const PILL_CLASS = {
   "Elective": "pill-elec",
 };
 
+// "Elective" is the catch-all credit type: it only applies when no other
+// category does. Whenever another type is present, drop the redundant
+// "Elective" tag. Mirrors the rule enforced server-side in
+// apply_audit_decisions.py / cleanup_elective.py.
+function dropRedundantElective(types) {
+  const arr = Array.isArray(types) ? types.slice() : [];
+  if (arr.length > 1 && arr.includes("Elective")) {
+    return arr.filter(t => t !== "Elective");
+  }
+  return arr;
+}
+
 const $ = (s) => document.querySelector(s);
 const tbody = $("#tbody");
 const search = $("#search");
@@ -654,7 +669,7 @@ function effective(c) {
   }
   const auto_types = c.credit_types || (c.credit_type ? [c.credit_type] : []);
   const override_types = d && d.override_credit_types && d.override_credit_types.length
-    ? d.override_credit_types.slice()
+    ? dropRedundantElective(d.override_credit_types)
     : null;
   const credit_types = override_types || auto_types.slice();
   return {
@@ -801,6 +816,8 @@ function render() {
     if (c.code === openCode) frag.appendChild(detailRow(c, eff));
   }
   tbody.appendChild(frag);
+  // Keep the summary tile numbers in sync with the active filters.
+  buildSummary(rows);
 }
 
 function detailRow(c, eff) {
@@ -880,14 +897,20 @@ function editorHTML(c, d) {
       return `<label class="cb"><input type="checkbox" name="applies_to" value="${inst.id}" ${checked?"checked":""} ${allChecked || disabledForLocal?"disabled":""}/> ${escapeHTML(inst.label)}</label>`;
     }).join("");
 
-  // override_credit_types multi-select via checkbox group
-  const currentOverride = v.override_credit_types || [];
+  // override_credit_types multi-select via checkbox group.
+  // Pre-check the course's current credit type(s): an existing override if one
+  // is set, otherwise the auto-classification. The decider must affirmatively
+  // uncheck a type to remove it (vs. the old "all unchecked = keep auto").
+  const autoTypes = c.credit_types || (c.credit_type ? [c.credit_type] : []);
+  const currentTypes = dropRedundantElective(
+    (v.override_credit_types && v.override_credit_types.length) ? v.override_credit_types : autoTypes
+  );
   const ctypeChecks = Object.keys(PILL_CLASS).map(t => {
-    const checked = currentOverride.includes(t);
+    const checked = currentTypes.includes(t);
     return `<label class="cb"><input type="checkbox" name="override_credit_types" value="${escapeHTML(t)}" ${checked?"checked":""}/> ${escapeHTML(t)}</label>`;
   }).join("");
 
-  const autoLabel = (c.credit_types || [c.credit_type]).join(" + ");
+  const autoLabel = autoTypes.join(" + ");
 
   return `<div class="editor" data-code="${c.code}" data-institution="${c.institution || "tcc"}">
     <h4>Decision editor</h4>
@@ -898,7 +921,7 @@ function editorHTML(c, d) {
     </div>
     <label class="cb-group-label">Applies to ${isCommon ? '<span class="hint">(WA Common Course — defaults to all colleges)</span>' : '<span class="hint">(local-prefix course — single college only)</span>'}</label>
     <div class="cb-group">${appliesChecks}</div>
-    <label class="cb-group-label">Override credit types <span class="hint">(leave all unchecked to keep auto: ${escapeHTML(autoLabel)})</span></label>
+    <label class="cb-group-label">Override credit types <span class="hint">(pre-filled with current type(s); uncheck to remove — auto: ${escapeHTML(autoLabel)})</span></label>
     <div class="cb-group">${ctypeChecks}</div>
     <div class="editor-row">
       <label>Override HS credits
@@ -926,22 +949,31 @@ function escapeHTML(s) {
   return String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 }
 
-function buildSummary() {
-  // Double-count: a course with credit_types ["CTE", "SS - Elective"] adds 1
-  // to both buckets. This is the intentional behavior (8.1 in the plan).
+function summaryTypeSet() {
+  // Stable set of tiles: every credit type (in PILL_CLASS order) that exists
+  // anywhere in the FULL dataset. Computed over all DATA — not the filtered
+  // rows — so tiles don't appear/disappear as filters change; only their
+  // numbers do.
+  const present = {};
+  for (const c of DATA) for (const t of effective(c).credit_types) present[t] = true;
+  return Object.keys(PILL_CLASS).filter(t => present[t]);
+}
+
+function buildSummary(rows) {
+  // Counts reflect the currently-filtered rows (defaults to the active filters
+  // when called standalone). Double-count: a course with credit_types
+  // ["CTE", "SS - Elective"] adds 1 to both buckets — intentional.
+  rows = rows || applyFilters();
   const counts = {};
-  for (const c of DATA) {
-    const types = effective(c).credit_types;
-    for (const t of types) counts[t] = (counts[t] || 0) + 1;
+  for (const c of rows) {
+    for (const t of effective(c).credit_types) counts[t] = (counts[t] || 0) + 1;
   }
-  const order = Object.keys(PILL_CLASS);
   const sum = $("#summary");
   sum.innerHTML = "";
-  for (const t of order) {
-    if (!counts[t]) continue;
+  for (const t of summaryTypeSet()) {
     const d = document.createElement("div");
     d.className = "stat";
-    d.innerHTML = `<div class="n">${counts[t]}</div><div class="l">${t}</div>`;
+    d.innerHTML = `<div class="n">${counts[t] || 0}</div><div class="l">${t}</div>`;
     d.style.cursor = "pointer";
     d.title = "Filter to " + t;
     d.addEventListener("click", () => { filterType.value = t; render(); });
@@ -1035,7 +1067,8 @@ async function handleEditor(ev) {
     fd.applies_to = applies.length ? applies : [institution];
     const overrides = [];
     editor.querySelectorAll('input[type=checkbox][name="override_credit_types"]:checked').forEach(el => overrides.push(el.value));
-    fd.override_credit_types = overrides;
+    // Elective only stands alone — strip it when another type is also selected.
+    fd.override_credit_types = dropRedundantElective(overrides);
     statusMsg.textContent = "Saving…";
     try {
       const r = await postDecision(fd);
@@ -1159,7 +1192,7 @@ async function boot() {
       banner.style.display = "";
       banner.className = "banner banner-warn";
       banner.innerHTML = "Couldn't load course data (" + escapeHTML(err.message)
-        + "). The HTML file must be served over http(s) — opening it from <code>file://</code> won't work because of browser security. Contact IT if this is hosted and still failing.";
+        + "). This file must be served over http(s) — opening it directly from <code>file://</code> is blocked by the browser. To view locally, run <code>./serve.sh</code> in the catalog folder (or <code>python3 -m http.server 8000</code>) and open <code>http://localhost:8000/ctc-psd-equivalency.html</code>. If it's hosted and still failing, contact IT.";
       DATA = [];
     }
   }
