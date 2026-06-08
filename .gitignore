@@ -4,3 +4,9 @@ __pycache__/
 .DS_Store
 *.swp
 *.swo
+
+# Local review worklist artifacts (kept out of the repo)
+prefix-worklist.md
+prefix-titles.md
+prefix-departments.md
+prefix-decisions.txt

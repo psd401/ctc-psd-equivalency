@@ -148,6 +148,7 @@ PREFIX_DIRECT_UNIVERSAL = {
 # Use this when a college's local prefix means something different from the
 # universal-prefix default. Populated as concrete conflicts emerge through
 # decision-making and audit workflows.
+_PFX_FLAG = ["Prefix mapping — manual review 2026-06"]
 PREFIX_DIRECT_BY_INSTITUTION: dict[str, dict[str, tuple]] = {
     "tcc": {
         # OSPI-standards audit (2026-05-29) confirmed these are workforce/
@@ -155,6 +156,151 @@ PREFIX_DIRECT_BY_INSTITUTION: dict[str, dict[str, tuple]] = {
         "CHP":  ("CTE", 0.75, ["Community Health — OSPI audit reclassified from Health; verify per-course"]),
         "CHPM": ("CTE", 0.80, ["Community Health Promotion / EMS — workforce track"]),
         "CHRC": ("CTE", 0.85, ["Community Health Resource Coordination — workforce track"]),
+    },
+    # Prefix mappings from the 2026-06 manual classification review of all six
+    # colleges. Confidence 0.85; see prefix-decisions.txt for the source decisions.
+    "olympic": {
+        "BSTEC": ("CTE", 0.85, _PFX_FLAG),
+        "COS":   ("CTE", 0.85, _PFX_FLAG),
+        "CIS":   ("CTE", 0.85, _PFX_FLAG),
+        "FILM":  ("CTE", 0.85, _PFX_FLAG),
+        "NURSE": ("CTE", 0.85, _PFX_FLAG),
+        "PEFSP": ("PE / Fitness", 0.85, _PFX_FLAG),
+        "MEDA":  ("CTE", 0.85, _PFX_FLAG),
+        "RADT":  ("CTE", 0.85, _PFX_FLAG),
+        "ELECT": ("CTE", 0.85, _PFX_FLAG),
+        "IE":    ("ELA", 0.85, _PFX_FLAG),
+        "PTA":   ("CTE", 0.85, _PFX_FLAG),
+        "EM":    ("CTE", 0.85, _PFX_FLAG),
+        "PNURS": ("CTE", 0.85, _PFX_FLAG),
+        "VLBSN": ("CTE", 0.85, _PFX_FLAG),
+        "TSABE": ("Elective", 0.85, _PFX_FLAG),
+        "ADESL": ("Elective", 0.85, _PFX_FLAG),
+        "CULIN": ("CTE", 0.85, _PFX_FLAG),
+        "IS":    ("CTE", 0.85, _PFX_FLAG),
+        "WELD":  ("CTE", 0.85, _PFX_FLAG),
+        "ASUDP": ("CTE", 0.85, _PFX_FLAG),
+        "INTRN": ("CTE", 0.85, _PFX_FLAG),
+        "AEGS":  ("Social Studies - Elective", 0.85, _PFX_FLAG),
+        "BNURS": ("CTE", 0.85, _PFX_FLAG),
+        "ST":    ("CTE", 0.85, _PFX_FLAG),
+        "BH":    ("CTE", 0.85, _PFX_FLAG),
+        "HUMAN": ("Social Studies - Elective", 0.85, _PFX_FLAG),
+        "LBM":   ("CTE", 0.85, _PFX_FLAG),
+        "HS":    ("CTE", 0.85, _PFX_FLAG),
+    },
+    "greenriver": {
+        "BTAC":   ("CTE", 0.85, _PFX_FLAG),
+        "ELL":    ("ELA", 0.85, _PFX_FLAG),
+        "AVIA":   ("CTE", 0.85, _PFX_FLAG),
+        "NATRS":  ("Science (Lab)", 0.85, _PFX_FLAG),
+        "CRC":    ("Elective", 0.85, _PFX_FLAG),
+        "OTA":    ("CTE", 0.85, _PFX_FLAG),
+        "PTA":    ("CTE", 0.85, _PFX_FLAG),
+        "TS":     ("Elective", 0.85, _PFX_FLAG),
+        "BNURSE": ("CTE", 0.85, _PFX_FLAG),
+        "JOURN":  ("CTE", 0.85, _PFX_FLAG),
+        "MGMT":   ("CTE", 0.85, _PFX_FLAG),
+        "SDEV":   ("CTE", 0.85, _PFX_FLAG),
+        "CJ":     ("CTE", 0.85, _PFX_FLAG),
+        "DRMA":   ("Fine & Performing Arts", 0.85, _PFX_FLAG),
+        "PNURSE": ("CTE", 0.85, _PFX_FLAG),
+        "ATECH":  ("CTE", 0.85, _PFX_FLAG),
+        "MFG":    ("CTE", 0.85, _PFX_FLAG),
+        "CARP":   ("CTE", 0.85, _PFX_FLAG),
+        "FLT":    ("CTE", 0.85, _PFX_FLAG),
+        "WELD":   ("CTE", 0.85, _PFX_FLAG),
+    },
+    "pierce": {
+        "DHYG":  ("CTE", 0.85, _PFX_FLAG),
+        "BTECA": ("CTE", 0.85, _PFX_FLAG),
+        "EM":    ("CTE", 0.85, _PFX_FLAG),
+        "VT":    ("CTE", 0.85, _PFX_FLAG),
+        "MNGT":  ("CTE", 0.85, _PFX_FLAG),
+        "FSLM":  ("CTE", 0.85, _PFX_FLAG),
+        "CIS":   ("CTE", 0.85, _PFX_FLAG),
+        "PCADE": ("Elective", 0.85, _PFX_FLAG),
+        "CONST": ("CTE", 0.85, _PFX_FLAG),
+        "PCADA": ("Elective", 0.85, _PFX_FLAG),
+        "CJ":    ("CTE", 0.85, _PFX_FLAG),
+        "CNE":   ("CTE", 0.85, _PFX_FLAG),
+        "KINS":  ("CTE", 0.85, _PFX_FLAG),
+        "DDSGN": ("CTE", 0.85, _PFX_FLAG),
+        "ESL":   ("ELA", 0.85, _PFX_FLAG),
+    },
+    "cloverpark": {
+        "MEC":   ("CTE", 0.85, _PFX_FLAG),
+        "DSN":   ("CTE", 0.85, _PFX_FLAG),
+        "AVP":   ("CTE", 0.85, _PFX_FLAG),
+        "AMT":   ("CTE", 0.85, _PFX_FLAG),
+        "CONST": ("CTE", 0.85, _PFX_FLAG),
+        "MET":   ("CTE", 0.85, _PFX_FLAG),
+        "NOS":   ("CTE", 0.85, _PFX_FLAG),
+        "UPH":   ("CTE", 0.85, _PFX_FLAG),
+        "ENV":   ("Science (Non-Lab)", 0.85, _PFX_FLAG),
+        "WLD":   ("CTE", 0.85, _PFX_FLAG),
+        "DED":   ("CTE", 0.85, _PFX_FLAG),
+        "ES":    ("CTE", 0.85, _PFX_FLAG),
+        "COSMO": ("CTE", 0.85, _PFX_FLAG),
+        "LINE":  ("CTE", 0.85, _PFX_FLAG),
+        "GTC":   ("CTE", 0.85, _PFX_FLAG),
+        "SURG":  ("CTE", 0.85, _PFX_FLAG),
+        "CPW":   ("CTE", 0.85, _PFX_FLAG),
+        "MASST": ("CTE", 0.85, _PFX_FLAG),
+        "ARC":   ("CTE", 0.85, _PFX_FLAG),
+        "HS":    ("CTE", 0.85, _PFX_FLAG),
+        "HAC":   ("CTE", 0.85, _PFX_FLAG),
+        "AUT":   ("CTE", 0.85, _PFX_FLAG),
+        "DAS":   ("CTE", 0.85, _PFX_FLAG),
+        "NDT":   ("CTE", 0.85, _PFX_FLAG),
+        "ACT":   ("CTE", 0.85, _PFX_FLAG),
+        "CUL":   ("CTE", 0.85, _PFX_FLAG),
+        "RBM":   ("CTE", 0.85, _PFX_FLAG),
+        "ACTG":  ("CTE", 0.85, _PFX_FLAG),
+        "EFS":   ("CTE", 0.85, _PFX_FLAG),
+        "MAP":   ("CTE", 0.85, _PFX_FLAG),
+        "PT":    ("CTE", 0.85, _PFX_FLAG),
+        "ARCF":  ("CTE", 0.85, _PFX_FLAG),
+    },
+    "bates": {
+        "WELD":  ("CTE", 0.85, _PFX_FLAG),
+        "DNTU":  ("CTE", 0.85, _PFX_FLAG),
+        "FIRES": ("CTE", 0.85, _PFX_FLAG),
+        "DENLB": ("CTE", 0.85, _PFX_FLAG),
+        "ARWC":  ("CTE", 0.85, _PFX_FLAG),
+        "AUTOM": ("CTE", 0.85, _PFX_FLAG),
+        "ELCON": ("CTE", 0.85, _PFX_FLAG),
+        "HVAC":  ("CTE", 0.85, _PFX_FLAG),
+        "SHME":  ("CTE", 0.85, _PFX_FLAG),
+        "DIESL": ("CTE", 0.85, _PFX_FLAG),
+        "EEST":  ("CTE", 0.85, _PFX_FLAG),
+        "AUTOB": ("CTE", 0.85, _PFX_FLAG),
+        "BROAD": ("CTE", 0.85, _PFX_FLAG),
+        "CARTS": ("CTE", 0.85, _PFX_FLAG),
+        "AMA":   ("CTE", 0.85, _PFX_FLAG),
+        "CVT":   ("CTE", 0.85, _PFX_FLAG),
+        "CARPT": ("CTE", 0.85, _PFX_FLAG),
+        "FACM":  ("CTE", 0.85, _PFX_FLAG),
+        "ECS":   ("CTE", 0.85, _PFX_FLAG),
+        "OTA":   ("CTE", 0.85, _PFX_FLAG),
+        "PLMB":  ("CTE", 0.85, _PFX_FLAG),
+        "REFR":  ("CTE", 0.85, _PFX_FLAG),
+        "STMF":  ("CTE", 0.85, _PFX_FLAG),
+        "BMST":  ("CTE", 0.85, _PFX_FLAG),
+        "DIGIT": ("CTE", 0.85, _PFX_FLAG),
+        "MRI":   ("CTE", 0.85, _PFX_FLAG),
+        "POW":   ("CTE", 0.85, _PFX_FLAG),
+        "TRON":  ("CTE", 0.85, _PFX_FLAG),
+        "ESL":   ("ELA", 0.85, _PFX_FLAG),
+        "MET":   ("CTE", 0.85, _PFX_FLAG),
+        "CSPS":  ("CTE", 0.85, _PFX_FLAG),
+        "DNTA":  ("CTE", 0.85, _PFX_FLAG),
+        "MACH":  ("CTE", 0.85, _PFX_FLAG),
+        "PNUR":  ("CTE", 0.85, _PFX_FLAG),
+        "CEET":  ("CTE", 0.85, _PFX_FLAG),
+        "ETRIC": ("CTE", 0.85, _PFX_FLAG),
+        "INFO":  ("CTE", 0.85, _PFX_FLAG),
+        "SOFT":  ("CTE", 0.85, _PFX_FLAG),
     },
 }
 
@@ -210,6 +356,17 @@ SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
 }
 SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {}
 
+# Prefix-level secondaries (keyed by (institution, prefix)) — applies the dual
+# credit type to every course under the prefix. From the 2026-06 review; the
+# per-course audit (recommended_types) refines these where a specific course
+# doesn't carry the academic content.
+SECONDARY_TYPES_BY_PREFIX: dict[tuple[str, str], list[str]] = {
+    ("olympic", "FILM"): ["Fine & Performing Arts"],
+    ("greenriver", "AVIA"): ["Science (Non-Lab)"],
+    ("pierce", "KINS"): ["Science (Non-Lab)"],
+    ("bates", "MRI"): ["Science (Non-Lab)"],
+}
+
 
 def _resolve_primary(institution: str, code: str, is_common: bool, common_code):
     """Five-tier resolution. Returns (ctype, confidence, rule_flags, rule_label)."""
@@ -247,6 +404,9 @@ def _resolve_secondaries(institution: str, code: str, is_common: bool, common_co
         secondaries.extend(SECONDARY_TYPES_COMMON[common_code])
     inst_secondaries = SECONDARY_TYPES_BY_INSTITUTION.get((institution, code), [])
     secondaries.extend(inst_secondaries)
+    prefix_match = re.match(r"([A-Z]+)", code)
+    prefix = prefix_match.group(1) if prefix_match else ""
+    secondaries.extend(SECONDARY_TYPES_BY_PREFIX.get((institution, prefix), []))
     # Dedupe and drop primary
     seen = set()
     out = []

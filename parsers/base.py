@@ -20,11 +20,29 @@ Required fields:
   source_url       str
 """
 from __future__ import annotations
+import html
 import re
 from datetime import date
 from typing import Iterable
 
 COMMON_COURSE_RE = re.compile(r"^([A-Z]{2,6})&(\d{2,3}[A-Z]{0,2})$")
+
+
+def normalize_text(s: str | None) -> str:
+    """Decode HTML entities and fold curly punctuation to ASCII.
+
+    Catalog HTML carries numeric/named entities (&#8217;, &nbsp;, &eacute;) and
+    smart quotes that otherwise render literally in the viewer (e.g. the title
+    "speaker&#8217;s"). html.unescape resolves all entities to real characters;
+    we then fold the most common typographic quotes/spaces to ASCII so titles
+    and descriptions read cleanly and export safely to CSV. Real dashes (– —)
+    are preserved as-is."""
+    if not s:
+        return ""
+    s = html.unescape(s)
+    return (s.replace("’", "'").replace("‘", "'")
+             .replace("“", '"').replace("”", '"')
+             .replace("\xa0", " "))
 
 
 def normalize_code(raw: str) -> str:
@@ -105,12 +123,12 @@ def make_record(
         "code": code,
         "is_common_course": is_common,
         "common_code": common_code,
-        "title": (title or "").strip(),
-        "department": (department or "").strip() or None,
-        "description": (description or "").strip(),
+        "title": normalize_text(title).strip(),
+        "department": normalize_text(department).strip() or None,
+        "description": normalize_text(description).strip(),
         "components": components or [],
         "credits_total": credits_total,
-        "prerequisites": (prerequisites or "").strip(),
+        "prerequisites": normalize_text(prerequisites).strip(),
         "catalog_year": catalog_year,
         "uploaded_at": uploaded_at or date.today().isoformat(),
         "source_url": source_url,
