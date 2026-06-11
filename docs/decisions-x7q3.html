@@ -117,7 +117,9 @@
     display: flex; flex-direction: column; gap: 4px;
     font-size: 0.78rem; color: var(--psd-whulge);
     text-transform: uppercase; letter-spacing: 0.05em;
+    min-width: 0; /* let grid tracks shrink below option-text width so controls stay inside the card */
   }
+  .toolbar label input, .toolbar label select { width: 100%; min-width: 0; }
   .toolbar input, .toolbar select, .editor input, .editor select, .editor textarea {
     font-size: 0.95rem; padding: 7px 9px;
     border: 1px solid var(--psd-ocean); border-radius: 6px;
@@ -1048,7 +1050,9 @@ function sameTypes(a, b) {
 function flagBadges(c) {
   const out = [];
   const eff = effective(c);
-  if (eff.decision) {
+  // Decision markers are decider-facing only; the public view shows effective
+  // values without exposing that (or how) a district decision was made.
+  if (MODE === "decisions" && eff.decision) {
     const status = eff.decision.status || "decided";
     out.push('<span class="flag flag-decided"><span class="dot dot-' + status + '"></span>' + status + '</span>');
   }
@@ -1142,11 +1146,15 @@ function render() {
     tr.className = "row" + (c.code === openCode ? " open" : "");
     tr.dataset.code = c.code;
     const hsCell = eff.decision && eff.decision.override_hs_credits !== "" && eff.decision.override_hs_credits != null && String(eff.hs_credits) !== String(c.hs_credits)
-      ? `<span class="struck">${fmtCredits(c.hs_credits)}</span> ${fmtCredits(eff.hs_credits)}`
+      ? (MODE === "decisions"
+          ? `<span class="struck">${fmtCredits(c.hs_credits)}</span> ${fmtCredits(eff.hs_credits)}`
+          : fmtCredits(eff.hs_credits))
       : fmtCredits(c.hs_credits);
     const autoTypes = c.credit_types || [c.credit_type];
     const typeCell = eff.decision && eff.decision.override_credit_type && !sameTypes(eff.credit_types, autoTypes)
-      ? `<span class="struck">${pills(autoTypes)}</span> ${pills(eff.credit_types)}`
+      ? (MODE === "decisions"
+          ? `<span class="struck">${pills(autoTypes)}</span> ${pills(eff.credit_types)}`
+          : pills(eff.credit_types))
       : pills(eff.credit_types);
     tr.innerHTML =
       `<td class="code">${c.code}</td>` +
@@ -1173,7 +1181,7 @@ function detailRow(c, eff) {
         ? "all colleges"
         : decided.applies_to.map(id => INSTITUTION_LABEL[id] || id).join(", "))
     : "";
-  const decidedNote = decided
+  const decidedNote = (MODE === "decisions" && decided)
     ? `<div class="decided-note">
         <strong>Decision (${decided.status || "decided"}):</strong> ${escapeHTML(decided.rationale) || "<em>no rationale</em>"}
         <div class="meta">
