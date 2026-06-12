@@ -443,6 +443,23 @@ const DATA_SIDECAR_URL = "./equivalency-data.json";
 let DECISIONS = {};
 const LS_KEY = "ctc-psd-decisions-cache-v1";
 
+// Decisions API key (decider mode only). The backend redacts rationale /
+// decided_by / source_citation from reads and rejects writes without it.
+// Never embedded in this file (the repo is public): prompted once and kept
+// in localStorage.
+const KEY_LS = "ctc-psd-decisions-key-v1";
+function apiKey() {
+  return MODE === "decisions" ? (localStorage.getItem(KEY_LS) || "") : "";
+}
+function ensureKey() {
+  if (MODE !== "decisions" || apiKey()) return;
+  const k = prompt("Decisions API key (from the Sheet's Apps Script API_KEY property):");
+  if (k && k.trim()) localStorage.setItem(KEY_LS, k.trim());
+}
+function dropKey() {
+  localStorage.removeItem(KEY_LS);
+}
+
 const PILL_CLASS = {
   "ELA": "pill-ela",
   "Math": "pill-math",
@@ -607,7 +624,8 @@ async function fetchDecisions() {
     return false;
   }
   try {
-    const res = await fetch(APPS_SCRIPT_URL + "?action=list", { method: "GET" });
+    const keyParam = apiKey() ? "&k=" + encodeURIComponent(apiKey()) : "";
+    const res = await fetch(APPS_SCRIPT_URL + "?action=list" + keyParam, { method: "GET" });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const j = await res.json();
     if (!j.ok) throw new Error(j.error || "unknown");
@@ -647,10 +665,16 @@ async function postDecision(decision) {
   const res = await fetch(APPS_SCRIPT_URL, {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },  // avoids CORS preflight
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ ...payload, k: apiKey() }),
   });
   const j = await res.json();
-  if (!j.ok) throw new Error(j.error || "save failed");
+  if (!j.ok) {
+    if (/unauthorized/i.test(j.error || "")) {
+      dropKey();  // stored key was rejected — re-prompt on next reload
+      throw new Error("save failed: API key rejected. Reload the page to enter a new key.");
+    }
+    throw new Error(j.error || "save failed");
+  }
   const d = normalizeDecision(j.decision);
   DECISIONS[decisionKey(d)] = d;
   indexDecisions();
@@ -1188,6 +1212,7 @@ tbody.addEventListener("click", (e) => {
 
 // Boot
 async function boot() {
+  ensureKey();  // decider mode: prompt once for the decisions API key
   loadCache();
   // Sidecar load for public mode (DATA was injected as null)
   if (DATA === null) {

@@ -15,6 +15,7 @@ Usage:
 from __future__ import annotations
 import argparse
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -23,6 +24,10 @@ from datetime import date
 from pathlib import Path
 
 APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWhXfKmN7ryC8wiPXypvHmChGvQ9LdCKPDu6EolyNODNARsdfF41wpG_9GF2cdWWIJ/exec"
+
+# Decisions API key (see decisions_setup/SETUP.md). Writes are rejected
+# without it.
+API_KEY = os.environ.get("CTC_DECISIONS_KEY", "")
 
 DEFAULT_ROLE = "Director of Research & Assessment (AI-assisted audit)"
 DEFAULT_SOURCE = "OSPI K-12 Health Learning Standards audit (2026-05-29)"
@@ -38,7 +43,7 @@ def drop_redundant_elective(types: list[str]) -> list[str]:
 
 
 def post(decision: dict) -> dict:
-    body = json.dumps(decision).encode("utf-8")
+    body = json.dumps({**decision, "k": API_KEY}).encode("utf-8")
     req = urllib.request.Request(
         APPS_SCRIPT_URL,
         data=body,

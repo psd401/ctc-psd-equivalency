@@ -76,10 +76,10 @@ After 2 weeks of stability (no rollback needed):
 
 | Endpoint | Behavior |
 |---|---|
-| `GET /exec?action=list` | Returns current decisions (is_current=TRUE) as JSON |
-| `GET /exec?action=history&course_code=X&institution=Y` | Returns the audit trail for one course at one institution, oldest first |
-| `GET /exec?action=ping` | Health check |
-| `POST /exec` (JSON body) | Appends a new decision row, supersedes the prior current row for the same `(course_code, institution)` pair |
+| `GET /exec?action=list&k=<key>` | Returns current decisions (is_current=TRUE) as JSON. Without a valid `k`, rows are REDACTED (see API key section below) |
+| `GET /exec?action=history&course_code=X&institution=Y&k=<key>` | Returns the audit trail for one course at one institution, oldest first. Redacted without a valid `k` |
+| `GET /exec?action=ping` | Health check; includes `key_ok` reflecting whether the supplied `k` is valid |
+| `POST /exec` (JSON body incl. `"k"`) | Appends a new decision row, supersedes the prior current row for the same `(course_code, institution)` pair. REJECTED without a valid key |
 
 ### Decision payload (POST)
 
@@ -95,9 +95,40 @@ After 2 weeks of stability (no rollback needed):
   "decided_by": "Director of Secondary Teaching & Learning",
   "decided_date": "2026-05-29",
   "source_citation": "OSPI K-12 SS standards p.14",
-  "decided_for_year": "2025-2026"
+  "decided_for_year": "2025-2026",
+  "k": "<API key>"
 }
 ```
+
+## API key & redaction (added 2026-06-12)
+
+The endpoints are publicly reachable (the public viewer fetches `list`
+client-side), but the district does not publish decision reasoning. The
+backend therefore gates full data behind a key:
+
+- **Without a valid key:** `list`/`history` return only
+  `decision_id, course_code, institution, applies_to, status,
+  override_credit_types, override_hs_credits, decided_date, is_current,
+  superseded_by` — everything the public viewer renders. `rationale`,
+  `decided_by`, `source_citation`, `decided_for_year`, and timestamps are
+  stripped. POST is rejected.
+- **With the key** (`?k=` on GET, `"k"` field on POST): full rows and writes.
+
+Setup (one time):
+1. Apps Script editor → **Project Settings → Script Properties** → add
+   property `API_KEY` with a long random value. The key lives ONLY there —
+   never in this repo (the repo is public).
+2. Deploy a new web app version (same URL).
+
+Clients:
+- **Decider tool** (`ctc-psd-decisions.html`, local-only — run `./serve.sh`):
+  prompts for the key on first load and keeps it in `localStorage`. If a save
+  is rejected, the stored key is cleared and you re-enter it on reload.
+- **Python scripts** (`apply_audit_decisions.py`, `cleanup_elective.py`, ad-hoc
+  posters): export `CTC_DECISIONS_KEY=<key>` in the environment.
+
+While `API_KEY` is unset on the script, all reads come back redacted and all
+writes are rejected — misconfiguration fails closed and visibly.
 
 `applies_to` and `override_credit_types` are pipe-delimited (`|`) strings — easier to scan in the Sheet than nested JSON.
 

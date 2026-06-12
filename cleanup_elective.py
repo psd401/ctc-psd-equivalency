@@ -26,8 +26,10 @@ Usage:
 from __future__ import annotations
 import argparse
 import json
+import os
 import sys
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -70,14 +72,21 @@ def split_pipe(value) -> list[str]:
 
 # ---------------- Sheet cleanup ----------------
 
+# Decisions API key (see decisions_setup/SETUP.md). Reads come back redacted
+# and writes are rejected without it.
+API_KEY = os.environ.get("CTC_DECISIONS_KEY", "")
+
+
 def http_get(url: str) -> dict:
+    if API_KEY:
+        url += ("&" if "?" in url else "?") + "k=" + urllib.parse.quote(API_KEY)
     req = urllib.request.Request(url, method="GET")
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read().decode("utf-8"))
 
 
 def http_post(decision: dict) -> dict:
-    body = json.dumps(decision).encode("utf-8")
+    body = json.dumps({**decision, "k": API_KEY}).encode("utf-8")
     req = urllib.request.Request(
         APPS_SCRIPT_URL,
         data=body,

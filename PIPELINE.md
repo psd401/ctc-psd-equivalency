@@ -71,17 +71,20 @@ Once you have a public repo set up:
 2. **Stage files** — run `./deploy.sh`. It rebuilds and copies into `docs/`:
    - `docs/index.html` (public tool, default landing)
    - `docs/equivalency-data.json` (sidecar)
-   - `docs/decisions-x7q3.html` (decider tool, unguessable filename)
    - `docs/.nojekyll` (so Jekyll doesn't munge the HTML)
+
+   The decider tool is **not** deployed (since 2026-06-12): the repo is
+   public, so an "unguessable" docs/ filename was browsable on GitHub. Run it
+   locally instead: `./serve.sh` → http://localhost:8000/ctc-psd-decisions.html
+   (it prompts once for the decisions API key — see `decisions_setup/SETUP.md`).
 3. **Commit + push**:
    ```bash
    git add docs/
    git commit -m "Deploy YYYY-MM-DD"
    git push
    ```
-4. **GitHub Pages builds** in ~30 seconds. URLs:
+4. **GitHub Pages builds** in ~30 seconds. URL:
    - Public: https://psd401.github.io/ctc-psd-equivalency/
-   - Decider: https://psd401.github.io/ctc-psd-equivalency/decisions-x7q3.html
 
 GitHub Pages enables gzip automatically, so the multi-MB sidecar JSON compresses to ~700 KB over the wire.
 

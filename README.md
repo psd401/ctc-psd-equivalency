@@ -14,7 +14,7 @@ Maps courses from 6 Washington community & technical colleges to PSD high school
 | File | Audience | Edits |
 |---|---|---|
 | `ctc-psd-equivalency.html` + `equivalency-data.json` | Public | No |
-| `ctc-psd-decisions.html` | Deciders (URL-gated) | Yes — saves to Sheet via Apps Script |
+| `ctc-psd-decisions.html` | Deciders (local-only, API-key gated) | Yes — saves to Sheet via Apps Script |
 
 ## Institutions covered
 

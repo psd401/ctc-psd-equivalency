@@ -107,30 +107,62 @@ function json_(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// ---------------- API key / redaction ----------------
+//
+// The list/history endpoints are publicly reachable (the public viewer
+// fetches them client-side), but the district does not publish decision
+// reasoning. Requests without a valid key get REDACTED rows: enough for the
+// public viewer to render effective values (override types/credits, dates,
+// scope), with rationale / decided_by / source_citation stripped. Writes
+// always require the key.
+//
+// The key is NOT in this file (the repo is public): set it once in the Apps
+// Script editor under Project Settings → Script Properties → API_KEY.
+// Clients send it as ?k=<key> on GET or a "k" field in the POST body.
+// While API_KEY is unset, all reads are redacted and all writes rejected.
+
+const PUBLIC_FIELDS = [
+  'decision_id', 'course_code', 'institution', 'applies_to', 'status',
+  'override_credit_types', 'override_hs_credits', 'decided_date',
+  'is_current', 'superseded_by',
+];
+
+function isAuthorized_(key) {
+  const expected = PropertiesService.getScriptProperties().getProperty('API_KEY');
+  return !!expected && !!key && key === expected;
+}
+
+function redact_(rows) {
+  return rows.map(d => Object.fromEntries(PUBLIC_FIELDS.map(f => [f, d[f]])));
+}
+
 // ---------------- HTTP handlers ----------------
 
 function doGet(e) {
   try {
     const sh = ensureSheet_();
-    const action = (e.parameter || {}).action || 'list';
+    const params = e.parameter || {};
+    const action = params.action || 'list';
+    const authed = isAuthorized_(params.k);
     if (action === 'list') {
-      const all = rowsToObjects_(sh);
-      return json_({ ok: true, decisions: all.filter(d => d.is_current) });
+      const all = rowsToObjects_(sh).filter(d => d.is_current);
+      return json_({ ok: true, decisions: authed ? all : redact_(all) });
     }
     if (action === 'history') {
-      const code = (e.parameter || {}).course_code;
-      const inst = (e.parameter || {}).institution;
+      const code = params.course_code;
+      const inst = params.institution;
       if (!code) return json_({ ok: false, error: 'missing course_code' });
       const all = rowsToObjects_(sh);
       const hist = all
         .filter(d => d.course_code === code && (!inst || d.institution === inst))
         .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
-      return json_({ ok: true, history: hist });
+      return json_({ ok: true, history: authed ? hist : redact_(hist) });
     }
     if (action === 'ping') {
       return json_({
         ok: true, message: 'pong', sheet: SHEET_NAME,
         schema: 'v2', rows: sh.getLastRow() - 1,
+        key_ok: authed,
       });
     }
     return json_({ ok: false, error: 'unknown action: ' + action });
@@ -143,6 +175,9 @@ function doPost(e) {
   try {
     const sh = ensureSheet_();
     const body = JSON.parse(e.postData.contents);
+    if (!isAuthorized_(body.k)) {
+      return json_({ ok: false, error: 'unauthorized: missing or invalid key (set the API_KEY script property; clients send it as "k")' });
+    }
     if (!body.course_code) return json_({ ok: false, error: 'missing course_code' });
     if (!body.institution) return json_({ ok: false, error: 'missing institution' });
 

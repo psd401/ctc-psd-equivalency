@@ -27,10 +27,11 @@ mkdir -p docs
 cp ctc-psd-equivalency.html docs/index.html
 cp equivalency-data.json    docs/equivalency-data.json
 
-# Decider tool — unguessable filename. Only deciders get this URL.
-# Change the suffix occasionally as a soft rotate.
-DEC_NAME="decisions-x7q3.html"
-cp ctc-psd-decisions.html docs/${DEC_NAME}
+# The decider tool is intentionally NOT deployed. It is decider-facing only:
+# run ./serve.sh and open http://localhost:8000/ctc-psd-decisions.html.
+# (It used to ship to docs/ under an unguessable filename, but this repo is
+# public, so the filename — and the full decider UI — were one GitHub browse
+# away. Removed 2026-06-12 along with API-key gating of the decisions API.)
 
 # A small landing index (so a stray crawler hits something neutral)
 cat > docs/.nojekyll <<'EOF'
@@ -47,8 +48,9 @@ To publish:
   git commit -m "Deploy \$(date +%Y-%m-%d)"
   git push
 
-After GitHub Pages builds (~30 sec), the URLs will be:
+After GitHub Pages builds (~30 sec), the URL will be:
   https://<owner>.github.io/<repo>/                       (public tool)
-  https://<owner>.github.io/<repo>/${DEC_NAME}            (decider tool)
+
+(The decider tool is local-only: ./serve.sh → http://localhost:8000/ctc-psd-decisions.html)
 
 EOF
