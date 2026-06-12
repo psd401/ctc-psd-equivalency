@@ -108,7 +108,7 @@ Behavior:
 - `keep_*` verdicts are skipped by default (no action needed). Pass `--include-keep` to write them as positive confirmations.
 - Cost guidance: roughly $0.05/course. The Health audit (37 courses) was ~$4; the CTE audit (877 courses) was ~$50.
 
-Audits completed: `audit-health-vs-ospi.md`, `audit-cte-vs-ospi.md`.
+Audits completed — all initial audits are done: `audit-health-vs-ospi.md`, `audit-cte-vs-ospi.md`, and the full Elective reclassification (2026-06-11: all 1,418 remaining Elective-only courses reviewed against the WA SBE 24-credit framework and career clusters; 862 decisions applied). The elective audit artifacts (`audit-electives-2026-06-11.md`/`.json`) are deliberately kept local-only, not committed: they contain per-course decision reasoning, and the district's stance is that decision rationale is not published (see the public-view marker removal in `build_html.py`). Sheet decisions cite the artifact filename in `source_citation`.
 
 When two audits disagree on a course, apply the more specific/well-reasoned one and skip the conflict from the other (the Sheet's append-only history shows both verdicts for review).
 
