@@ -243,6 +243,67 @@ def validate_ccn_consistency(courses: list[dict], r: Report) -> None:
                f"across colleges (base layer): {sorted(diverging)[:8]}")
 
 
+# Fields classify() owns. Everything else on a record comes from the parser.
+CLASSIFIED_FIELDS = (
+    "credit_type", "credit_types", "primary_credit_type",
+    "hs_credits", "level", "is_sub_100",
+    "classification_rule", "confidence", "review_flags",
+)
+
+
+def validate_classification_current(courses: list[dict], r: Report) -> None:
+    """The published classification must match what the rules produce NOW.
+
+    Every other check here asks whether the data is implausible. This one asks
+    whether it is STALE, which is a different failure and the one that came
+    closest to shipping on 2026-09-02.
+
+    merge_catalogs rebuilds the dataset from per-college classified files, each
+    frozen at whenever that college was last scraped. A rule added to
+    classify_courses.py afterwards silently does not apply to any college not
+    re-scraped since. The result is complete, well-formed, valid-looking records
+    carrying superseded classifications — correct shape, valid credit types,
+    sensible values, right count. Nothing is missing, so no absence-based check
+    fires. 695 records had reverted that way, and only a diff against the
+    previous commit caught it.
+
+    Re-running classify() over a classified record is idempotent by design, so
+    any disagreement here means the stored classification predates the current
+    rules. Re-run classify_courses.py.
+    """
+    try:
+        from classify_courses import classify
+    except Exception as e:  # pragma: no cover - import guard
+        r.warn(f"could not import classify_courses to check freshness: {e}")
+        return
+
+    stale: list[tuple[dict, str]] = []
+    for c in courses:
+        try:
+            fresh = classify(c)
+        except Exception as e:
+            r.error(f"{c.get('institution')} {c.get('code')}: classify() raised {e!r}")
+            continue
+        for field in CLASSIFIED_FIELDS:
+            if fresh.get(field) != c.get(field):
+                stale.append((c, field))
+                break
+
+    if not stale:
+        return
+    by_inst = Counter(c["institution"] for c, _ in stale)
+    by_field = Counter(field for _, field in stale)
+    r.error(
+        f"{len(stale)} records do not match what the current rules produce — the "
+        f"classification is STALE, not wrong-looking. Re-run classify_courses.py. "
+        f"By college: {dict(by_inst)}. First differing field: {dict(by_field)}."
+    )
+    for c, field in stale[:5]:
+        fresh = classify(c)
+        r.error(f"    {c['institution']} {c['code']} {field}: "
+                f"stored {c.get(field)!r} vs current {fresh.get(field)!r}")
+
+
 def validate_catalog_year(courses: list[dict], r: Report) -> None:
     """Flag colleges whose catalog year looks stale or inconsistent."""
     by_inst = defaultdict(set)
@@ -266,6 +327,7 @@ CHECKS = (
     validate_derived_credits,
     validate_types,
     validate_ccn_consistency,
+    validate_classification_current,
     validate_catalog_year,
 )
 
