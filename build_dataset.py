@@ -12,6 +12,7 @@ Output:
 """
 from __future__ import annotations
 import json
+import os
 import sys
 from datetime import date
 from pathlib import Path
@@ -99,13 +100,25 @@ INSTITUTIONS = {
             "institution": "bates",
             "base_url": "https://catalog.batestech.edu",
             "list_path": "/courses",
-            "catalog_year": "2025-2026",
+            # Bates' Drupal catalog is UNVERSIONED: no year marker anywhere on
+            # the site and no way to request a specific year. Whatever it serves
+            # is the current catalog, so any fixed year here would be a guess we
+            # then present as fact. Stamp the scrape date instead — it is the
+            # only thing we can actually source.
+            "catalog_year": f"scraped {date.today().isoformat()}",
             "uploaded_at": date.today().isoformat(),
             "source_url": "https://catalog.batestech.edu/",
             "request_delay": 0.50,
         },
     },
 }
+
+
+# A scrape yielding less than this fraction of the previous run is treated as a
+# failure, not a catalog change. Bates legitimately moved 1285 -> 1167 (91%).
+COLLAPSE_THRESHOLD = float(os.environ.get("COLLAPSE_THRESHOLD", "0.5"))
+if os.environ.get("FORCE_SCRAPE") == "1":
+    COLLAPSE_THRESHOLD = 0.0
 
 
 def run_one(inst_id: str, cfg: dict, out_dir: Path) -> list[dict]:
@@ -116,6 +129,23 @@ def run_one(inst_id: str, cfg: dict, out_dir: Path) -> list[dict]:
     print(f"[{inst_id}] parsing...")
     raw = list(parser_fn(cfg["config"]))
     print(f"[{inst_id}] {len(raw)} raw records")
+
+    # Refuse to overwrite a healthy catalog with a collapsed scrape. A blocked
+    # crawl yields zero (or near-zero) records; without this guard run_one
+    # writes [] over the college's file and merge_catalogs then drops the
+    # college from the dataset entirely. Losing a college to a transient WAF
+    # challenge is far worse than skipping one run.
+    prior_path = out_dir / f"{inst_id}-courses.json"
+    if prior_path.exists():
+        prior_n = len(json.loads(prior_path.read_text()))
+        if prior_n and len(raw) < prior_n * COLLAPSE_THRESHOLD:
+            raise RuntimeError(
+                f"[{inst_id}] scrape collapsed: {len(raw)} records vs {prior_n} on disk "
+                f"(<{COLLAPSE_THRESHOLD:.0%}). Refusing to overwrite {prior_path.name}. "
+                f"Investigate — a blocked crawl or a drifted detail-page regex looks "
+                f"exactly like this. Re-run with FORCE_SCRAPE=1 if the drop is real."
+            )
+
     classified = [classify(r) for r in raw]
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"{inst_id}-courses.json").write_text(json.dumps(raw, indent=2))

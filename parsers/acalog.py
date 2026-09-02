@@ -40,10 +40,28 @@ PREREQ_RE = re.compile(
 DEPT_RE = re.compile(r"^([A-Z]+)")
 
 
+class ChallengeError(RuntimeError):
+    """Acalog returned a bot-mitigation challenge instead of the page.
+
+    catalog.*.edu answers content.php with HTTP 202 and an empty body when it
+    decides a client looks automated. urlopen does not raise on 202, so without
+    this check the caller reads the empty body as a legitimately empty course
+    list, enumerates zero courses, and silently wipes the college.
+    """
+
+
 def _fetch(url: str) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8", errors="replace")
+        status = r.status
+        body = r.read().decode("utf-8", errors="replace")
+    if status != 200 or not body.strip():
+        raise ChallengeError(
+            f"HTTP {status} with {len(body)} bytes for {url} — "
+            "looks like a bot-mitigation challenge, not a real page. "
+            "Slow the request rate and retry later; do NOT treat this as an empty catalog."
+        )
+    return body
 
 
 def _strip_tags(s: str) -> str:

@@ -156,6 +156,12 @@ def report_parse_coverage(
     of the offending URLs so a regex drift is caught on the next run.
     """
     print(f"  {parser}: {institution}: {yielded}/{enumerated} pages parsed")
+    if enumerated == 0:
+        # A blocked or challenged enumeration otherwise reports "0/0 pages
+        # parsed", which reads exactly like a clean run of an empty catalog.
+        print(f"  !! {parser}: {institution}: enumerated ZERO courses — this is almost "
+              f"certainly a blocked crawl, not an empty catalog. Do NOT publish this run.")
+        return
     if not unparsed:
         return
     pct = 100.0 * len(unparsed) / enumerated if enumerated else 0.0
