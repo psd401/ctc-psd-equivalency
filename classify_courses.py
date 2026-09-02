@@ -420,8 +420,9 @@ SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
 SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {
     # Clover Park digital-imaging courses stay CTE (graphic-technology program)
     # but also carry art credit per the PSD equivalency worksheet's ART row.
-    # Decided 2026-09-01.
-    ("cloverpark", "GTC130"): ["Fine & Performing Arts"],
+    # Decided 2026-09-01. "Digital Illustration" was renumbered GTC130 -> GTC131
+    # in the 2026-2027 catalog; GTC130 no longer exists.
+    ("cloverpark", "GTC131"): ["Fine & Performing Arts"],
     ("cloverpark", "GTC132"): ["Fine & Performing Arts"],
 }
 

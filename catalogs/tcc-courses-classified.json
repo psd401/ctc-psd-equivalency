@@ -1209,14 +1209,17 @@
     "level": 205,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
+      "Science (Non-Lab)",
       "Social Studies - Elective"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:ANTH",
-    "confidence": 0.9,
-    "review_flags": []
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ANTH&205",
+    "confidence": 0.85,
+    "review_flags": [
+      "Biological Anthropology \u2014 natural-science content; also carries SS Elective"
+    ]
   },
   {
     "institution": "tcc",
@@ -2499,9 +2502,11 @@
       "Science (Lab)"
     ],
     "primary_credit_type": "Science (Lab)",
-    "classification_rule": "prefix:BIOL",
-    "confidence": 0.95,
-    "review_flags": []
+    "classification_rule": "common-course:BIOL&241",
+    "confidence": 0.9,
+    "review_flags": [
+      "Human Anatomy & Physiology I \u2014 lab course at all five other colleges"
+    ]
   },
   {
     "institution": "tcc",
@@ -2530,9 +2535,11 @@
       "Science (Lab)"
     ],
     "primary_credit_type": "Science (Lab)",
-    "classification_rule": "prefix:BIOL",
-    "confidence": 0.95,
-    "review_flags": []
+    "classification_rule": "common-course:BIOL&242",
+    "confidence": 0.9,
+    "review_flags": [
+      "Human Anatomy & Physiology II \u2014 lab course at all five other colleges"
+    ]
   },
   {
     "institution": "tcc",
@@ -4540,15 +4547,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:COL",
-    "confidence": 0.9,
+    "primary_credit_type": "CTE",
+    "classification_rule": "specific:tcc:COL101",
+    "confidence": 0.85,
     "review_flags": [
-      "College success \u2014 typically elective"
+      "CCFE \u2014 College 101"
     ]
   },
   {
@@ -4573,15 +4580,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&101",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Communication \u2014 decided ELA at every college offering it (2026-06-11)"
     ]
   },
   {
@@ -4606,15 +4613,15 @@
     "level": 102,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&102",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Mass Media \u2014 decided ELA at every other college"
     ]
   },
   {
@@ -4639,15 +4646,15 @@
     "level": 210,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&210",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Interpersonal Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -4674,8 +4681,7 @@
     "hs_credits": 1.0,
     "credit_type": "ELA",
     "credit_types": [
-      "ELA",
-      "CTE"
+      "ELA"
     ],
     "primary_credit_type": "ELA",
     "classification_rule": "common-course:CMST&220",
@@ -4706,15 +4712,15 @@
     "level": 230,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&230",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Small Group Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -4739,15 +4745,15 @@
     "level": 240,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&240",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Argumentation \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -4878,15 +4884,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -4911,15 +4917,15 @@
     "level": 260,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -4944,15 +4950,15 @@
     "level": 300,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -4977,15 +4983,15 @@
     "level": 305,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5010,15 +5016,15 @@
     "level": 310,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5043,15 +5049,15 @@
     "level": 315,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5076,15 +5082,15 @@
     "level": 320,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5109,15 +5115,15 @@
     "level": 325,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5142,15 +5148,15 @@
     "level": 330,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5175,15 +5181,15 @@
     "level": 335,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5208,15 +5214,15 @@
     "level": 340,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5241,15 +5247,15 @@
     "level": 360,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5281,15 +5287,15 @@
       "min": 0.2,
       "max": 1.0
     },
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5314,15 +5320,15 @@
     "level": 400,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5347,15 +5353,15 @@
     "level": 410,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5380,15 +5386,15 @@
     "level": 420,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5413,15 +5419,15 @@
     "level": 430,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5446,15 +5452,15 @@
     "level": 440,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5479,15 +5485,15 @@
     "level": 490,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHP",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHP",
+    "confidence": 0.75,
     "review_flags": [
-      "Community Health Prevention"
+      "Community Health \u2014 OSPI audit reclassified from Health; verify per-course"
     ]
   },
   {
@@ -5512,15 +5518,15 @@
     "level": 400,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5545,15 +5551,15 @@
     "level": 410,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5578,15 +5584,15 @@
     "level": 420,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5611,15 +5617,15 @@
     "level": 430,
     "is_sub_100": false,
     "hs_credits": 2.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5644,15 +5650,15 @@
     "level": 440,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5677,15 +5683,15 @@
     "level": 450,
     "is_sub_100": false,
     "hs_credits": 2.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5710,15 +5716,15 @@
     "level": 460,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5750,15 +5756,15 @@
       "min": 0.8,
       "max": 1.0
     },
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHPM",
-    "confidence": 0.85,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHPM",
+    "confidence": 0.8,
     "review_flags": [
-      "Community Health Promotion"
+      "Community Health Promotion / EMS \u2014 workforce track"
     ]
   },
   {
@@ -5783,15 +5789,15 @@
     "level": 400,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHRC",
-    "confidence": 0.8,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHRC",
+    "confidence": 0.85,
     "review_flags": [
-      "Community Health Resource Coordination"
+      "Community Health Resource Coordination \u2014 workforce track"
     ]
   },
   {
@@ -5816,15 +5822,15 @@
     "level": 410,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHRC",
-    "confidence": 0.8,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHRC",
+    "confidence": 0.85,
     "review_flags": [
-      "Community Health Resource Coordination"
+      "Community Health Resource Coordination \u2014 workforce track"
     ]
   },
   {
@@ -5849,15 +5855,15 @@
     "level": 420,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHRC",
-    "confidence": 0.8,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHRC",
+    "confidence": 0.85,
     "review_flags": [
-      "Community Health Resource Coordination"
+      "Community Health Resource Coordination \u2014 workforce track"
     ]
   },
   {
@@ -5882,15 +5888,15 @@
     "level": 430,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHRC",
-    "confidence": 0.8,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHRC",
+    "confidence": 0.85,
     "review_flags": [
-      "Community Health Resource Coordination"
+      "Community Health Resource Coordination \u2014 workforce track"
     ]
   },
   {
@@ -5922,15 +5928,15 @@
       "min": 0.8,
       "max": 1.0
     },
-    "credit_type": "Health",
+    "credit_type": "CTE",
     "credit_types": [
-      "Health"
+      "CTE"
     ],
-    "primary_credit_type": "Health",
-    "classification_rule": "prefix:CHRC",
-    "confidence": 0.8,
+    "primary_credit_type": "CTE",
+    "classification_rule": "prefix:tcc:CHRC",
+    "confidence": 0.85,
     "review_flags": [
-      "Community Health Resource Coordination"
+      "Community Health Resource Coordination \u2014 workforce track"
     ]
   },
   {
@@ -8394,8 +8400,7 @@
     "hs_credits": 1.0,
     "credit_type": "Social Studies - Elective",
     "credit_types": [
-      "Social Studies - Elective",
-      "CTE"
+      "Social Studies - Elective"
     ],
     "primary_credit_type": "Social Studies - Elective",
     "classification_rule": "prefix:ECON",
@@ -8426,8 +8431,7 @@
     "hs_credits": 1.0,
     "credit_type": "Social Studies - Elective",
     "credit_types": [
-      "Social Studies - Elective",
-      "CTE"
+      "Social Studies - Elective"
     ],
     "primary_credit_type": "Social Studies - Elective",
     "classification_rule": "prefix:ECON",
@@ -8456,15 +8460,15 @@
     "level": 115,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:EDUC",
+    "primary_credit_type": "CTE",
+    "classification_rule": "common-course:EDUC&115",
     "confidence": 0.85,
     "review_flags": [
-      "Education \u2014 review for CTE alignment"
+      "Child Development \u2014 decided CTE at every other college"
     ]
   },
   {
@@ -8489,15 +8493,15 @@
     "level": 130,
     "is_sub_100": false,
     "hs_credits": 0.6,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:EDUC",
+    "primary_credit_type": "CTE",
+    "classification_rule": "common-course:EDUC&130",
     "confidence": 0.85,
     "review_flags": [
-      "Education \u2014 review for CTE alignment"
+      "Guiding Behavior \u2014 decided CTE at every other college"
     ]
   },
   {
@@ -8522,15 +8526,15 @@
     "level": 150,
     "is_sub_100": false,
     "hs_credits": 0.6,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:EDUC",
+    "primary_credit_type": "CTE",
+    "classification_rule": "common-course:EDUC&150",
     "confidence": 0.85,
     "review_flags": [
-      "Education \u2014 review for CTE alignment"
+      "Child, Family and Community \u2014 decided CTE at every other college"
     ]
   },
   {
@@ -8555,15 +8559,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:EDUC",
+    "primary_credit_type": "CTE",
+    "classification_rule": "common-course:EDUC&204",
     "confidence": 0.85,
     "review_flags": [
-      "Education \u2014 review for CTE alignment"
+      "Inclusive Education / Exceptional Child \u2014 decided CTE at every other college"
     ]
   },
   {
@@ -9493,15 +9497,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": 1.2,
-    "credit_type": "CTE",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Lab)",
+    "classification_rule": "common-course:ENGR&204",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Electrical Circuits \u2014 lecture + lab"
     ]
   },
   {
@@ -9559,15 +9563,15 @@
     "level": 215,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&215",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Dynamics \u2014 lecture only"
     ]
   },
   {
@@ -9592,15 +9596,15 @@
     "level": 224,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&224",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Thermodynamics \u2014 lecture only"
     ]
   },
   {
@@ -21371,16 +21375,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Health",
     "credit_types": [
-      "Science (Non-Lab)",
-      "Health"
+      "Health",
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {

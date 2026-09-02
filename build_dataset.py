@@ -86,10 +86,10 @@ INSTITUTIONS = {
         "config": {
             "institution": "cloverpark",
             "base_url": "https://cptc.smartcatalogiq.com",
-            "catalog_path": "/en/2025-2026/catalog/courses",
-            "catalog_year": "2025-2026",
+            "catalog_path": "/en/2026-2027/catalog/courses",
+            "catalog_year": "2026-2027",
             "uploaded_at": date.today().isoformat(),
-            "source_url": "https://cptc.smartcatalogiq.com/en/2025-2026/catalog",
+            "source_url": "https://cptc.smartcatalogiq.com/en/2026-2027/catalog",
             "request_delay": 0.50,
         },
     },
