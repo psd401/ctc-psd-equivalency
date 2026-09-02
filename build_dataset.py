@@ -200,7 +200,23 @@ def main():
     print()
     print("Merging all per-institution outputs → ctc-courses-classified.json...")
     import subprocess
-    subprocess.run([__import__("sys").executable, str(HERE / "merge_catalogs.py")], check=True)
+    subprocess.run([sys.executable, str(HERE / "merge_catalogs.py")], check=True)
+
+    # Re-classify the merged dataset. The merge rebuilds ctc-courses-classified
+    # .json from catalogs/<inst>-courses-classified.json, each of which was
+    # classified whenever that college was last scraped — so any rule added to
+    # classify_courses.py since then is silently dropped for every college not
+    # re-scraped in this run.
+    #
+    # That is not hypothetical: a failed Acalog scrape still reaches this merge
+    # (deliberately, so the other five colleges stay current), and on
+    # 2026-09-02 an hourly retry loop kept reverting 695 records to pre-override
+    # classifications — Green River's EDUC&240 back to Elective, losing its CCN
+    # override. Well-formed records classified by superseded rules, so the
+    # validator saw nothing wrong.
+    print()
+    print("Re-classifying merged dataset with the current rules...")
+    subprocess.run([sys.executable, str(HERE / "classify_courses.py")], check=True)
 
     if failed:
         # Exiting 0 after a failed scrape tells every caller the run succeeded.
