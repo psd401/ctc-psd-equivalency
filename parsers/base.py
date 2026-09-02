@@ -144,6 +144,29 @@ def infer_components_from_text(text: str) -> list[dict]:
     return types
 
 
+def report_parse_coverage(
+    parser: str, institution: str, enumerated: int, yielded: int,
+    unparsed: list[str], sample: int = 10,
+) -> None:
+    """Report how many enumerated pages actually became records.
+
+    A parser that fetches a page and cannot read it drops the course silently.
+    That is how the Bates CCN title bug removed the college's whole transfer
+    catalog without a single warning. Any gap is printed loudly with a sample
+    of the offending URLs so a regex drift is caught on the next run.
+    """
+    print(f"  {parser}: {institution}: {yielded}/{enumerated} pages parsed")
+    if not unparsed:
+        return
+    pct = 100.0 * len(unparsed) / enumerated if enumerated else 0.0
+    print(f"  !! {parser}: {institution}: {len(unparsed)} pages ({pct:.1f}%) fetched but NOT parsed")
+    for u in unparsed[:sample]:
+        print(f"     - {u}")
+    if len(unparsed) > sample:
+        print(f"     … and {len(unparsed) - sample} more")
+    print(f"  !! Investigate before trusting this scrape — a detail-page regex may have drifted.")
+
+
 def make_record(
     *,
     institution: str,

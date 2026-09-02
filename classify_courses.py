@@ -336,6 +336,18 @@ COMMON_COURSE_OVERRIDES = {
     "ANTH&205": ("Science (Non-Lab)", 0.85, ["Biological Anthropology — natural-science content; also carries SS Elective"]),
     "DRMA&101": ("Fine & Performing Arts", 0.90, ["Intro to Theatre — Fine & Performing Arts"]),
     "NUTR&101": ("Health", 0.85, ["Nutrition — Health primary, Science (Non-Lab) secondary (2026-09-01)"]),
+    # Statewide answers for CCNs that Bates joined the dataset with on 2026-09-02.
+    # Bates publishes no contact hours for these, so without an override its
+    # records fall to the generic prefix rule and diverge from the other five
+    # colleges. Each value below is what every other college already resolves to.
+    "BIOL&241": ("Science (Lab)", 0.90, ["Human Anatomy & Physiology I — lab course at all five other colleges"]),
+    "BIOL&242": ("Science (Lab)", 0.90, ["Human Anatomy & Physiology II — lab course at all five other colleges"]),
+    "CMST&102": ("ELA", 0.75, ["Intro to Mass Media — decided ELA at every other college"]),
+    "EDUC&115": ("CTE", 0.85, ["Child Development — decided CTE at every other college"]),
+    "EDUC&130": ("CTE", 0.85, ["Guiding Behavior — decided CTE at every other college"]),
+    "EDUC&136": ("CTE", 0.85, ["School-Age Care — decided CTE at every other college"]),
+    "EDUC&150": ("CTE", 0.85, ["Child, Family and Community — decided CTE at every other college"]),
+    "EDUC&204": ("CTE", 0.85, ["Inclusive Education / Exceptional Child — decided CTE at every other college"]),
     # Engineering CCNs normalized across colleges (2026-09-01). ENGR&204 carries a
     # lab at every college that publishes components (6 credits, Lecture + Lab);
     # ENGR&215/224 are 5-credit lecture-only.
@@ -484,7 +496,9 @@ def classify(course):
     institution = course.get("institution", "tcc")
     is_common = course.get("is_common_course", False)
     common_code = course.get("common_code")
-    flags = []
+    # Carry through flags the ingest stage already attached (e.g. a record
+    # retained from a prior scrape because the college unpublished the page).
+    flags = list(course.get("review_flags") or [])
 
     # Level check
     num_match = re.match(r"[A-Z]+&?(\d+)", code)

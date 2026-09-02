@@ -144,6 +144,8 @@ def parse(config: dict) -> Iterator[dict]:
     urls = _list_course_urls(base_url, catalog_path)
     print(f"  smartcatalog: {len(urls)} course URLs")
 
+    unparsed: list[str] = []
+    yielded = 0
     for i, url in enumerate(urls, 1):
         if i % 100 == 0:
             print(f"    {institution}: {i}/{len(urls)}")
@@ -154,7 +156,9 @@ def parse(config: dict) -> Iterator[dict]:
             continue
         parsed = _parse_detail(html)
         if not parsed:
+            unparsed.append(url)
             continue
+        yielded += 1
         # Department: prefix is the first path segment after /courses/
         seg = url.split(catalog_path + "/")[-1].split("/")[0]
         dept = seg.replace("-", " ").title() if seg else None
@@ -173,3 +177,5 @@ def parse(config: dict) -> Iterator[dict]:
         )
         if delay:
             time.sleep(delay)
+
+    base.report_parse_coverage("smartcatalog", institution, len(urls), yielded, unparsed)

@@ -32,8 +32,13 @@ UA = "Mozilla/5.0 (PSD course equivalency parser; cantonwinej@psd401.net)"
 
 # Course detail URL pattern: /{department-slug}/{prefix}-{number}
 COURSE_LINK_RE = re.compile(r'href="(/[a-z][a-z0-9-]+/[a-z]+-[0-9]+[a-z]*)"')
+# The code group MUST allow "&" (rendered "&amp;"). Bates writes Common Course
+# Numbers as "ENGL&amp; 101: ..." while local courses are "ENGL 175: ...".
+# Without the ampersand branch this regex silently failed on every CCN course,
+# _parse_detail returned None, and the parser dropped Bates' entire
+# transfer/gen-ed catalog — the courses Running Start students actually take.
 TITLE_RE = re.compile(
-    r"<h1[^>]*>\s*([A-Z]+\s*\d+[A-Z]*)\s*:\s*(.+?)\s*</h1>",
+    r"<h1[^>]*>\s*([A-Z]+(?:&(?:amp;)?)?\s*\d+[A-Z]*)\s*:\s*(.+?)\s*</h1>",
     re.S | re.I,
 )
 CREDITS_RE = re.compile(
@@ -49,6 +54,18 @@ DISTRIBUTION_RE = re.compile(
     re.I | re.S,
 )
 DEPT_RE = re.compile(r"^/([a-z0-9-]+)/")
+
+# Transfer course pages carry structured contact hours that workforce pages do
+# not (workforce pages carry field-distribution instead). Capturing them gives
+# the classifier real lab evidence rather than a title heuristic.
+HOURS_RE = {
+    "Lecture": re.compile(r'field--name-field-lecture-hours\b.*?field__item[^>]*>\s*([\d.]+)', re.I | re.S),
+    "Lab": re.compile(r'field--name-field-lab-hours\b.*?field__item[^>]*>\s*([\d.]+)', re.I | re.S),
+    "Clinical": re.compile(r'field--name-field-clinical\b.*?field__item[^>]*>\s*([\d.]+)', re.I | re.S),
+}
+PREREQ_RE = re.compile(
+    r'field--name-field-pr\b.*?field__item[^>]*>(.*?)</div>', re.I | re.S
+)
 
 
 def _fetch(url: str) -> str:
@@ -118,7 +135,25 @@ def _parse_detail(html: str, source_path: str) -> dict | None:
     if dept_match:
         dept = dept_match.group(1).replace("-", " ").title()
 
-    components = base.infer_components_from_text(desc)
+    prereq = ""
+    pm = PREREQ_RE.search(html)
+    if pm:
+        prereq = _strip_tags(pm.group(1))
+
+    # Prefer the page's own contact-hour fields; a component declared with 0
+    # hours is not part of the course. Fall back to prose inference only when
+    # the page publishes no hours at all (workforce pages).
+    components = []
+    saw_hours = False
+    for kind, rx in HOURS_RE.items():
+        hm = rx.search(html)
+        if not hm:
+            continue
+        saw_hours = True
+        if float(hm.group(1)) > 0:
+            components.append({"type": kind})
+    if not saw_hours:
+        components = base.infer_components_from_text(desc)
 
     return {
         "code": code,
@@ -127,7 +162,7 @@ def _parse_detail(html: str, source_path: str) -> dict | None:
         "description": desc,
         "components": components,
         "credits_total": credits,
-        "prerequisites": "",  # Bates doesn't publish structured prereqs in this layout
+        "prerequisites": prereq,
     }
 
 
@@ -144,6 +179,8 @@ def parse(config: dict) -> Iterator[dict]:
     paths = _list_course_paths(base_url, list_path)
     print(f"  drupal: {len(paths)} courses")
 
+    unparsed: list[str] = []
+    yielded = 0
     for i, path in enumerate(paths, 1):
         if i % 100 == 0:
             print(f"    {institution}: {i}/{len(paths)}")
@@ -154,7 +191,12 @@ def parse(config: dict) -> Iterator[dict]:
             continue
         parsed = _parse_detail(html, path)
         if not parsed:
+            # A page we fetched but could not read. Never swallow this: an
+            # unreported drop here is exactly how the CCN title bug hid an
+            # entire transfer catalog for four months.
+            unparsed.append(path)
             continue
+        yielded += 1
         yield base.make_record(
             institution=institution,
             code=parsed["code"],
@@ -170,3 +212,5 @@ def parse(config: dict) -> Iterator[dict]:
         )
         if delay:
             time.sleep(delay)
+
+    base.report_parse_coverage("drupal", institution, len(paths), yielded, unparsed)
