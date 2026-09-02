@@ -23004,16 +23004,15 @@
     "level": 95,
     "is_sub_100": true,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Social Studies - Civics",
     "credit_types": [
-      "Elective"
+      "Social Studies - Civics"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
+    "primary_credit_type": "Social Studies - Civics",
+    "classification_rule": "specific:bates:GOVT95",
+    "confidence": 0.9,
     "review_flags": [
-      "Sub-100 \u2014 Fresh Start (Open Doors) review",
-      "Unmapped prefix 'GOVT' \u2014 review"
+      "Sub-100 \u2014 Fresh Start (Open Doors) review"
     ]
   },
   {
@@ -23061,16 +23060,15 @@
     "level": 90,
     "is_sub_100": true,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "specific:bates:HIST90",
+    "confidence": 0.9,
     "review_flags": [
-      "Sub-100 \u2014 Fresh Start (Open Doors) review",
-      "Refine into US/World History"
+      "Sub-100 \u2014 Fresh Start (Open Doors) review"
     ]
   },
   {
@@ -23094,16 +23092,15 @@
     "level": 92,
     "is_sub_100": true,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "specific:bates:HIST92",
+    "confidence": 0.9,
     "review_flags": [
-      "Sub-100 \u2014 Fresh Start (Open Doors) review",
-      "Refine into US/World History"
+      "Sub-100 \u2014 Fresh Start (Open Doors) review"
     ]
   },
   {
@@ -23127,16 +23124,15 @@
     "level": 96,
     "is_sub_100": true,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - Washington State History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - Washington State History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
+    "primary_credit_type": "Social Studies - Washington State History",
+    "classification_rule": "specific:bates:HIST96",
+    "confidence": 0.9,
     "review_flags": [
-      "Sub-100 \u2014 Fresh Start (Open Doors) review",
-      "Refine into US/World History"
+      "Sub-100 \u2014 Fresh Start (Open Doors) review"
     ]
   },
   {
@@ -42724,11 +42720,11 @@
     "level": 160,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:BIOL",
     "confidence": 0.95,
     "review_flags": []
@@ -43411,11 +43407,11 @@
     "level": 110,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -43493,11 +43489,11 @@
     "level": 161,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -43519,11 +43515,11 @@
     "level": 162,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -52866,11 +52862,11 @@
     "level": 110,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:GEOL",
     "confidence": 0.95,
     "review_flags": []
@@ -52978,7 +52974,8 @@
     "hs_credits": 0.8,
     "credit_type": "CTE",
     "credit_types": [
-      "CTE"
+      "CTE",
+      "Fine & Performing Arts"
     ],
     "primary_credit_type": "CTE",
     "classification_rule": "prefix:cloverpark:GTC",
@@ -53006,7 +53003,8 @@
     "hs_credits": 0.8,
     "credit_type": "CTE",
     "credit_types": [
-      "CTE"
+      "CTE",
+      "Fine & Performing Arts"
     ],
     "primary_credit_type": "CTE",
     "classification_rule": "prefix:cloverpark:GTC",
@@ -57843,16 +57841,15 @@
     "level": 99,
     "is_sub_100": true,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Math",
     "credit_types": [
-      "Elective"
+      "Math"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
+    "primary_credit_type": "Math",
+    "classification_rule": "specific:cloverpark:MAT99",
+    "confidence": 0.85,
     "review_flags": [
-      "Sub-100 \u2014 Fresh Start (Open Doors) review",
-      "Unmapped prefix 'MAT' \u2014 review"
+      "Sub-100 \u2014 Fresh Start (Open Doors) review"
     ]
   },
   {
@@ -57872,16 +57869,14 @@
     "level": 103,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Math",
     "credit_types": [
-      "Elective"
+      "Math"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
-    "review_flags": [
-      "Unmapped prefix 'MAT' \u2014 review"
-    ]
+    "primary_credit_type": "Math",
+    "classification_rule": "specific:cloverpark:MAT103",
+    "confidence": 0.85,
+    "review_flags": []
   },
   {
     "institution": "cloverpark",
@@ -65082,15 +65077,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Health",
     "credit_types": [
+      "Health",
       "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {
@@ -65489,11 +65485,11 @@
     "level": 114,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "Science (Non-Lab)"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
+    "primary_credit_type": "Science (Lab)",
     "classification_rule": "prefix:PHYS",
     "confidence": 0.95,
     "review_flags": []
@@ -70395,14 +70391,17 @@
     "level": 205,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
+      "Science (Non-Lab)",
       "Social Studies - Elective"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:ANTH",
-    "confidence": 0.9,
-    "review_flags": []
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ANTH&205",
+    "confidence": 0.85,
+    "review_flags": [
+      "Biological Anthropology \u2014 natural-science content; also carries SS Elective"
+    ]
   },
   {
     "institution": "greenriver",
@@ -79515,15 +79514,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&101",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Communication \u2014 decided ELA at every college offering it (2026-06-11)"
     ]
   },
   {
@@ -79711,15 +79710,15 @@
     "level": 210,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&210",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Interpersonal Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -79935,15 +79934,15 @@
     "level": 230,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&230",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Small Group Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -79963,15 +79962,15 @@
     "level": 240,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&240",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Argumentation \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -82468,10 +82467,10 @@
       "Fine & Performing Arts"
     ],
     "primary_credit_type": "Fine & Performing Arts",
-    "classification_rule": "prefix:greenriver:DRMA",
-    "confidence": 0.85,
+    "classification_rule": "common-course:DRMA&101",
+    "confidence": 0.9,
     "review_flags": [
-      "Prefix mapping \u2014 manual review 2026-06"
+      "Intro to Theatre \u2014 Fine & Performing Arts"
     ]
   },
   {
@@ -85206,15 +85205,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Lab)",
+    "classification_rule": "common-course:ENGR&204",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Electrical Circuits \u2014 lecture + lab"
     ]
   },
   {
@@ -85262,15 +85261,15 @@
     "level": 215,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&215",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Dynamics \u2014 lecture only"
     ]
   },
   {
@@ -85290,15 +85289,15 @@
     "level": 224,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&224",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Thermodynamics \u2014 lecture only"
     ]
   },
   {
@@ -90296,16 +90295,14 @@
     "level": 136,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
-    "review_flags": [
-      "Refine into US/World History"
-    ]
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "common-course:HIST&136",
+    "confidence": 0.95,
+    "review_flags": []
   },
   {
     "institution": "greenriver",
@@ -90324,16 +90321,14 @@
     "level": 137,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
-    "review_flags": [
-      "Refine into US/World History"
-    ]
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "common-course:HIST&137",
+    "confidence": 0.95,
+    "review_flags": []
   },
   {
     "institution": "greenriver",
@@ -100384,15 +100379,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Health",
     "credit_types": [
+      "Health",
       "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {
@@ -112649,14 +112645,17 @@
     "level": 205,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
+      "Science (Non-Lab)",
       "Social Studies - Elective"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:ANTH",
-    "confidence": 0.9,
-    "review_flags": []
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ANTH&205",
+    "confidence": 0.85,
+    "review_flags": [
+      "Biological Anthropology \u2014 natural-science content; also carries SS Elective"
+    ]
   },
   {
     "institution": "olympic",
@@ -118612,15 +118611,15 @@
     "level": 133,
     "is_sub_100": false,
     "hs_credits": 0.6,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
+    "primary_credit_type": "CTE",
+    "classification_rule": "specific:olympic:COLL133",
+    "confidence": 0.85,
     "review_flags": [
-      "Unmapped prefix 'COLL' \u2014 review"
+      "CCFE \u2014 Running Start and Beyond"
     ]
   },
   {
@@ -118975,15 +118974,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&101",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Communication \u2014 decided ELA at every college offering it (2026-06-11)"
     ]
   },
   {
@@ -119040,15 +119039,15 @@
     "level": 210,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&210",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Interpersonal Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -119105,15 +119104,15 @@
     "level": 230,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&230",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Small Group Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -119138,15 +119137,15 @@
     "level": 240,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&240",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Argumentation \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -121211,13 +121210,14 @@
     "hs_credits": 1.0,
     "credit_type": "CTE",
     "credit_types": [
-      "CTE"
+      "CTE",
+      "Math"
     ],
     "primary_credit_type": "CTE",
-    "classification_rule": "prefix:CS",
+    "classification_rule": "common-course:CS&141",
     "confidence": 0.85,
     "review_flags": [
-      "CTE \u2014 programming, NOT a World Language"
+      "Computer Science I \u2014 CTE primary, Math secondary"
     ]
   },
   {
@@ -124576,16 +124576,14 @@
     "level": 120,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Fine & Performing Arts",
     "credit_types": [
-      "Elective"
+      "Fine & Performing Arts"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
-    "review_flags": [
-      "Unmapped prefix 'DMA' \u2014 review"
-    ]
+    "primary_credit_type": "Fine & Performing Arts",
+    "classification_rule": "specific:olympic:DMA120",
+    "confidence": 0.85,
+    "review_flags": []
   },
   {
     "institution": "olympic",
@@ -124684,16 +124682,14 @@
     "level": 220,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Fine & Performing Arts",
     "credit_types": [
-      "Elective"
+      "Fine & Performing Arts"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
-    "review_flags": [
-      "Unmapped prefix 'DMA' \u2014 review"
-    ]
+    "primary_credit_type": "Fine & Performing Arts",
+    "classification_rule": "specific:olympic:DMA220",
+    "confidence": 0.85,
+    "review_flags": []
   },
   {
     "institution": "olympic",
@@ -124792,15 +124788,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "Fine & Performing Arts",
     "credit_types": [
-      "Elective"
+      "Fine & Performing Arts"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
+    "primary_credit_type": "Fine & Performing Arts",
+    "classification_rule": "common-course:DRMA&101",
+    "confidence": 0.9,
     "review_flags": [
-      "Unmapped prefix 'DRMA' \u2014 review"
+      "Intro to Theatre \u2014 Fine & Performing Arts"
     ]
   },
   {
@@ -127638,15 +127634,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": 1.2,
-    "credit_type": "CTE",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Lab)",
+    "classification_rule": "common-course:ENGR&204",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Electrical Circuits \u2014 lecture + lab"
     ]
   },
   {
@@ -127704,15 +127700,15 @@
     "level": 215,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&215",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Dynamics \u2014 lecture only"
     ]
   },
   {
@@ -127737,15 +127733,15 @@
     "level": 224,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&224",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Thermodynamics \u2014 lecture only"
     ]
   },
   {
@@ -131593,16 +131589,14 @@
     "level": 136,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
-    "review_flags": [
-      "Refine into US/World History"
-    ]
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "common-course:HIST&136",
+    "confidence": 0.95,
+    "review_flags": []
   },
   {
     "institution": "olympic",
@@ -131626,16 +131620,14 @@
     "level": 137,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Social Studies - US History",
     "credit_types": [
-      "Social Studies - Elective"
+      "Social Studies - US History"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:HIST",
-    "confidence": 0.7,
-    "review_flags": [
-      "Refine into US/World History"
-    ]
+    "primary_credit_type": "Social Studies - US History",
+    "classification_rule": "common-course:HIST&137",
+    "confidence": 0.95,
+    "review_flags": []
   },
   {
     "institution": "olympic",
@@ -142983,15 +142975,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Health",
     "credit_types": [
+      "Health",
       "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {
@@ -151828,14 +151821,17 @@
     "level": 205,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
+      "Science (Non-Lab)",
       "Social Studies - Elective"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:ANTH",
-    "confidence": 0.9,
-    "review_flags": []
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ANTH&205",
+    "confidence": 0.85,
+    "review_flags": [
+      "Biological Anthropology \u2014 natural-science content; also carries SS Elective"
+    ]
   },
   {
     "institution": "pierce",
@@ -152770,11 +152766,11 @@
     "level": 100,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:ASTR",
     "confidence": 0.95,
     "review_flags": []
@@ -152925,11 +152921,11 @@
     "level": 275,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:BIOL",
     "confidence": 0.95,
     "review_flags": []
@@ -153036,11 +153032,11 @@
     "level": 170,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:BIOL",
     "confidence": 0.95,
     "review_flags": []
@@ -156397,11 +156393,11 @@
     "level": 100,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -156541,11 +156537,11 @@
     "level": 139,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -156577,11 +156573,11 @@
     "level": 141,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -156613,11 +156609,11 @@
     "level": 142,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:CHEM",
     "confidence": 0.95,
     "review_flags": []
@@ -157064,15 +157060,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&101",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Communication \u2014 decided ELA at every college offering it (2026-06-11)"
     ]
   },
   {
@@ -157140,15 +157136,15 @@
     "level": 210,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&210",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Interpersonal Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -157216,15 +157212,15 @@
     "level": 230,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&230",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Small Group Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -159042,13 +159038,14 @@
     "hs_credits": null,
     "credit_type": "CTE",
     "credit_types": [
-      "CTE"
+      "CTE",
+      "Math"
     ],
     "primary_credit_type": "CTE",
-    "classification_rule": "prefix:CS",
+    "classification_rule": "common-course:CS&141",
     "confidence": 0.85,
     "review_flags": [
-      "CTE \u2014 programming, NOT a World Language"
+      "Computer Science I \u2014 CTE primary, Math secondary"
     ]
   },
   {
@@ -164151,15 +164148,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Elective",
+    "credit_type": "Fine & Performing Arts",
     "credit_types": [
-      "Elective"
+      "Fine & Performing Arts"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "fallback",
-    "confidence": 0.3,
+    "primary_credit_type": "Fine & Performing Arts",
+    "classification_rule": "common-course:DRMA&101",
+    "confidence": 0.9,
     "review_flags": [
-      "Unmapped prefix 'DRMA' \u2014 review"
+      "Intro to Theatre \u2014 Fine & Performing Arts"
     ]
   },
   {
@@ -167089,15 +167086,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Lab)",
+    "classification_rule": "common-course:ENGR&204",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Electrical Circuits \u2014 lecture + lab"
     ]
   },
   {
@@ -167165,15 +167162,15 @@
     "level": 215,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&215",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Dynamics \u2014 lecture only"
     ]
   },
   {
@@ -167203,15 +167200,15 @@
     "level": 224,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&224",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Thermodynamics \u2014 lecture only"
     ]
   },
   {
@@ -169077,11 +169074,11 @@
     "level": 150,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:ENVS",
     "confidence": 0.95,
     "review_flags": []
@@ -169116,11 +169113,11 @@
     "level": 100,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:ENVS",
     "confidence": 0.95,
     "review_flags": []
@@ -170632,11 +170629,11 @@
     "level": 112,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "Science (Lab)"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
+    "primary_credit_type": "Science (Non-Lab)",
     "classification_rule": "prefix:GEOL",
     "confidence": 0.95,
     "review_flags": []
@@ -178964,15 +178961,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": null,
-    "credit_type": "Science (Lab)",
+    "credit_type": "Health",
     "credit_types": [
-      "Science (Lab)"
+      "Health",
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {
@@ -187454,14 +187452,17 @@
     "level": 205,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Social Studies - Elective",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
+      "Science (Non-Lab)",
       "Social Studies - Elective"
     ],
-    "primary_credit_type": "Social Studies - Elective",
-    "classification_rule": "prefix:ANTH",
-    "confidence": 0.9,
-    "review_flags": []
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ANTH&205",
+    "confidence": 0.85,
+    "review_flags": [
+      "Biological Anthropology \u2014 natural-science content; also carries SS Elective"
+    ]
   },
   {
     "institution": "tcc",
@@ -190785,15 +190786,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "CTE",
     "credit_types": [
-      "Elective"
+      "CTE"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:COL",
-    "confidence": 0.9,
+    "primary_credit_type": "CTE",
+    "classification_rule": "specific:tcc:COL101",
+    "confidence": 0.85,
     "review_flags": [
-      "College success \u2014 typically elective"
+      "CCFE \u2014 College 101"
     ]
   },
   {
@@ -190818,15 +190819,15 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&101",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Intro to Communication \u2014 decided ELA at every college offering it (2026-06-11)"
     ]
   },
   {
@@ -190884,15 +190885,15 @@
     "level": 210,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&210",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Interpersonal Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -190950,15 +190951,15 @@
     "level": 230,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&230",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Small Group Communication \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -190983,15 +190984,15 @@
     "level": 240,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Elective",
+    "credit_type": "ELA",
     "credit_types": [
-      "Elective"
+      "ELA"
     ],
-    "primary_credit_type": "Elective",
-    "classification_rule": "prefix:CMST",
-    "confidence": 0.7,
+    "primary_credit_type": "ELA",
+    "classification_rule": "common-course:CMST&240",
+    "confidence": 0.75,
     "review_flags": [
-      "CMST&220 may substitute for ELA per OSPI; review"
+      "Argumentation \u2014 ELA at every college (2026-09-01)"
     ]
   },
   {
@@ -195735,15 +195736,15 @@
     "level": 204,
     "is_sub_100": false,
     "hs_credits": 1.2,
-    "credit_type": "CTE",
+    "credit_type": "Science (Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Lab)",
+    "classification_rule": "common-course:ENGR&204",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Electrical Circuits \u2014 lecture + lab"
     ]
   },
   {
@@ -195801,15 +195802,15 @@
     "level": 215,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&215",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Dynamics \u2014 lecture only"
     ]
   },
   {
@@ -195834,15 +195835,15 @@
     "level": 224,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "CTE",
+    "credit_type": "Science (Non-Lab)",
     "credit_types": [
-      "CTE"
+      "Science (Non-Lab)"
     ],
-    "primary_credit_type": "CTE",
-    "classification_rule": "prefix:ENGR",
-    "confidence": 0.6,
+    "primary_credit_type": "Science (Non-Lab)",
+    "classification_rule": "common-course:ENGR&224",
+    "confidence": 0.85,
     "review_flags": [
-      "WA OSPI: Engineering may count as Math/Science equivalency; review"
+      "Thermodynamics \u2014 lecture only"
     ]
   },
   {
@@ -207613,15 +207614,16 @@
     "level": 101,
     "is_sub_100": false,
     "hs_credits": 1.0,
-    "credit_type": "Science (Non-Lab)",
+    "credit_type": "Health",
     "credit_types": [
+      "Health",
       "Science (Non-Lab)"
     ],
-    "primary_credit_type": "Science (Non-Lab)",
-    "classification_rule": "prefix:NUTR",
-    "confidence": 0.75,
+    "primary_credit_type": "Health",
+    "classification_rule": "common-course:NUTR&101",
+    "confidence": 0.85,
     "review_flags": [
-      "Nutrition \u2014 may count as Science or Health"
+      "Nutrition \u2014 Health primary, Science (Non-Lab) secondary (2026-09-01)"
     ]
   },
   {

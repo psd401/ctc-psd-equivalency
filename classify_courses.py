@@ -15,6 +15,8 @@ import re
 import sys
 from pathlib import Path
 
+from parsers.base import parse_contact_hours
+
 SRC = Path("ctc-courses-classified.json")  # merged dataset (default)
 OUT = Path("ctc-courses-classified.json")
 
@@ -312,6 +314,9 @@ COMMON_COURSE_OVERRIDES = {
     "HIST&126": ("Social Studies - World History", 0.95, []),
     "HIST&127": ("Social Studies - World History", 0.95, []),
     "HIST&128": ("Social Studies - World History", 0.95, []),
+    "HIST&136": ("Social Studies - US History", 0.95, []),
+    "HIST&137": ("Social Studies - US History", 0.95, []),
+    "HIST&138": ("Social Studies - US History", 0.95, []),
     "HIST&146": ("Social Studies - US History", 0.95, []),
     "HIST&147": ("Social Studies - US History", 0.95, []),
     "HIST&148": ("Social Studies - US History", 0.95, []),
@@ -323,8 +328,22 @@ COMMON_COURSE_OVERRIDES = {
     "POLS&202": ("Social Studies - Civics", 0.95, ["US Government — Civics"]),
     "POLS&201": ("Social Studies - Elective", 0.85, []),
     "POLS&203": ("Social Studies - Elective", 0.85, []),
+    "CMST&101": ("ELA", 0.75, ["Intro to Communication — decided ELA at every college offering it (2026-06-11)"]),
+    "CMST&210": ("ELA", 0.75, ["Interpersonal Communication — ELA at every college (2026-09-01)"]),
     "CMST&220": ("ELA", 0.75, ["Public Speaking — WA OSPI allows substitute for 1 ELA credit"]),
+    "CMST&230": ("ELA", 0.75, ["Small Group Communication — ELA at every college (2026-09-01)"]),
+    "CMST&240": ("ELA", 0.75, ["Argumentation — ELA at every college (2026-09-01)"]),
+    "ANTH&205": ("Science (Non-Lab)", 0.85, ["Biological Anthropology — natural-science content; also carries SS Elective"]),
+    "DRMA&101": ("Fine & Performing Arts", 0.90, ["Intro to Theatre — Fine & Performing Arts"]),
+    "NUTR&101": ("Health", 0.85, ["Nutrition — Health primary, Science (Non-Lab) secondary (2026-09-01)"]),
+    # Engineering CCNs normalized across colleges (2026-09-01). ENGR&204 carries a
+    # lab at every college that publishes components (6 credits, Lecture + Lab);
+    # ENGR&215/224 are 5-credit lecture-only.
+    "ENGR&204": ("Science (Lab)", 0.85, ["Electrical Circuits — lecture + lab"]),
+    "ENGR&215": ("Science (Non-Lab)", 0.85, ["Dynamics — lecture only"]),
+    "ENGR&224": ("Science (Non-Lab)", 0.85, ["Thermodynamics — lecture only"]),
     "ENGR&225": ("Elective", 0.70, ["Mechanics of Materials — Engineering"]),
+    "CS&141": ("CTE", 0.85, ["Computer Science I — CTE primary, Math secondary"]),
 }
 
 
@@ -338,6 +357,35 @@ SPECIFIC_OVERRIDES: dict[tuple[str, str], tuple] = {
     ("tcc", "HIST231"):  ("Social Studies - US History", 0.80, []),
     ("tcc", "HIST240"):  ("Social Studies - US History", 0.80, []),
     ("tcc", "HIST244"):  ("Social Studies - US History", 0.80, []),
+
+    # Bates high-school-completion Social Studies. The generic HIST/GOVT prefix
+    # rules leave these as SS Elective / Elective; the courses are the specific
+    # subject areas by title. Decided 2026-06-11.
+    ("bates", "HIST90"):  ("Social Studies - US History", 0.90, []),
+    ("bates", "HIST92"):  ("Social Studies - US History", 0.90, []),
+    ("bates", "HIST96"):  ("Social Studies - Washington State History", 0.90, []),
+    ("bates", "GOVT95"):  ("Social Studies - Civics", 0.90, []),
+
+    # Clover Park local math prefix (MAT, distinct from the transfer MATH&
+    # sequence). Only the two courses on the PSD equivalency worksheet are
+    # promoted to Math; the rest of the MAT prefix stays Elective pending
+    # review. Decided 2026-06-11.
+    ("cloverpark", "MAT99"):   ("Math", 0.85, []),
+    ("cloverpark", "MAT103"):  ("Math", 0.85, []),
+
+    # Olympic Digital Media Arts. DMA136/DMA236 (photography) were already
+    # decided Fine & Performing Arts; the Photoshop pair matches them.
+    # Decided 2026-09-01.
+    ("olympic", "DMA120"):  ("Fine & Performing Arts", 0.85, []),
+    ("olympic", "DMA220"):  ("Fine & Performing Arts", 0.85, []),
+
+    # CCFE (College & Career / Financial Education) row on the PSD equivalency
+    # worksheet. PSD counts these under the existing Career & Technical credit
+    # type rather than a separate CCFE category. Only the courses the worksheet
+    # actually names are promoted — the rest of the COLL / HD college-success
+    # prefixes stay Elective. Decided 2026-09-02.
+    ("olympic", "COLL133"): ("CTE", 0.85, ["CCFE — Running Start and Beyond"]),
+    ("tcc", "COL101"):      ("CTE", 0.85, ["CCFE — College 101"]),
 }
 
 
@@ -347,6 +395,9 @@ SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
     "BUS&201":  ["Social Studies - Elective"],                       # Business Law
     # ECON&201/202 CTE secondaries REMOVED 2026-05-29 — CTE audit found these are
     # academic-transfer Social Studies, not CTE. SS Elective is the primary.
+    "ANTH&205": ["Social Studies - Elective"],                       # Biological Anthropology — dual science/SS
+    "CS&141":   ["Math"],                                            # Computer Science I — CTE + Math
+    "NUTR&101": ["Science (Non-Lab)"],                               # Nutrition — Health + college science
     "HIST&214": ["Social Studies - US History"],                     # Pacific NW also satisfies US Hist
     # NUTR&101 Health secondary REMOVED 2026-05-29 — Health audit found most
     # college nutrition courses lean college-science. Per-institution audit
@@ -354,7 +405,13 @@ SECONDARY_TYPES_COMMON: dict[str, list[str]] = {
     # CMST&220 CTE secondary REMOVED 2026-05-29 — CTE audit found Public Speaking
     # is general-ed ELA equivalent, not CTE pathway.
 }
-SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {}
+SECONDARY_TYPES_BY_INSTITUTION: dict[tuple[str, str], list[str]] = {
+    # Clover Park digital-imaging courses stay CTE (graphic-technology program)
+    # but also carry art credit per the PSD equivalency worksheet's ART row.
+    # Decided 2026-09-01.
+    ("cloverpark", "GTC130"): ["Fine & Performing Arts"],
+    ("cloverpark", "GTC132"): ["Fine & Performing Arts"],
+}
 
 # Prefix-level secondaries (keyed by (institution, prefix)) — applies the dual
 # credit type to every course under the prefix. From the 2026-06 review; the
@@ -417,6 +474,11 @@ def _resolve_secondaries(institution: str, code: str, is_common: bool, common_co
     return out
 
 
+# Title-based lab evidence, used only when a parser gives us no components.
+# Matches "w/Lab", "w/ Lab", "with Lab" — not a bare trailing "Lab".
+_LAB_TITLE_RE = re.compile(r"\bw/\s*lab|\bwith\s+lab", re.I)
+
+
 def classify(course):
     code = course["code"]
     institution = course.get("institution", "tcc")
@@ -448,9 +510,38 @@ def classify(course):
     ctype, conf, rule_flags, rule = _resolve_primary(institution, code, is_common, common_code)
     flags.extend(rule_flags)
 
-    # Science lab/non-lab refinement: check components for "Lab"
+    # Science lab/non-lab refinement: prefer structured components, fall back to
+    # the title. Some catalogs (Clover Park / SmartCatalog) publish no component
+    # breakdown at all, so a component-only test silently demoted every Clover
+    # Park lab science to Non-Lab even when the title says "w/Lab". The title
+    # pattern is deliberately narrow ("w/ Lab" / "with Lab") so a course merely
+    # *named* "...Lab" (e.g. Bates MRI123 "Clinical Techniques Lab") is not
+    # mistaken for a science lab. Only runs when the primary is already Science.
     if ctype.startswith("Science"):
-        has_lab = any("Lab" in c.get("type", "") for c in course.get("components", []))
+        # Lab evidence, strongest first:
+        #   1. An explicit "<Type> Contact Hours <N>" table in the description.
+        #      Authoritative both ways — Pierce declares "Lab Contact Hours 0"
+        #      for its lecture-only sections, and records scraped before
+        #      parsers/base.py was hardened carry a phantom "Lab" component
+        #      inferred from that very line. Re-deriving here corrects the
+        #      existing dataset without a re-scrape.
+        #   2. Stored components from the parser.
+        #   3. A "w/ Lab" / "with Lab" title (catalogs that publish no
+        #      components at all, e.g. Clover Park / SmartCatalog).
+        #   4. Nothing at all: keep what an explicit CCN / course-specific
+        #      override said rather than silently demoting it. Green River's
+        #      ENGR&204 record has no components, no credits and no contact
+        #      hours; every other college shows it as lecture + lab.
+        declared = parse_contact_hours(course.get("description") or "")
+        components = course.get("components", [])
+        if declared is not None:
+            has_lab = declared.get("Lab", 0) > 0
+        elif components:
+            has_lab = any("Lab" in c.get("type", "") for c in components)
+        elif _LAB_TITLE_RE.search(course.get("title") or ""):
+            has_lab = True
+        else:
+            has_lab = rule.startswith(("specific:", "common-course:")) and ctype == "Science (Lab)"
         ctype = "Science (Lab)" if has_lab else "Science (Non-Lab)"
 
     # Sub-100 World Language → not transferable as HS World Language unless review

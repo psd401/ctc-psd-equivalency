@@ -86,16 +86,59 @@ def parse_credit_string(s: str) -> float | dict | None:
     return None
 
 
+_COMPONENT_KEYWORDS = ("Lecture", "Lab", "Laboratory", "Seminar", "Clinical", "Studio", "Field")
+
+# Pierce (and other Acalog catalogs) print an explicit contact-hour table in
+# the description prose, e.g.
+#     "Lecture Contact Hours 50 Lab Contact Hours 0 Clinical Contact Hours 0"
+# A bare keyword scan reads "Lab" out of that line and invents a lab component
+# for a course that explicitly has zero lab hours.
+_CONTACT_HOURS_RE = re.compile(
+    rf"\b({'|'.join(_COMPONENT_KEYWORDS)})\s+Contact\s+Hours[:\s]+(\d+(?:\.\d+)?)",
+    re.I,
+)
+
+
+def _normalize_component_type(kw: str) -> str:
+    return "Lab" if kw.lower() == "laboratory" else kw.title()
+
+
+def parse_contact_hours(text: str) -> dict[str, float] | None:
+    """Parse an explicit "<Type> Contact Hours <N>" table out of catalog prose.
+
+    Returns {component type: hours} when such a table is present (including
+    entries with 0 hours, so callers can tell "declared zero" apart from
+    "not mentioned"), or None when the text has no contact-hour table.
+    """
+    found = _CONTACT_HOURS_RE.findall(text or "")
+    if not found:
+        return None
+    hours: dict[str, float] = {}
+    for kw, value in found:
+        t = _normalize_component_type(kw)
+        # Keep the largest figure if a type is listed more than once.
+        hours[t] = max(hours.get(t, 0.0), float(value))
+    return hours
+
+
 def infer_components_from_text(text: str) -> list[dict]:
     """Fallback component inference when a parser can't get structured data.
-    Looks for tokens 'Lab', 'Lecture', 'Seminar', 'Clinical' in the text.
+
+    Prefers an explicit contact-hour table when the catalog publishes one —
+    a component declared with 0 contact hours is NOT part of the course.
+    Otherwise falls back to scanning for component keywords.
+
     Returns components without credit values — the classifier only uses
     the type field for Lab detection.
     """
+    hours = parse_contact_hours(text)
+    if hours is not None:
+        return [{"type": t} for t, h in hours.items() if h > 0]
+
     types = []
-    for kw in ("Lecture", "Lab", "Laboratory", "Seminar", "Clinical", "Studio", "Field"):
+    for kw in _COMPONENT_KEYWORDS:
         if re.search(rf"\b{kw}\b", text, re.I):
-            t = "Lab" if kw == "Laboratory" else kw.title()
+            t = _normalize_component_type(kw)
             if t not in [c["type"] for c in types]:
                 types.append({"type": t})
     return types
