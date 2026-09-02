@@ -33,9 +33,22 @@ INSTITUTIONS = {
         "enabled": True,
         "parser": "tcc",
         "config": {
-            "text_path": str(HERE / "tcc-columnwise.txt"),
-            "catalog_year": "2025-2026",
+            "institution": "tcc",
+            "school": "tacomacc",
+            # Coursedog catalog id — changes each catalog year. To refresh it:
+            # open https://catalog.tacomacc.edu/, click Courses, and read
+            # catalogId off the courses/search request the page issues.
+            "catalog_id": "DWxsIxX5L3wj78cR33Wj",
+            "effective_date": "2026-09-01",
+            "origin": "https://catalog.tacomacc.edu",
+            # Variable-credit ranges the live catalog no longer expresses are
+            # recovered from the last PDF-derived scrape, and only where the
+            # range minimum agrees with the live figure.
+            "credits_fallback_path": str(HERE / "archives" / "2025-2026" / "tcc.json"),
+            "catalog_year": "2026-2027",
             "uploaded_at": date.today().isoformat(),
+            "source_url": "https://catalog.tacomacc.edu/",
+            "request_delay": 0.30,
         },
     },
     "olympic": {
@@ -49,7 +62,10 @@ INSTITUTIONS = {
             "catalog_year": "2025-2026",
             "uploaded_at": date.today().isoformat(),
             "source_url": "https://catalog.olympic.edu/",
-            "request_delay": 0.50,
+            # catalog.*.edu robots.txt asks for crawl-delay: 120. We ran this at
+            # 0.50 (240x faster) until 2026-09-02, when content.php began
+            # answering with an AWS WAF challenge. Honour the published rate.
+            "request_delay": float(os.environ.get("ACALOG_DELAY", "120")),
         },
     },
     "greenriver": {
@@ -63,7 +79,7 @@ INSTITUTIONS = {
             "catalog_year": "2025-2026",
             "uploaded_at": date.today().isoformat(),
             "source_url": "https://catalog.greenriver.edu/",
-            "request_delay": 0.50,
+            "request_delay": float(os.environ.get("ACALOG_DELAY", "120")),
         },
     },
     "pierce": {
@@ -77,7 +93,7 @@ INSTITUTIONS = {
             "catalog_year": "2025-2026",
             "uploaded_at": date.today().isoformat(),
             "source_url": "https://catalog.pierce.ctc.edu/",
-            "request_delay": 0.50,
+            "request_delay": float(os.environ.get("ACALOG_DELAY", "120")),
         },
     },
     "cloverpark": {

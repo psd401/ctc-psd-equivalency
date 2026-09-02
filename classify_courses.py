@@ -348,6 +348,10 @@ COMMON_COURSE_OVERRIDES = {
     "EDUC&136": ("CTE", 0.85, ["School-Age Care — decided CTE at every other college"]),
     "EDUC&150": ("CTE", 0.85, ["Child, Family and Community — decided CTE at every other college"]),
     "EDUC&204": ("CTE", 0.85, ["Inclusive Education / Exceptional Child — decided CTE at every other college"]),
+    # Statewide answers for CCNs that TCC joined the dataset with on 2026-09-02
+    # when it moved from the PDF to the live Coursedog catalog.
+    "EDUC&240": ("CTE", 0.85, ["Diversity in Education — decided CTE at every other college"]),
+    "ENVS&101": ("Science (Lab)", 0.90, ["Intro Environmental Science — lab course at Olympic and Pierce"]),
     # Engineering CCNs normalized across colleges (2026-09-01). ENGR&204 carries a
     # lab at every college that publishes components (6 credits, Lecture + Lab);
     # ENGR&215/224 are 5-credit lecture-only.
@@ -549,14 +553,20 @@ def classify(course):
         #      hours; every other college shows it as lecture + lab.
         declared = parse_contact_hours(course.get("description") or "")
         components = course.get("components", [])
+        explicit = rule.startswith(("specific:", "common-course:"))
         if declared is not None:
             has_lab = declared.get("Lab", 0) > 0
+        elif explicit:
+            # An override naming Lab/Non-Lab is a deliberate statewide decision.
+            # Only declared contact hours may overturn it — NOT the components
+            # list, which for several catalogs is keyword-inferred from prose
+            # and produces phantom entries (TCC's ENVS&101 infers "Field" and
+            # nothing else, which would silently demote it to Non-Lab).
+            has_lab = ctype == "Science (Lab)"
         elif components:
             has_lab = any("Lab" in c.get("type", "") for c in components)
-        elif _LAB_TITLE_RE.search(course.get("title") or ""):
-            has_lab = True
         else:
-            has_lab = rule.startswith(("specific:", "common-course:")) and ctype == "Science (Lab)"
+            has_lab = bool(_LAB_TITLE_RE.search(course.get("title") or ""))
         ctype = "Science (Lab)" if has_lab else "Science (Non-Lab)"
 
     # Sub-100 World Language → not transferable as HS World Language unless review

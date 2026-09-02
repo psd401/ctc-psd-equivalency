@@ -33,6 +33,11 @@ UA = "Mozilla/5.0 (PSD course equivalency parser; cantonwinej@psd401.net)"
 COID_RE = re.compile(r"preview_course_nopop\.php\?catoid=\d+&coid=(\d+)")
 TITLE_RE = re.compile(r"<h1[^>]*id=['\"]course_preview_title['\"][^>]*>([^<]+)</h1>")
 CREDITS_RE = re.compile(r"<strong>\s*Credits?\s*:\s*</strong>\s*<strong>\s*([^<]+?)\s*</strong>", re.I)
+# Fallback for catalogs that do not wrap the figure in the <strong> pair above.
+# Green River renders it as plain text, so the strict pattern missed and every
+# one of its 1378 courses was stored with credits_total None — the tool showed
+# no HS credit value for the whole college.
+CREDITS_TEXT_RE = re.compile(r"\bCredits?\s*:\s*([\d.]+(?:\s*-\s*[\d.]+)?)", re.I)
 PREREQ_RE = re.compile(
     r"<strong>\s*Prerequisites?\s*:\s*</strong>\s*([^<]+?)(?:<br|</p|<strong)",
     re.I,
@@ -76,8 +81,15 @@ def _strip_tags(s: str) -> str:
     return s.strip()
 
 
-def _list_coids(base_url: str, catoid: int, course_navoid: int) -> list[str]:
-    """Walk pagination and return de-duplicated coids in insertion order."""
+def _list_coids(base_url: str, catoid: int, course_navoid: int,
+                delay: float = 0.0, challenge_retries: int = 3) -> list[str]:
+    """Walk pagination and return de-duplicated coids in insertion order.
+
+    Sleeps `delay` between pages. This loop previously fetched every listing
+    page back to back with no pause at all while the site's robots.txt asks for
+    crawl-delay: 120 — a burst of ~13 rapid requests to the same endpoint, which
+    is what a bot filter is built to notice.
+    """
     seen: set[str] = set()
     ordered: list[str] = []
     page = 1
@@ -88,11 +100,27 @@ def _list_coids(base_url: str, catoid: int, course_navoid: int) -> list[str]:
             f"&filter%5Bitem_type%5D=3&filter%5Bonly_active%5D=1&filter%5B3%5D=1"
             f"&filter%5Bcpage%5D={page}"
         )
-        try:
-            html = _fetch(url)
-        except Exception as e:
-            print(f"  acalog: page {page} fetch error: {e}")
-            break
+        html = None
+        for attempt in range(challenge_retries):
+            try:
+                html = _fetch(url)
+                break
+            except ChallengeError as e:
+                wait = delay * (attempt + 1) if delay else 30 * (attempt + 1)
+                print(f"  acalog: page {page} challenged (attempt {attempt+1}/"
+                      f"{challenge_retries}); waiting {wait:.0f}s — {e}")
+                time.sleep(wait)
+            except Exception as e:
+                print(f"  acalog: page {page} fetch error: {e}")
+                break
+        if html is None:
+            # Never treat a challenge as "end of pagination": that silently
+            # truncates the catalog. Surface it so the run aborts instead.
+            raise ChallengeError(
+                f"listing page {page} for catoid={catoid} could not be fetched after "
+                f"{challenge_retries} attempts. Aborting rather than returning a "
+                f"partial course list."
+            )
         new = [c for c in COID_RE.findall(html) if c not in seen]
         if not new:
             # Page returned no new course detail links → end of pagination
@@ -101,6 +129,8 @@ def _list_coids(base_url: str, catoid: int, course_navoid: int) -> list[str]:
             seen.add(c)
             ordered.append(c)
         page += 1
+        if delay:
+            time.sleep(delay)
     return ordered
 
 
@@ -136,6 +166,8 @@ def _parse_detail(html: str) -> dict | None:
 
     credits = None
     cm = CREDITS_RE.search(body)
+    if not cm:
+        cm = CREDITS_TEXT_RE.search(_strip_tags(body))
     if cm:
         credits = base.parse_credit_string(_strip_tags(cm.group(1)))
 
@@ -191,21 +223,36 @@ def parse(config: dict) -> Iterator[dict]:
     source_url = config.get("source_url", base_url + "/")
     delay = float(config.get("request_delay", 0.10))
 
-    print(f"  acalog: enumerating coids for {institution}...")
-    coids = _list_coids(base_url, catoid, course_navoid)
+    print(f"  acalog: enumerating coids for {institution} "
+          f"(catoid={catoid}, navoid={course_navoid}, delay={delay}s)...")
+    coids = _list_coids(base_url, catoid, course_navoid, delay=delay)
     print(f"  acalog: {len(coids)} courses found")
 
+    unparsed: list[str] = []
+    yielded = 0
     for i, coid in enumerate(coids, 1):
-        if i % 100 == 0:
-            print(f"    {institution}: {i}/{len(coids)}")
-        try:
-            html = _fetch(f"{base_url}/preview_course_nopop.php?catoid={catoid}&coid={coid}")
-        except Exception as e:
-            print(f"  acalog: coid={coid} fetch error: {e}")
+        if i % 25 == 0:
+            print(f"    {institution}: {i}/{len(coids)}", flush=True)
+        html = None
+        for attempt in range(3):
+            try:
+                html = _fetch(f"{base_url}/preview_course_nopop.php?catoid={catoid}&coid={coid}")
+                break
+            except ChallengeError as e:
+                wait = delay or 30
+                print(f"  acalog: coid={coid} challenged; waiting {wait:.0f}s", flush=True)
+                time.sleep(wait)
+            except Exception as e:
+                print(f"  acalog: coid={coid} fetch error: {e}")
+                break
+        if html is None:
+            unparsed.append(coid)
             continue
         parsed = _parse_detail(html)
         if not parsed:
+            unparsed.append(coid)
             continue
+        yielded += 1
         dept = None
         dept_m = DEPT_RE.match(parsed["code"])
         if dept_m:
@@ -225,3 +272,5 @@ def parse(config: dict) -> Iterator[dict]:
         )
         if delay:
             time.sleep(delay)
+
+    base.report_parse_coverage("acalog", institution, len(coids), yielded, unparsed)
