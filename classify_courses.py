@@ -577,6 +577,13 @@ def classify(course):
     secondaries = _resolve_secondaries(institution, code, is_common, common_code, ctype)
     credit_types = [ctype, *secondaries]
 
+    # classify() is run repeatedly over its own output (classify_courses.py
+    # reads and rewrites ctc-courses-classified.json in place), and it now
+    # inherits ingest-stage flags from the incoming record. Without a dedupe,
+    # every rerun appends another copy of each rule flag. Order-preserving so
+    # the first occurrence wins.
+    flags = list(dict.fromkeys(flags))
+
     return {
         **course,
         "level": level,

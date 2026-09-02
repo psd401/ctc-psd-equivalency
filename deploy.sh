@@ -21,6 +21,21 @@ PYTHON="${PYTHON:-$(pwd)/.venv/bin/python}"
 [ -x "$PYTHON" ] || PYTHON="python3"
 "$PYTHON" build_html.py >/dev/null
 
+# Gate the deploy on the dataset being sane. Every serious defect this project
+# has hit was a silent absence that still produced a plausible-looking file —
+# a missing transfer catalog, a college-wide credit blackout — so "it built" is
+# not evidence it is publishable. Set SKIP_VALIDATE=1 only with a reason.
+if [ "${SKIP_VALIDATE:-0}" != "1" ]; then
+  echo "Validating dataset..."
+  if ! "$PYTHON" validate_dataset.py; then
+    echo
+    echo "Deploy ABORTED: the dataset failed validation (see errors above)."
+    echo "Fix the cause, or re-run with SKIP_VALIDATE=1 if you have verified"
+    echo "the failure is expected."
+    exit 1
+  fi
+fi
+
 mkdir -p docs
 
 # Public read-only tool → index.html (default landing page)
