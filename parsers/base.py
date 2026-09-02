@@ -144,6 +144,50 @@ def infer_components_from_text(text: str) -> list[dict]:
     return types
 
 
+# WA quarter-credit contact-hour convention: one credit is 10 lecture hours,
+# 20 lab hours, or 30 clinical/practicum hours per quarter.
+CONTACT_HOURS_PER_CREDIT = {"Lecture": 10.0, "Lab": 20.0, "Clinical": 30.0}
+
+CREDITS_DERIVED_FLAG = (
+    "Credit value DERIVED from published contact hours "
+    "(lecture/10 + lab/20 + clinical/30), not published by the college — "
+    "confirm with the college before it counts toward graduation"
+)
+
+
+def derive_credits_from_contact_hours(text: str) -> float | None:
+    """Credits implied by a published contact-hour table, or None.
+
+    Pierce publishes contact hours and no credit figure anywhere — its catalog
+    UI has no credits field at all — leaving all 947 of its courses with no
+    high-school credit value in the tool. This converts using the standard WA
+    quarter-credit ratios.
+
+    Validated against the 164 Pierce Common Course Numbers that peer colleges
+    also offer and DO publish credits for: every one of the 164 lands on a
+    credit value at least one peer college assigns to that same course. Note
+    that peers disagree with each other on lab sciences (BIOL&241 is 5.0 at
+    four colleges and 6.0 at Olympic), so there is no single value to check
+    against — only a range, and the derivation stays inside it.
+
+    It remains DERIVED, not published. Callers must attach
+    CREDITS_DERIVED_FLAG so the viewer can say so.
+    """
+    hours = parse_contact_hours(text)
+    if not hours:
+        return None
+    total = 0.0
+    seen = False
+    for kind, per_credit in CONTACT_HOURS_PER_CREDIT.items():
+        h = hours.get(kind)
+        if h:
+            total += h / per_credit
+            seen = True
+    if not seen or total <= 0:
+        return None
+    return round(total, 2)
+
+
 def report_parse_coverage(
     parser: str, institution: str, enumerated: int, yielded: int,
     unparsed: list[str], sample: int = 10,

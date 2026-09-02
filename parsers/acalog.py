@@ -165,11 +165,19 @@ def _parse_detail(html: str) -> dict | None:
     body = html[body_start: body_start + body_end_match.start()] if body_end_match else html[body_start:]
 
     credits = None
+    derived_credits = False
     cm = CREDITS_RE.search(body)
     if not cm:
         cm = CREDITS_TEXT_RE.search(_strip_tags(body))
     if cm:
         credits = base.parse_credit_string(_strip_tags(cm.group(1)))
+    if credits is None:
+        # Pierce publishes no credit figure at all — only a contact-hour table.
+        # Derive from it rather than leaving every one of its courses with no
+        # high-school credit value, and mark the record so the viewer can say
+        # the number is derived rather than published.
+        credits = base.derive_credits_from_contact_hours(_strip_tags(body))
+        derived_credits = credits is not None
 
     prereq = ""
     pm = PREREQ_RE.search(body)
@@ -209,6 +217,7 @@ def _parse_detail(html: str) -> dict | None:
         "description": desc.strip(),
         "components": components,
         "credits_total": credits,
+        "credits_derived": derived_credits,
         "prerequisites": prereq,
     }
 
@@ -257,7 +266,7 @@ def parse(config: dict) -> Iterator[dict]:
         dept_m = DEPT_RE.match(parsed["code"])
         if dept_m:
             dept = dept_m.group(1)  # prefix-as-department fallback
-        yield base.make_record(
+        record = base.make_record(
             institution=institution,
             code=parsed["code"],
             title=parsed["title"],
@@ -270,6 +279,9 @@ def parse(config: dict) -> Iterator[dict]:
             uploaded_at=uploaded_at,
             source_url=source_url,
         )
+        if parsed.get("credits_derived"):
+            record["review_flags"] = [base.CREDITS_DERIVED_FLAG]
+        yield record
         if delay:
             time.sleep(delay)
 

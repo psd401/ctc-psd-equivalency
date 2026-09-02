@@ -18,15 +18,32 @@ Maps courses from 6 Washington community & technical colleges to PSD high school
 
 ## Institutions covered
 
-| College | Catalog platform | Course count (2025-2026) |
-|---|---|---|
-| Tacoma Community College | Coursedog | 828 |
-| Olympic College | Acalog | 1,246 |
-| Pierce College | Acalog | 947 |
-| Green River College | Acalog | 1,378 |
-| Clover Park Technical College | SmartCatalog | 1,116 |
-| Bates Technical College | Drupal | 1,285 |
-| **Total** | | **6,800** |
+| College | Catalog platform | Catalog edition | Courses |
+|---|---|---|---|
+| Tacoma Community College | Coursedog (live API) | 2026-2027 | 839 |
+| Olympic College | Acalog | 2025-2026 | 1,246 |
+| Pierce College | Acalog | 2025-2026 * | 947 |
+| Green River College | Acalog | 2025-2026 | 1,378 |
+| Clover Park Technical College | SmartCatalog | 2026-2027 | 1,091 |
+| Bates Technical College | Drupal (unversioned) | scraped 2026-09-02 | 1,397 |
+| **Total** | | | **6,898** |
+
+\* Pierce is pinned to Acalog `catoid=17`, which is its **2023-2024** catalog.
+Moving to the current edition is blocked while Acalog serves a bot challenge —
+see PIPELINE.md.
+
+Bates' catalog carries no year marker and cannot be addressed by year, so its
+records are stamped with the scrape date rather than a guessed edition.
+
+### Credit values
+
+`hs_credits` is `credits_total / 5`. Five of the six colleges publish a credit
+figure. **Pierce publishes none at all** — only contact hours — so its credits are
+*derived* (`lecture/10 + lab/20 + clinical/30`, the standard WA quarter-credit
+ratios). Those records carry a `derived` badge beside the credit value in the
+viewer and a `review_flags` entry explaining it. Confirm with Pierce before a
+derived figure counts toward a graduation requirement. The derivation and how it
+was validated are documented in PIPELINE.md.
 
 ## Quick start
 

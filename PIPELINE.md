@@ -115,9 +115,77 @@ Audits completed — all initial audits are done: `audit-health-vs-ospi.md`, `au
 
 When two audits disagree on a course, apply the more specific/well-reasoned one and skip the conflict from the other (the Sheet's append-only history shows both verdicts for review).
 
+## Credit values: published vs derived
+
+`hs_credits` is `credits_total / 5` (5 quarter credits = 1.0 HS credit). Everything
+downstream depends on `credits_total`, so how each college publishes it matters.
+
+| College | How credits are obtained |
+| --- | --- |
+| Bates | `field-credits` on the detail page |
+| Clover Park | `<div class="credits">` on the detail page |
+| Green River | plain-text `Credits: N` in the page body (see below) |
+| Olympic | `<strong>Credits:</strong><strong>N</strong>` |
+| TCC | the catalog's CSV export (`Total Credits`); the JSON API returns null for ~86% of courses |
+| **Pierce** | **DERIVED from contact hours — the college publishes no credit figure at all** |
+
+Two traps here, both of which silently emptied a column for months:
+
+- **Green River** renders the same field as plain text rather than the `<strong>`
+  pair Olympic and Pierce use. `CREDITS_RE` missed it, so all 1378 of its courses
+  stored `credits_total: None` and the tool showed no HS credit for the college.
+  `CREDITS_TEXT_RE` is the fallback. (Fixed 2026-09-02.)
+- **Pierce** has no credits field anywhere — not in the markup, not in its catalog
+  UI. It publishes a contact-hour table instead.
+
+### The Pierce derivation
+
+`base.derive_credits_from_contact_hours()` converts Pierce's published contact
+hours using the standard WA quarter-credit ratios — one credit per:
+
+    10 lecture hours   |   20 lab hours   |   30 clinical hours
+
+So a course printing `Lecture Contact Hours 50, Lab 0, Clinical 0` derives 5.0
+credits; `Lecture 40, Lab 40` derives 6.0; `Lecture 5, Clinical 45` derives 2.0.
+945 of Pierce's 947 courses carry such a table (`EMS150` and `SSBH125` do not, and
+keep no credit value).
+
+**How it was validated.** 164 Pierce Common Course Numbers are also offered by
+colleges that DO publish credits. Every one of the 164 derives a value that at
+least one peer college assigns to that same course.
+
+Note the shape of that claim. Peers disagree *with each other* on lab sciences —
+`BIOL&241` is 5.0 at Bates, Clover Park, Green River and TCC but 6.0 at Olympic;
+`PHYS&221` is 5.0 at Bates and Green River, 6.0 at Clover Park and TCC. There is
+no single correct figure to check against, only a range, and the derivation stays
+inside it in all 164 cases. An earlier check that scored against the *modal* peer
+value reported 93% and looked like 11 formula failures; 6 of those were peer
+disagreement rather than error, and 2 were a genuine bug (clinical hours ignored).
+
+**It is still derived, not published.** Every such record carries
+`base.CREDITS_DERIVED_FLAG` in `review_flags`, the public viewer renders a
+`derived` badge beside the credit figure with the formula in its tooltip, and
+`validate_dataset.validate_derived_credits` fails the build if a flagged record
+has no value. Pierce's registrar remains the authority: confirm before a derived
+figure counts toward a graduation requirement.
+
+Pierce is additionally pinned to `catoid=17`, which is Acalog's **2023-2024**
+catalog, so its contact hours are three years old regardless. Moving to
+`catoid=21` is blocked while Acalog serves a WAF challenge.
+
 ## Catalog ingest caveats
 
-- Some institutions (notably Pierce) rate-limit aggressive scraping. If a parser reports 0 records after enumerating coids successfully, the institution has likely IP-blocked you. Wait ~1 hour and retry, or run from a different network.
+- **Acalog (Olympic, Green River, Pierce) serves an AWS WAF JavaScript challenge on
+  `content.php` as of 2026-09-02.** `_fetch` raises `ChallengeError` rather than
+  reading the empty 202 body as an empty catalog. Their `robots.txt` permits the
+  paths we read but asks for `crawl-delay: 120`; we ran at 0.50 for months, which
+  is the likely trigger. `request_delay` now defaults to 120s for those three
+  (override with `ACALOG_DELAY`). `run_acalog_overnight.sh` re-scrapes at that
+  rate. The durable fix is a supported export from the colleges, not a slower loop.
+- Some institutions rate-limit aggressive scraping. A parser reporting 0 records
+  after a successful enumeration is a block, not an empty catalog — `build_dataset`
+  refuses to overwrite a catalog file when a scrape returns under
+  `COLLAPSE_THRESHOLD` (50%) of what is on disk, and exits non-zero.
 - Default request delay is 100 ms per detail page. To be gentler, raise `request_delay` in the institution config (e.g. 0.30 = 300 ms).
 - Ingests can run in parallel: each writes only to its own `catalogs/<inst>-*.json` (and per-archive snapshot). After parallel runs, run `python merge_catalogs.py` to combine — `build_dataset.py` calls this automatically at the end of each run.
 

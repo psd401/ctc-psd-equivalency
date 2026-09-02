@@ -234,6 +234,12 @@ TEMPLATE = r"""<!doctype html>
   .pill-arts   { background: #f7e8f0; color: #7d3057; border-color: #c275a0; }
   .pill-lang   { background: #ecf1f7; color: #2c4f78; border-color: #5476a4; }
   .pill-health { background: #fdeded; color: #843535; border-color: #c47272; }
+  .derived {
+    font-size: 0.66rem; font-weight: 600; letter-spacing: .02em;
+    text-transform: uppercase; text-decoration: none; cursor: help;
+    color: #8a5a10; background: #fdf4e3; border: 1px solid #e0bd7a;
+    border-radius: 3px; padding: 1px 4px; margin-left: 4px; white-space: nowrap;
+  }
   .pill-pe     { background: #fdf0e4; color: #6e4316; border-color: #c08a5c; }
   .pill-cte    { background: var(--cte-bg); color: #6a5510; border-color: var(--cte-border); }
   .pill-elec   { background: #efeae3; color: #4a4035; border-color: var(--psd-driftwood); }
@@ -708,6 +714,20 @@ function effective(c) {
   };
 }
 
+// A credit value the college does not publish, derived from its contact hours.
+// This must be visible in the PUBLIC view, not just the decider tool: a
+// counselor reading a credit figure needs to know it is inferred before it
+// counts toward a graduation requirement.
+const DERIVED_CREDITS_RE = /^Credit value DERIVED from published contact hours/;
+function creditsAreDerived(c) {
+  return (c.review_flags || []).some(f => DERIVED_CREDITS_RE.test(f));
+}
+function derivedMark(c) {
+  if (!creditsAreDerived(c)) return "";
+  const why = (c.review_flags || []).find(f => DERIVED_CREDITS_RE.test(f)) || "";
+  return ' <abbr class="derived" title="' + escapeHTML(why) + '">derived</abbr>';
+}
+
 function fmtCredits(v) {
   if (v == null) return "—";
   if (typeof v === "object") return v.min + "–" + v.max;
@@ -841,7 +861,7 @@ function render() {
       `<td>${escapeHTML(c.title)} ${flagBadges(c)}</td>` +
       `<td class="dept">${escapeHTML(c.department || "")}</td>` +
       `<td class="credits col-tcc-qtr">${fmtCredits(c.credits_total)}</td>` +
-      `<td class="credits">${hsCell}</td>` +
+      `<td class="credits">${hsCell}${derivedMark(c)}</td>` +
       `<td>${typeCell}</td>` +
       `<td class="credits col-confidence">${(c.confidence * 100).toFixed(0)}%</td>`;
     frag.appendChild(tr);

@@ -50,7 +50,12 @@ EXPECTED_INSTITUTIONS = {
 # Pierce genuinely publishes contact hours instead of credits, so it is exempt
 # until that conversion is agreed — see the note in validate_credits().
 MAX_MISSING_CREDITS = 0.25
-CREDITS_EXEMPT = {"pierce"}
+# Pierce was exempt while it had no credit values at all; since 2026-09-02 its
+# credits are derived from published contact hours, so it is held to the same
+# bar as everyone else.
+CREDITS_EXEMPT: set[str] = set()
+
+DERIVED_CREDITS_PREFIX = "Credit value DERIVED from published contact hours"
 
 VALID_TYPES = {
     "ELA", "Math", "Science (Lab)", "Science (Non-Lab)",
@@ -186,6 +191,27 @@ def validate_flags(courses: list[dict], r: Report) -> None:
                 f"{dupes[0]['review_flags']})")
 
 
+def validate_derived_credits(courses: list[dict], r: Report) -> None:
+    """A derived credit value must say so, and must actually have a value.
+
+    Pierce publishes contact hours and no credit figure, so its credits are
+    computed (lecture/10 + lab/20 + clinical/30). That is defensible only while
+    the record carries the flag saying it is derived — a counselor reading the
+    number needs to know it is inferred before it counts toward graduation. A
+    derived value with the flag stripped is worse than no value at all.
+    """
+    flagged = [c for c in courses
+               if any(f.startswith(DERIVED_CREDITS_PREFIX) for f in (c.get("review_flags") or []))]
+    empty = [c for c in flagged if c.get("hs_credits") is None]
+    if empty:
+        r.error(f"{len(empty)} records are flagged as having derived credits but carry no "
+                f"value (e.g. {empty[0]['institution']} {empty[0]['code']})")
+    if flagged:
+        by_inst = Counter(c["institution"] for c in flagged)
+        r.warn(f"{len(flagged)} records carry DERIVED credit values, not published by the "
+               f"college: {dict(by_inst)}")
+
+
 def validate_types(courses: list[dict], r: Report) -> None:
     """Credit types must be known values, and Elective is the catch-all."""
     for c in courses:
@@ -237,6 +263,7 @@ CHECKS = (
     validate_credits,
     validate_common_courses,
     validate_flags,
+    validate_derived_credits,
     validate_types,
     validate_ccn_consistency,
     validate_catalog_year,
