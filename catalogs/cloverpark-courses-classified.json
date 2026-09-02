@@ -15998,7 +15998,8 @@
     "hs_credits": 0.8,
     "credit_type": "CTE",
     "credit_types": [
-      "CTE"
+      "CTE",
+      "Fine & Performing Arts"
     ],
     "primary_credit_type": "CTE",
     "classification_rule": "prefix:cloverpark:GTC",

@@ -184,12 +184,14 @@ def main():
         sys.exit(1)
 
     print(f"Building dataset for: {', '.join(selected)}")
+    failed: list[str] = []
     for inst_id in selected:
         cfg = INSTITUTIONS[inst_id]
         try:
             run_one(inst_id, cfg, CATALOG_DIR)
         except Exception as e:
             print(f"[{inst_id}] ERROR: {e}")
+            failed.append(inst_id)
             continue
 
     # Always run the merge so the HTML always reads the up-to-date combined
@@ -199,6 +201,16 @@ def main():
     print("Merging all per-institution outputs → ctc-courses-classified.json...")
     import subprocess
     subprocess.run([__import__("sys").executable, str(HERE / "merge_catalogs.py")], check=True)
+
+    if failed:
+        # Exiting 0 after a failed scrape tells every caller the run succeeded.
+        # run_acalog_overnight.sh logged "olympic: OK" for a scrape that had in
+        # fact aborted on a WAF challenge, and then skipped its 7 remaining
+        # retries. Same class of silent success as the parser bugs above.
+        print()
+        print(f"!! {len(failed)} institution(s) FAILED: {', '.join(failed)}")
+        print("   Their existing catalog files were left untouched.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
