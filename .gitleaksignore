@@ -1,0 +1,5 @@
+# KEY_LS is a localStorage key name ("ctc-psd-decisions-key-v1"), not a secret
+e425fbc7ae89c4497b225a61c7816d7a8bfabe94:build_html.py:generic-api-key:450
+e425fbc7ae89c4497b225a61c7816d7a8bfabe94:ctc-psd-decisions.html:generic-api-key:794
+e425fbc7ae89c4497b225a61c7816d7a8bfabe94:ctc-psd-equivalency.html:generic-api-key:794
+e425fbc7ae89c4497b225a61c7816d7a8bfabe94:docs/index.html:generic-api-key:794
