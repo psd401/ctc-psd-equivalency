@@ -50,7 +50,7 @@ A re-scrape treats the live index as truth, so unpublished courses vanish. `reta
 
 ## Annual refresh
 
-1. Update catalog ids/years in `INSTITUTIONS` (TCC's Coursedog `catalog_id` changes each year; instructions are in the inline comment). Bates' `catalog_year` is intentionally `scraped <date>` because the site is unversioned.
+1. Update catalog ids/years in `INSTITUTIONS` (TCC's Coursedog `catalog_id` changes each year, and its `effective_date` must match the new edition; instructions are in the inline comment). Bates' `catalog_year` is intentionally `scraped <date>` because the site is unversioned.
 2. `python build_dataset.py` stamps `catalog_year` and `uploaded_at` and writes `archives/<year>/<inst>.json`.
 3. `python diff_catalogs.py --year-from 2025-2026 --year-to 2026-2027 -o diff.md` (or two explicit files). Sections: Added, Removed, Credit-type changed, HS-credit changed, Title changed, Confidence dropped (> 0.10). Review "Credit-type changed" and "Confidence dropped" for decisions needing reconfirmation. The tool writes temporary `.diff_old_*.json` / `.diff_new_*.json` files at the repo root.
 4. `python build_html.py`, then validate and deploy.

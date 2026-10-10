@@ -45,6 +45,7 @@ Each table value is `(credit_type, confidence, review_flags)`. Prefix is the lea
 - **Common Course Number overrides** (`COMMON_COURSE_OVERRIDES`) apply at every college offering that CCN; this is where statewide decisions go (e.g. `HIST&146` US History, `CMST&220` ELA, `ENGR&204` Science (Lab)). Several entries exist solely so Bates or TCC records, which joined later, agree with the other colleges.
 - **Per-institution prefix tables** hold workforce-track prefixes (mostly CTE at 0.85 with `_PFX_FLAG`) from the 2026-06 manual review. Add entries only when a concrete conflict emerges.
 - **Specific overrides** are for local-prefix courses unique to one college (TCC HIST, Bates HS-completion social studies, Clover Park `MAT99`/`MAT103`, CCFE courses counted as CTE).
+- **Dated secondary decisions** (recorded only in code comments, so check them before re-adding a removed secondary): the `NUTR&101` Health secondary and the `CMST&220` CTE secondary were removed on 2026-05-29 after audits; Clover Park `GTC131` and `GTC132` carry a Fine & Performing Arts secondary (decided 2026-09-01; `GTC130` was renumbered to `GTC131` in the 2026-2027 catalog). The Clover Park entries live in `SECONDARY_TYPES_BY_INSTITUTION`; the common-course secondaries live in `SECONDARY_TYPES_COMMON`.
 
 ## Post-processing inside `classify`
 
