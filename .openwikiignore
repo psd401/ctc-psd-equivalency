@@ -1,0 +1,28 @@
+# OpenWiki: paths it must not read (gitignore syntax). See psd-dev-standards
+# standards/06-cicd-enforcement.md.
+
+# Audit artifacts with per-course decision reasoning (CLAUDE.md: these stay local)
+audit-*.json
+audit-*-vs-ospi.md
+
+# Decisions backend runbook and key-gate code; production Sheet name
+decisions_setup/
+
+# Local-only decider tool and scripts that post to the decisions endpoint
+ctc-psd-decisions.html
+apply_audit_decisions.py
+cleanup_elective.py
+normalize_ccn_decisions.py
+
+# Scraped college catalogs (college staff contacts) and generated datasets: noise
+*.pdf
+tcc-2025-2026-catalog.txt
+tcc-columnwise.txt
+catalogs/
+archives/
+*-courses.json
+*-courses-classified.json
+equivalency-data.json
+docs/equivalency-data.json
+docs/index.html
+ctc-psd-equivalency.html
