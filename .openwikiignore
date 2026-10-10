@@ -26,3 +26,6 @@ equivalency-data.json
 docs/equivalency-data.json
 docs/index.html
 ctc-psd-equivalency.html
+
+# Decisions-key handling notes (key transport and storage)
+CLAUDE.md
