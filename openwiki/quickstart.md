@@ -59,4 +59,4 @@ Expensive and conditional: live scrapes (minutes for most colleges, days for the
 - `decisions_setup/` (Apps Script `Code.gs`, Sheet migration recipe): excluded by `.openwikiignore`; the server-side contract is documented only from the client side in [Viewer and decisions](architecture/viewer-and-decisions.md).
 - `apply_audit_decisions.py`, `cleanup_elective.py`, `normalize_ccn_decisions.py`: excluded; behavior is taken from `README.md`/`PIPELINE.md` in [OSPI audit](workflows/ospi-audit.md).
 - Legacy TCC PDF path (`parse_courses.py`, `extract_columns.py`, `inspect_page.py`, `parsers/tcc.py`): only summarized in [Catalog parsers](integrations/catalog-parsers.md); low priority as TCC now reads Coursedog live.
-- `.github/workflows/claude-review.yml`: not read in detail.
+
