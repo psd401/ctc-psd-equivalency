@@ -54,7 +54,7 @@ Decisions are therefore a **runtime layer** over the [classifier](../domain/clas
 
 ## Public/private boundary
 
-- Per `CLAUDE.md` and the `build_html.py` comments: `list`/`history` are publicly reachable but redacted (no rationale, `decided_by`, `source_citation`) without `?k=<key>`; POST requires the key stored as the script's `API_KEY` property. The key is prompted for once in decisions mode and kept in `localStorage` (`KEY_LS`); a rejected key is dropped (`dropKey`).
+- Per the `build_html.py` comments: `list`/`history` are publicly reachable but redacted (no rationale, `decided_by`, `source_citation`) without `?k=<key>`; POST requires the key stored as the script's `API_KEY` property. The key is prompted for once in decisions mode and kept in `localStorage` (`KEY_LS`); a rejected key is dropped (`dropKey`).
 - Decision markers, rationale, and sub-100/flag badges are decider-only (`MODE === "decisions"`); the public view shows effective values without revealing how a decision was made. District stance: decision rationale is not published.
 - The public view still shows the `derived` badge for Pierce credits (`creditsAreDerived`; [credit values](../domain/credit-values.md)).
 - `deploy.sh` copies only the public HTML (as `docs/index.html`) and the sidecar. The decider tool was removed from `docs/` on 2026-06-12 because the repo is public. Do not reintroduce it, embed keys, or commit per-course decision reasoning ([validation and deploy](../operations/validation-and-deploy.md)).
