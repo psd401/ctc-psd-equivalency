@@ -6,7 +6,7 @@ tags: [audit, llm, ospi, decisions, classification]
 openwiki:
   roles: [workflow]
   change_kinds: [audit, decisions]
-  source_paths: [audit_credit_type.py, README.md, PIPELINE.md, CLAUDE.md]
+  source_paths: [audit_credit_type.py, README.md, PIPELINE.md]
   symbols: [OSPI_STANDARDS_HINTS, TYPE_FRAMING, WORKFLOW_TEMPLATE, main]
   invariants:
     - "Audit artifacts and per-course reasoning stay local and are never committed."
@@ -27,7 +27,7 @@ Use this when a credit type's classifications need systematic review against sta
 ## Rules to respect
 
 - Attribution: AI-applied decisions are marked as AI (`decided_by` "AI Classifier", or the "(AI-assisted audit)" director label used by README); the Sheet is append-only so a human override is a new row.
-- Always fetch `?action=list` fresh first and skip already-decided `(code, institution)` pairs. Post key comes from env `CTC_DECISIONS_KEY` (never committed; see `CLAUDE.md`).
+- Always fetch `?action=list` fresh first and skip already-decided `(code, institution)` pairs. Post key comes from env `CTC_DECISIONS_KEY` (never committed).
 - When two audits disagree, apply the more specific, better-reasoned one; the Sheet history keeps both.
 - Per-course reasoning is not published. Audit report/JSON artifacts (`audit-*.md`, `audit-*.json`) stay local; decisions cite the artifact filename in `source_citation`.
 - Cost: about $0.05 per course (Health, 37 courses, about $4; CTE, 877 courses, about $50). Prefer `--max-confidence` to focus on uncertain courses and `--dry-run` first.
@@ -39,3 +39,4 @@ Per `PIPELINE.md`, the initial audits are complete: Health, CTE, and a full Elec
 ## Validation
 
 There is no test harness. `python audit_credit_type.py "<type>" --dry-run` verifies selection; generated JS is only exercised by the external runner.
+nner.

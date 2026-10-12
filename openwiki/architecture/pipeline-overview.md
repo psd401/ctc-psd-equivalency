@@ -13,7 +13,7 @@ openwiki:
 
 # Pipeline overview
 
-The repo is a flat set of Python scripts (no package manifest or test suite; deps are managed with `uv` in a local `.venv`, per `CLAUDE.md`). It scrapes six Washington community and technical college catalogs (~6,900 courses), classifies each course to a PSD high-school credit type under the WA SBE 24-credit framework, and emits two single-file HTML tools. Product context lives in `README.md`; this page is the canonical description of how the stages connect.
+The repo is a flat set of Python scripts (no package manifest or test suite; scripts default to the local `.venv/bin/python`). It scrapes six Washington community and technical college catalogs (~6,900 courses), classifies each course to a PSD high-school credit type under the WA SBE 24-credit framework, and emits two single-file HTML tools. Product context lives in `README.md`; this page is the canonical description of how the stages connect.
 
 ## Stages and artifacts
 

@@ -5,7 +5,7 @@ description: Entry point for the wiki covering the Python pipeline that scrapes 
 tags: [quickstart, overview, navigation]
 openwiki:
   roles: [repository]
-  source_paths: [README.md, PIPELINE.md, CLAUDE.md, build_dataset.py, classify_courses.py, build_html.py, validate_dataset.py]
+  source_paths: [README.md, PIPELINE.md, build_dataset.py, classify_courses.py, build_html.py, validate_dataset.py]
   validation_commands: ["python validate_dataset.py"]
 ---
 
@@ -13,7 +13,7 @@ openwiki:
 
 Internal Peninsula School District (PSD) tool. It maps about 6,900 courses from six Washington community and technical colleges (Tacoma, Olympic, Green River, Pierce, Clover Park, Bates) to PSD high-school credit types under the WA State Board of Education 24-credit framework. `hs_credits` is `credits_total / 5`. Outputs: a public read-only viewer (GitHub Pages, https://psd401.github.io/ctc-psd-equivalency/) and a local-only decider tool whose decisions persist to a Google Sheet via Apps Script.
 
-The repo is a flat set of Python scripts with **no package manifest and no test suite**. Quality is enforced by `validate_dataset.py` and idempotent classification. Activate the uv venv (`source .venv/bin/activate`) before Python commands. Existing human docs: `README.md`, `PIPELINE.md`, `CLAUDE.md`; this wiki links to and verifies them rather than copying.
+The repo is a flat set of Python scripts with **no package manifest and no test suite**. Quality is enforced by `validate_dataset.py` and idempotent classification. Run Python from the local `.venv` (`deploy.sh` and `run_acalog_overnight.sh` default to `.venv/bin/python`). Existing human docs: `README.md` and `PIPELINE.md`; this wiki links to and verifies them rather than copying.
 
 ## Wiki map
 

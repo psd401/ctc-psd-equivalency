@@ -41,7 +41,7 @@ Consult this page when a college's data looks wrong, a catalog site changes, or 
 
 **Drupal (`parsers/drupal.py`, Bates).** Paginates `/courses?page=N` (0-based), detail path `/{dept-slug}/{prefix}-{num}`. `TITLE_RE` must accept `&` (rendered `&amp;`); omitting it once dropped every CCN course for four months. Transfer pages carry lecture/lab/clinical hours (`HOURS_RE`), workforce pages do not. The catalog has no year marker, so `catalog_year` is `scraped <date>`. Courses a college unpublishes (HTTP 403) can be re-added with `retain_unpublished.py` ([catalog refresh](../operations/catalog-refresh.md)).
 
-**Legacy TCC PDF (`parsers/tcc.py`, `parse_courses.py`, `extract_columns.py`, `inspect_page.py`).** Earlier path: pdfplumber column extraction to `tcc-columnwise.txt`, then a state-machine parse. Kept for reproducing 2025-2026 archives; not used by `build_dataset.py` for `tcc` any more.
+**Legacy TCC PDF (`parsers/tcc.py`, `parse_courses.py`, `extract_columns.py`, `inspect_page.py`).** Earlier path: pdfplumber column extraction to a column-wise text file, then a state-machine parse. Kept for reproducing 2025-2026 archives; not used by `build_dataset.py` for `tcc` any more.
 
 ## Change recipe: add or re-point a college
 
