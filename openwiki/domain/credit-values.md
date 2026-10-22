@@ -36,7 +36,9 @@ Two silent failures shaped this design: Green River's markup differs from Olympi
 
 `derive_credits_from_contact_hours` parses `Lecture/Lab/Clinical Contact Hours N` (via `parse_contact_hours`) and sums lecture/10 + lab/20 + clinical/30 (`CONTACT_HOURS_PER_CREDIT`, WA quarter-credit convention), rounded to 2 places. `acalog._parse_detail` calls it only when no published credit was found and sets `credits_derived`; `acalog.parse` then adds `base.CREDITS_DERIVED_FLAG` to `review_flags`. Examples: 50 lecture -> 5.0; 40 lecture + 40 lab -> 6.0; 5 lecture + 45 clinical -> 2.0. Two Pierce courses (EMS150, SSBH125) have no table and stay valueless.
 
-Validation evidence recorded in `PIPELINE.md`: all 164 Pierce CCNs also offered by peer colleges derive a value that at least one peer assigns. Peers disagree with each other on lab sciences (BIOL&241 is 5.0 at four colleges and 6.0 at Olympic), so the check is "inside the peer range", not "equals the mode". The derivation is still unpublished data: Pierce's registrar is the authority before it counts toward a graduation requirement.
+Validation evidence recorded in `PIPELINE.md`: all 164 Pierce CCNs also offered by peer colleges derive a value that at least one peer assigns. Peers disagree with each other on lab sciences (BIOL&241 is 5.0 at four colleges and 6.0 at Olympic), so the check is "inside the peer range", not "equals the mode". The validator's `validate_credits` docstring quotes a different figure (139 of 150 CCN courses "match" peers). It uses another count and criterion, so do not compare the two numbers directly; `PIPELINE.md` is the source for the 164-course result.
+
+The derivation is still unpublished data: Pierce's registrar is the authority before it counts toward a graduation requirement.
 
 Pierce is also pinned to Acalog `catoid=17`, which is the 2023-2024 catalog although `catalog_year` is labelled 2025-2026; updating is blocked by the WAF ([catalog refresh](../operations/catalog-refresh.md)). Treat the label as known-inaccurate.
 
