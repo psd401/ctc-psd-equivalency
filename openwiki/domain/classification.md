@@ -42,10 +42,31 @@ Caption: first matching tier wins; the label is stored in `classification_rule`.
 
 Each table value is `(credit_type, confidence, review_flags)`. Prefix is the leading letters of the code (`re.match("([A-Z]+)")`).
 
-- **Common Course Number overrides** (`COMMON_COURSE_OVERRIDES`) apply at every college offering that CCN; this is where statewide decisions go (e.g. `HIST&146` US History, `CMST&220` ELA, `ENGR&204` Science (Lab)). Several entries exist solely so Bates or TCC records, which joined later, agree with the other colleges.
+- **Common Course Number overrides** (`COMMON_COURSE_OVERRIDES`) apply at every college offering that CCN; this is where statewide decisions go (e.g. `HIST&146` US History, `CMST&220` ELA, `ENGR&204` Science (Lab)). Several entries exist solely so Bates or TCC records, which joined later, agree with the other colleges (see the dated table below).
 - **Per-institution prefix tables** hold workforce-track prefixes (mostly CTE at 0.85 with `_PFX_FLAG`) from the 2026-06 manual review. Add entries only when a concrete conflict emerges.
 - **Specific overrides** are for local-prefix courses unique to one college (TCC HIST, Bates HS-completion social studies, Clover Park `MAT99`/`MAT103`, CCFE courses counted as CTE).
-- **Dated secondary decisions** (recorded only in code comments, so check them before re-adding a removed secondary): the `NUTR&101` Health secondary and the `CMST&220` CTE secondary were removed on 2026-05-29 after audits; Clover Park `GTC131` and `GTC132` carry a Fine & Performing Arts secondary (decided 2026-09-01; `GTC130` was renumbered to `GTC131` in the 2026-2027 catalog). The Clover Park entries live in `SECONDARY_TYPES_BY_INSTITUTION`; the common-course secondaries live in `SECONDARY_TYPES_COMMON`.
+- **Dated decisions** are recorded only in code comments, so check the table in [Dated decisions](#dated-decisions-2026-05-to-2026-09) before re-adding a removed override or secondary.
+
+## Dated decisions (2026-05 to 2026-09)
+
+These rows exist only because of the decision noted in their code comment. The dates below are the ones written in `classify_courses.py`; the table is a map, not a substitute for reading the comment.
+
+| Decision | Table / scope | Current result | Dated in code |
+|---|---|---|---|
+| `CMST&101`, `CMST&210`, `CMST&230`, `CMST&240` | `COMMON_COURSE_OVERRIDES` | ELA at every college | 2026-06-11 (101), 2026-09-01 (others) |
+| `CMST&102` and other Bates-join CCNs | `COMMON_COURSE_OVERRIDES` | Matches what the other colleges resolve to | 2026-09-02 |
+| `CMST&220` | `COMMON_COURSE_OVERRIDES`, `SECONDARY_TYPES_COMMON` | ELA (Public Speaking substitute); CTE secondary removed | secondary removed 2026-05-29 |
+| `NUTR&101` | `COMMON_COURSE_OVERRIDES`, `SECONDARY_TYPES_COMMON` | Health primary, Science (Non-Lab) secondary; earlier Health secondary removed | 2026-05-29, 2026-09-01 |
+| `ENGR&204`, `ENGR&215`, `ENGR&224`, `ENGR&225` | `COMMON_COURSE_OVERRIDES` | Science (Lab); Science (Non-Lab) x2; Elective (0.70) | 2026-09-01 |
+| `BIOL&241`, `BIOL&242` | `COMMON_COURSE_OVERRIDES` (Bates join) | Science (Lab) | 2026-09-02 |
+| `EDUC&115`, `EDUC&130`, `EDUC&136`, `EDUC&150`, `EDUC&204` (Bates join); `EDUC&240` (TCC join) | `COMMON_COURSE_OVERRIDES` | CTE | 2026-09-02 |
+| `ENVS&101` (TCC join) | `COMMON_COURSE_OVERRIDES` | Science (Lab); the comment notes TCC's inferred components would otherwise demote it | 2026-09-02 |
+| `CS&141` | `COMMON_COURSE_OVERRIDES`, `SECONDARY_TYPES_COMMON` | CTE primary, Math secondary | undated |
+| `DMA120`, `DMA220` (Olympic) | `SPECIFIC_OVERRIDES` | Fine & Performing Arts | 2026-09-01 |
+| `COLL133` (Olympic), `COL101` (TCC) | `SPECIFIC_OVERRIDES` | CTE, as the CCFE row of the PSD worksheet | 2026-09-02 |
+| `GTC131`, `GTC132` (Clover Park) | `SECONDARY_TYPES_BY_INSTITUTION` | Fine & Performing Arts secondary; `GTC130` was renumbered `GTC131` in the 2026-2027 catalog | 2026-09-01 |
+
+Constraint: a CCN override changes every college offering that CCN at the base layer. Use `SPECIFIC_OVERRIDES` for one college's local course. Verify with `python classify_courses.py && python validate_dataset.py`; `validate_ccn_consistency` warns if colleges still disagree.
 
 ## Post-processing inside `classify`
 
@@ -57,7 +78,7 @@ Each table value is `(credit_type, confidence, review_flags)`. Prefix is the lea
 
 ## Why idempotency is a hard requirement
 
-`classify_courses.py` reads and rewrites `ctc-courses-classified.json` in place, and `validate_dataset.validate_classification_current` re-runs `classify()` on the published data and fails if any `CLASSIFIED_FIELDS` differ. So any new rule must give identical output when applied twice, and the dataset must be re-classified (`python classify_courses.py`) after every rule edit, otherwise validation reports the classification as stale.
+`classify_courses.py` reads and rewrites `ctc-courses-classified.json` in place, and `validate_dataset.validate_classification_current` ([validation and deploy](../operations/validation-and-deploy.md)) re-runs `classify()` on the published data and fails if any `CLASSIFIED_FIELDS` differ. So any new rule must give identical output when applied twice, and the dataset must be re-classified (`python classify_courses.py`) after every rule edit, otherwise validation reports the classification as stale.
 
 ## Interplay with human decisions
 

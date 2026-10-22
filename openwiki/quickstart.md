@@ -23,7 +23,7 @@ The repo is a flat set of Python scripts with **no package manifest and no test 
 | Architecture | [Data model](architecture/data-model.md) | course record fields, decision Sheet schema |
 | Architecture | [Viewer and decisions](architecture/viewer-and-decisions.md) | the two HTML outputs, decisions overlay, privacy |
 | Integrations | [Catalog parsers](integrations/catalog-parsers.md) | Coursedog, Acalog, SmartCatalog, Drupal, legacy PDF |
-| Domain | [Classification](domain/classification.md) | 5-tier credit-type resolution, taxonomy |
+| Domain | [Classification](domain/classification.md) | 5-tier credit-type resolution, taxonomy, dated 2026 decisions |
 | Domain | [Credit values](domain/credit-values.md) | published vs derived credits, Pierce |
 | Workflows | [OSPI audit](workflows/ospi-audit.md) | LLM audit and decision application |
 | Operations | [Catalog refresh](operations/catalog-refresh.md) | scraping safety, WAF, annual refresh, new college |
@@ -40,7 +40,7 @@ The repo is a flat set of Python scripts with **no package manifest and no test 
 | Add a college or platform | [Catalog refresh](operations/catalog-refresh.md#adding-a-new-institution) | `build_dataset.py`, `build_html.py`, `parsers/__init__.py`, `validate_dataset.py` | `INSTITUTIONS`, `PARSERS`, `EXPECTED_INSTITUTIONS` | `validate_coverage` | `python build_html.py && python validate_dataset.py` |
 | Viewer UI, filters, CSV export | [Viewer and decisions](architecture/viewer-and-decisions.md) | `build_html.py` (`TEMPLATE`, `emit`) | `effective`, `applyFilters`, `exportCSV` | open via `./serve.sh` | `python build_html.py` |
 | Decisions overlay or Apps Script contract | [Viewer and decisions](architecture/viewer-and-decisions.md), [Data model](architecture/data-model.md) | `build_html.py` | `fetchDecisions`, `postDecision`, `normalizeDecision`, `APPS_SCRIPT_URL` | manual, decider tool | `python build_html.py` |
-| Add or change a record field | [Data model](architecture/data-model.md) | `parsers/base.py` | `make_record`, `CLASSIFIED_FIELDS` | `validate_shape` | `python validate_dataset.py` |
+| Add or change a record field | [Data model](architecture/data-model.md) | `parsers/base.py`, `validate_dataset.py` | `make_record`, `CLASSIFIED_FIELDS` (in the validator) | `validate_shape`, `validate_classification_current` | `python classify_courses.py && python validate_dataset.py` |
 | Run an OSPI audit | [OSPI audit](workflows/ospi-audit.md) | `audit_credit_type.py` | `OSPI_STANDARDS_HINTS`, `TYPE_FRAMING` | `--dry-run` | `python audit_credit_type.py "<type>" --dry-run` |
 | Year-over-year refresh | [Catalog refresh](operations/catalog-refresh.md#annual-refresh) | `diff_catalogs.py`, `build_dataset.py` | `compute`, `INSTITUTIONS` | diff report | `python diff_catalogs.py --year-from A --year-to B` |
 | Publish the site | [Validation and deploy](operations/validation-and-deploy.md) | `deploy.sh`, `validate_dataset.py` | `CHECKS` | the validator | `python validate_dataset.py` (conditional: `./deploy.sh` only when publishing) |

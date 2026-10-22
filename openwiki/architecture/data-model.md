@@ -55,7 +55,7 @@ Caption: parser-owned course fields and the optional component list (components 
 - Optional `review_flags` set at ingest (e.g. `CREDITS_DERIVED_FLAG` for Pierce, retained-unpublished flags from `retain_unpublished.py`); `classify()` carries these through.
 - `dedupe(records)` keeps the longest description per `(institution, code)`.
 
-**Classifier-owned fields** (`classify_courses.CLASSIFIED_FIELDS`): `credit_type` (deprecated alias of the primary), `credit_types` (primary first, then secondaries), `primary_credit_type`, `hs_credits` (`credits_total / 5`, same shape as `credits_total`), `level`, `is_sub_100`, `classification_rule` (e.g. `specific:<inst>:<code>`, `common-course:<ccn>`, `prefix:<inst>:<pfx>`, `prefix:<pfx>`, `fallback`), `confidence`, `review_flags`.
+**Classifier-owned fields** (the `CLASSIFIED_FIELDS` tuple is defined in `validate_dataset.py`, which uses it for the freshness check; [`classify_courses.classify`](../domain/classification.md) produces them): `credit_type` (deprecated alias of the primary), `credit_types` (primary first, then secondaries), `primary_credit_type`, `hs_credits` (`credits_total / 5`, same shape as `credits_total`), `level`, `is_sub_100`, `classification_rule` (e.g. `specific:<inst>:<code>`, `common-course:<ccn>`, `prefix:<inst>:<pfx>`, `prefix:<pfx>`, `fallback`), `confidence`, `review_flags`.
 
 Invariants checked in `validate_dataset.py`: required fields present, no duplicate `(institution, code)`, every credit type in `VALID_TYPES`, `Elective` never alongside another type, `review_flags` free of duplicates, one `catalog_year` per college.
 
