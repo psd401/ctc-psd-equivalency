@@ -39,4 +39,3 @@ Per `PIPELINE.md`, the initial audits are complete: Health, CTE, and a full Elec
 ## Validation
 
 There is no test harness. `python audit_credit_type.py "<type>" --dry-run` verifies selection; generated JS is only exercised by the external runner.
-nner.
