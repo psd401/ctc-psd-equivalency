@@ -56,6 +56,7 @@ These rows exist only because of the decision noted in their code comment. The d
 | `CMST&101`, `CMST&210`, `CMST&230`, `CMST&240` | `COMMON_COURSE_OVERRIDES` | ELA at every college | 2026-06-11 (101), 2026-09-01 (others) |
 | `CMST&102` and other Bates-join CCNs | `COMMON_COURSE_OVERRIDES` | Matches what the other colleges resolve to | 2026-09-02 |
 | `CMST&220` | `COMMON_COURSE_OVERRIDES`, `SECONDARY_TYPES_COMMON` | ELA (Public Speaking substitute); CTE secondary removed | secondary removed 2026-05-29 |
+| `ECON&201`, `ECON&202` | `SECONDARY_TYPES_COMMON` | No CTE secondary; the CTE audit found these are academic-transfer Social Studies, with Social Studies - Elective as primary | secondary removed 2026-05-29 |
 | `NUTR&101` | `COMMON_COURSE_OVERRIDES`, `SECONDARY_TYPES_COMMON` | Health primary, Science (Non-Lab) secondary; earlier Health secondary removed | 2026-05-29, 2026-09-01 |
 | `ENGR&204`, `ENGR&215`, `ENGR&224`, `ENGR&225` | `COMMON_COURSE_OVERRIDES` | Science (Lab); Science (Non-Lab) x2; Elective (0.70) | 2026-09-01 |
 | `BIOL&241`, `BIOL&242` | `COMMON_COURSE_OVERRIDES` (Bates join) | Science (Lab) | 2026-09-02 |
@@ -91,5 +92,8 @@ Rules here produce the **base layer**. District decisions in the Sheet override 
 3. `python classify_courses.py` (prints the credit-type distribution and low-confidence counts).
 4. `python build_html.py && python validate_dataset.py`.
 5. Optional: `python diff_catalogs.py <old> <new>` between snapshots to see "Credit-type changed" and "Confidence dropped" rows.
+
+Non-goals: do not hand-edit `ctc-courses-classified.json` or per-college classified files; they are regenerated. There is no unit-test file for the classifier; the validator is the regression net.
+d" and "Confidence dropped" rows.
 
 Non-goals: do not hand-edit `ctc-courses-classified.json` or per-college classified files; they are regenerated. There is no unit-test file for the classifier; the validator is the regression net.
