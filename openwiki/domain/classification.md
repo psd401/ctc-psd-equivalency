@@ -71,7 +71,7 @@ Constraint: a CCN override changes every college offering that CCN at the base l
 
 ## Post-processing inside `classify`
 
-- **Level:** number parsed from the code; `< 100` sets `is_sub_100` and flag "Sub-100 - Fresh Start (Open Doors) review".
+- **Level:** number parsed from the code; `< 100` sets `is_sub_100` and flag "Sub-100 — Fresh Start (Open Doors) review" (em dash, as in the code). Sub-100 courses keep their `hs_credits`; the flag is the only consequence. The module docstring of `classify_courses.py` still says the HS value is left null, which is stale. A sub-100 World Language course also gets "Sub-100 World Language — verify HS credit eligibility".
 - **HS credits:** `credits_total / 5`, rounded to 2 places, applied to both scalar and `{min,max}`. Semantics and the Pierce exception: [credit values](credit-values.md).
 - **Science lab refinement** (only when the primary starts with "Science"), evidence strongest first: (1) declared `Contact Hours` table in the description, authoritative both ways; (2) if a specific/common-course override decided it, keep that decision (components may be keyword-inferred phantoms); (3) stored `components`; (4) `w/ Lab` / `with Lab` in the title; result is forced to Lab or Non-Lab.
 - **Secondaries:** `SECONDARY_TYPES_COMMON`, `SECONDARY_TYPES_BY_INSTITUTION`, `SECONDARY_TYPES_BY_PREFIX`, deduped, primary removed. Primary is always `credit_types[0]`.
@@ -92,8 +92,5 @@ Rules here produce the **base layer**. District decisions in the Sheet override 
 3. `python classify_courses.py` (prints the credit-type distribution and low-confidence counts).
 4. `python build_html.py && python validate_dataset.py`.
 5. Optional: `python diff_catalogs.py <old> <new>` between snapshots to see "Credit-type changed" and "Confidence dropped" rows.
-
-Non-goals: do not hand-edit `ctc-courses-classified.json` or per-college classified files; they are regenerated. There is no unit-test file for the classifier; the validator is the regression net.
-d" and "Confidence dropped" rows.
 
 Non-goals: do not hand-edit `ctc-courses-classified.json` or per-college classified files; they are regenerated. There is no unit-test file for the classifier; the validator is the regression net.
