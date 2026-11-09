@@ -67,7 +67,7 @@ Caption: the script rebuilds, gates on validation, stages only public files; com
 ## GitHub Actions (`.github/workflows/`)
 
 - `security-scan.yml`: PRs, pushes to `main`, weekly Monday cron; delegates to the org reusable workflow `PSD401/.github/.../reusable-security-scan.yml@main`.
-- `openwiki-update.yml`: on push to `main`, weekly cron, manual dispatch; delegates to the org reusable OpenWiki workflow (concurrency group cancels superseded runs). It regenerates this wiki; do not hand-edit generated pages (see `AGENTS.md`).
+- `openwiki-update.yml`: on push to `main`, weekly cron, manual dispatch; delegates to the org reusable workflow `PSD401/.github/.github/workflows/reusable-openwiki.yml`, pinned to a release tag, with `base_branch: main` and the `BEDROCK_API_KEY` and `PSD_AUTOMATION_APP_PRIVATE_KEY` secrets. The caller grants `contents: write` and `pull-requests: write`, and a `concurrency` group (`openwiki`, cancel-in-progress) drops superseded runs. It regenerates this wiki; do not hand-edit generated pages (see `AGENTS.md`).
 - `claude-review.yml`: runs on pull request open, synchronize, ready-for-review and reopen; skips `dependabot[bot]` actors (their callers cannot grant `id-token: write`). It is a thin caller of the org reusable workflow `PSD401/.github/.github/workflows/reusable-claude-review.yml@main` and passes only the `BEDROCK_API_KEY` secret. The review logic lives in that external workflow, which is not in this repository.
 
 None of these run `validate_dataset.py`; validation is a local pre-deploy step.
