@@ -12,6 +12,6 @@ jobs:
     # Dependabot-triggered callers cannot grant id-token: write to the
     # reusable — startup_failure. The reusable also self-guards; both needed.
     if: github.actor != 'dependabot[bot]'
-    uses: PSD401/.github/.github/workflows/reusable-claude-review.yml@1aa5f5351a78b15f5c71668037f5d35b9613ae41 # v1.0.0
+    uses: PSD401/.github/.github/workflows/reusable-claude-review.yml@d5be9265b78fa3d21c73ea42840bce9148a2d8e3 # v1.2.2
     secrets:
       BEDROCK_API_KEY: ${{ secrets.BEDROCK_API_KEY }}
